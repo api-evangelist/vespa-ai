@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vespa Query API
+  description: Vespa Query (Search) API capability. Executes YQL / hybrid / vector queries against a
+    Vespa application endpoint and returns ranked hits with relevance, fields, and coverage. Self-
+    contained Naftiko capability covering Vespa's primary search business surface.
+  tags:
+    - Vespa
+    - Query
+    - Search
+    - Vector
+    - YQL
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      VESPA_ENDPOINT: VESPA_ENDPOINT
+      VESPA_DATA_PLANE_TOKEN: VESPA_DATA_PLANE_TOKEN
+capability:
+  consumes:
+    - type: http
+      namespace: vespa-query
+      baseUri: '{{env.VESPA_ENDPOINT}}'
+      description: Vespa Query API business capability. Self-contained.
+      resources:
+        - name: search
+          path: /search/
+          operations:
+            - name: vespaQueryGet
+              method: GET
+              description: Execute Vespa Query Via Get
+              inputParameters:
+                - name: yql
+                  in: query
+                  type: string
+                - name: query
+                  in: query
+                  type: string
+                - name: hits
+                  in: query
+                  type: integer
+                - name: offset
+                  in: query
+                  type: integer
+                - name: ranking.profile
+                  in: query
+                  type: string
+                - name: timeout
+                  in: query
+                  type: string
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+            - name: vespaQueryPost
+              method: POST
+              description: Execute Vespa Query Via Post
+              inputRawFormat: json
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+      authentication:
+        type: bearer
+        token: '{{env.VESPA_DATA_PLANE_TOKEN}}'
+  exposes:
+    - type: rest
+      namespace: vespa-query-rest
+      port: 8080

@@ -1,0 +1,61 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Vespa
+providerId: vespa-ai
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - Rate Limiting
+  - AI Search
+  - Vector Database
+description: Vespa serving throughput is governed by application configuration (per-container HTTP
+  threads, document API concurrency, query timeout) rather than a fixed per-key request quota. The
+  values below reflect Vespa's default protection mechanisms and Vespa Cloud guidance.
+sources:
+  - https://docs.vespa.ai/en/performance/sizing-feeding.html
+  - https://docs.vespa.ai/en/reference/document-v1-api-reference.html
+  - https://cloud.vespa.ai/pricing
+headers:
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+  serverError: 503
+  timeout: 504
+limits:
+  - name: Query throughput
+    scope: cluster
+    metric: queries_per_second
+    limit: scales with container cluster size
+    notes: Tune feed/query container resources and search threads per query to scale.
+  - name: Document API throughput
+    scope: cluster
+    metric: writes_per_second
+    limit: scales with content cluster size
+    notes: Vespa Cloud customers typically achieve tens of thousands of writes per second per
+      content cluster.
+  - name: In-flight document operations
+    scope: container
+    metric: concurrent
+    limit: bounded by container thread pool
+    notes: Returns HTTP 429 when the per-container in-flight limit is exceeded.
+  - name: Default query timeout
+    scope: request
+    metric: seconds
+    limit: 500
+    timeFrame: request
+    notes: Default query timeout is 500ms; configurable per request via the `timeout` parameter.
+  - name: Default feed timeout
+    scope: request
+    metric: seconds
+    limit: 180
+    timeFrame: request
+    notes: Default feed timeout is 180s; configurable per request.
+  - name: Visit batch
+    scope: request
+    metric: documents
+    limit: wantedDocumentCount
+    timeFrame: request
+    notes: Visit operations are paginated via the `continuation` token; batch sizing is governed by
+      `wantedDocumentCount`.

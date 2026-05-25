@@ -1,0 +1,339 @@
+openapi: 3.0.3
+info:
+  title: Vespa Document API
+  description: |
+    The Vespa Document API (`/document/v1`) provides synchronous REST access to document operations
+    against a Vespa content cluster. It supports Put, Get, Update (partial update with assign/add/remove
+    operators), Remove, and Visit (streaming visit, copy, delete-where, update-where) over JSON or
+    JSON Lines, with conditional writes, multi-tenant namespaces, field-set projection, time-window
+    selection, and pagination via continuation tokens.
+  version: '1.0'
+  contact:
+    name: Vespa
+    url: https://vespa.ai
+  license:
+    name: Apache 2.0
+    url: https://github.com/vespa-engine/vespa/blob/master/LICENSE
+servers:
+  - url: http://localhost:8080
+    description: Default local Vespa container endpoint
+  - url: https://{endpoint}.vespa-cloud.com
+    description: Vespa Cloud application endpoint
+    variables:
+      endpoint:
+        default: example
+        description: Vespa Cloud application endpoint hostname prefix
+paths:
+  /document/v1/:
+    get:
+      operationId: visitAllDocuments
+      summary: Visit Documents Across Cluster
+      description: Visit (stream) documents from a content cluster. Requires the `cluster` query
+        parameter.
+      tags:
+        - Documents
+        - Visit
+      parameters:
+        - $ref: '#/components/parameters/Cluster'
+        - $ref: '#/components/parameters/Selection'
+        - $ref: '#/components/parameters/Continuation'
+        - $ref: '#/components/parameters/WantedDocumentCount'
+        - $ref: '#/components/parameters/Stream'
+        - $ref: '#/components/parameters/FieldSet'
+        - $ref: '#/components/parameters/Timeout'
+      responses:
+        '200':
+          description: Visit result. JSON by default, JSON Lines when `Accept: application/jsonl`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitResponse'
+            application/jsonl:
+              schema:
+                type: string
+                description: Newline-separated JSON objects (put, remove, continuation, sessionStats).
+        '400':
+          description: Bad request.
+        '429':
+          description: Too many inflight requests.
+  /document/v1/{namespace}/{documentType}/docid/{documentId}:
+    parameters:
+      - $ref: '#/components/parameters/Namespace'
+      - $ref: '#/components/parameters/DocumentType'
+      - $ref: '#/components/parameters/DocumentId'
+    get:
+      operationId: getDocument
+      summary: Get Document By Id
+      description: Retrieve a single document by its document id.
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/FieldSet'
+        - $ref: '#/components/parameters/Cluster'
+        - $ref: '#/components/parameters/Timeout'
+      responses:
+        '200':
+          description: Document found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '404':
+          description: Document not found.
+    post:
+      operationId: putDocument
+      summary: Put Document
+      description: Create or overwrite a document with the given id.
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/Condition'
+        - $ref: '#/components/parameters/Route'
+        - $ref: '#/components/parameters/Timeout'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentBody'
+      responses:
+        '200':
+          description: Document written successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentWriteResponse'
+        '400':
+          description: Bad request.
+        '412':
+          description: Test-and-set condition failed.
+        '413':
+          description: Payload too large.
+    put:
+      operationId: updateDocument
+      summary: Update Document
+      description: Apply a partial update to a document using assign / add / remove operators.
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/Condition'
+        - $ref: '#/components/parameters/Create'
+        - $ref: '#/components/parameters/Route'
+        - $ref: '#/components/parameters/Timeout'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentUpdateBody'
+      responses:
+        '200':
+          description: Document updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentWriteResponse'
+        '412':
+          description: Test-and-set condition failed or document does not exist.
+    delete:
+      operationId: removeDocument
+      summary: Remove Document
+      description: Remove a document with the given id.
+      tags:
+        - Documents
+      parameters:
+        - $ref: '#/components/parameters/Condition'
+        - $ref: '#/components/parameters/Route'
+        - $ref: '#/components/parameters/Timeout'
+      responses:
+        '200':
+          description: Document removed successfully (or did not exist).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentWriteResponse'
+  /document/v1/{namespace}/{documentType}/docid:
+    parameters:
+      - $ref: '#/components/parameters/Namespace'
+      - $ref: '#/components/parameters/DocumentType'
+    get:
+      operationId: visitDocumentsByType
+      summary: Visit Documents Of A Type
+      description: Visit (stream) documents of the given namespace and document type.
+      tags:
+        - Documents
+        - Visit
+      parameters:
+        - $ref: '#/components/parameters/Selection'
+        - $ref: '#/components/parameters/Continuation'
+        - $ref: '#/components/parameters/WantedDocumentCount'
+        - $ref: '#/components/parameters/Stream'
+        - $ref: '#/components/parameters/FieldSet'
+        - $ref: '#/components/parameters/Timeout'
+        - $ref: '#/components/parameters/Cluster'
+      responses:
+        '200':
+          description: Visit result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitResponse'
+    delete:
+      operationId: deleteWhere
+      summary: Delete Documents Matching Selection
+      description: Bulk-delete documents matching a Vespa selection expression. Requires `cluster`
+        and `selection`.
+      tags:
+        - Documents
+        - Visit
+      parameters:
+        - $ref: '#/components/parameters/Cluster'
+        - $ref: '#/components/parameters/Selection'
+        - $ref: '#/components/parameters/Timeout'
+      responses:
+        '200':
+          description: Bulk delete completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitResponse'
+components:
+  parameters:
+    Namespace:
+      name: namespace
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Document namespace (a multi-tenant grouping segment).
+    DocumentType:
+      name: documentType
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Document type as declared in the Vespa application schema.
+    DocumentId:
+      name: documentId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Document id within the namespace and type.
+    Cluster:
+      name: cluster
+      in: query
+      schema:
+        type: string
+      description: Content cluster name. Required for visit and bulk operations.
+    Selection:
+      name: selection
+      in: query
+      schema:
+        type: string
+      description: Vespa document selection expression.
+    Continuation:
+      name: continuation
+      in: query
+      schema:
+        type: string
+      description: Continuation token from a prior visit response.
+    WantedDocumentCount:
+      name: wantedDocumentCount
+      in: query
+      schema:
+        type: integer
+      description: Target number of documents to return per visit batch.
+    Stream:
+      name: stream
+      in: query
+      schema:
+        type: boolean
+      description: When true, stream responses as JSON Lines.
+    FieldSet:
+      name: fieldSet
+      in: query
+      schema:
+        type: string
+      description: Field set name controlling which document fields are returned.
+    Timeout:
+      name: timeout
+      in: query
+      schema:
+        type: string
+      description: Request timeout, e.g. `5s`.
+    Condition:
+      name: condition
+      in: query
+      schema:
+        type: string
+      description: Test-and-set condition selection expression.
+    Create:
+      name: create
+      in: query
+      schema:
+        type: boolean
+      description: If true, create the document when missing on update (upsert).
+    Route:
+      name: route
+      in: query
+      schema:
+        type: string
+      description: Document API route name for advanced routing.
+  schemas:
+    DocumentBody:
+      type: object
+      required: [fields]
+      properties:
+        fields:
+          type: object
+          additionalProperties: true
+          description: Document field values keyed by schema field name.
+    DocumentUpdateBody:
+      type: object
+      required: [fields]
+      properties:
+        fields:
+          type: object
+          additionalProperties: true
+          description: Update operators (assign, add, remove, increment, decrement, multiply, divide)
+            keyed by field name.
+    Document:
+      type: object
+      properties:
+        pathId:
+          type: string
+        id:
+          type: string
+        fields:
+          type: object
+          additionalProperties: true
+    DocumentWriteResponse:
+      type: object
+      properties:
+        pathId:
+          type: string
+        id:
+          type: string
+        message:
+          type: string
+    VisitResponse:
+      type: object
+      properties:
+        pathId:
+          type: string
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        documentCount:
+          type: integer
+        continuation:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    mtls:
+      type: http
+      scheme: bearer
+      description: Vespa Cloud endpoints use mTLS with a client data-plane certificate.

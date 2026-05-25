@@ -1,0 +1,32 @@
+{
+  "title": "VespaDocumentStructure",
+  "description": "Structural breakdown of a Vespa document for the /document/v1 API.",
+  "structure": {
+    "VespaDocument": {
+      "pathId": "string — request URL path id",
+      "id": "string — fully-qualified Vespa document id (id:namespace:documentType::documentId)",
+      "fields": {
+        "<fieldName>": "value — type defined by the schema (string, int, double, tensor, array, weightedset, map, struct, document reference)"
+      }
+    },
+    "VespaUpdate": {
+      "fields": {
+        "<fieldName>": {
+          "assign": "value — replace field value",
+          "add": "value — add element to array/weightedset/map",
+          "remove": "value — remove element from array/weightedset/map",
+          "increment": "number — atomic add to numeric field",
+          "decrement": "number — atomic subtract from numeric field",
+          "multiply": "number — atomic multiply for numeric field",
+          "divide": "number — atomic divide for numeric field"
+        }
+      }
+    },
+    "VespaVisitResponse": {
+      "pathId": "string",
+      "documents": "array of VespaDocument",
+      "documentCount": "integer — number of documents in this batch",
+      "continuation": "string — token to pass to the next visit request"
+    }
+  }
+}

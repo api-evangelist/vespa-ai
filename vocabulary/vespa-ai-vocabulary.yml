@@ -1,0 +1,82 @@
+specification: API Commons Vocabulary
+specificationVersion: '0.1'
+provider: Vespa
+providerId: vespa-ai
+created: '2026-05-25'
+modified: '2026-05-25'
+description: Vespa domain vocabulary mapping operational dimensions, capabilities, and terminology.
+tags:
+  - AI Search
+  - Vector Database
+  - Big Data Serving
+concepts:
+  - name: Application Package
+    description: A versioned bundle of Vespa schemas, services.xml, search definitions, rank
+      profiles, and components deployed to a Vespa application.
+  - name: Schema
+    description: A Vespa document type definition (fields, indexes, summary classes) declared in
+      `.sd` files within an application package.
+  - name: Document
+    description: A unit of data stored in a Vespa content cluster, identified by namespace, document
+      type, and document id.
+  - name: Namespace
+    description: A logical multi-tenant segment within a Vespa document type. Used to isolate
+      tenants or sub-domains within a single application.
+  - name: Content Cluster
+    description: A cluster of Vespa storage and search nodes that index, persist, and query
+      documents.
+  - name: Container Cluster
+    description: A cluster of Vespa container nodes that host the Query API, Document API, custom
+      searchers, and document processors.
+  - name: YQL
+    description: Vespa Query Language — Vespa's SQL-like query language used to express selection,
+      ranking, and grouping for searches.
+  - name: Rank Profile
+    description: A named ranking configuration in a schema that defines first-phase, second-phase,
+      global-phase, and match-phase expressions and ML model inputs.
+  - name: Tensor
+    description: Vespa's native multi-dimensional numeric data type used for vectors, matrices, and
+      ML model inputs/outputs at serving time.
+  - name: HNSW
+    description: Hierarchical Navigable Small World — Vespa's approximate-nearest-neighbor index
+      for vector search.
+  - name: Nearest Neighbor
+    description: A Vespa query operator that finds documents whose tensor field is closest to a
+      query tensor by a configured distance metric.
+  - name: Streaming Search
+    description: A Vespa search mode that scans a user's documents on demand instead of using a
+      shared inverted index. Ideal for personal-data search.
+  - name: Visit
+    description: Bulk document iteration over a content cluster using the `/document/v1/` API with
+      continuation tokens.
+  - name: Selection Expression
+    description: A Vespa expression language used to filter documents in visit, copy, update-where,
+      and delete-where operations.
+  - name: Application Endpoint
+    description: A public endpoint for a Vespa Cloud application, authenticated by mTLS or data-
+      plane token.
+  - name: Zone
+    description: A Vespa Cloud deployment region/environment (e.g. dev, perf, prod) within a cloud
+      provider.
+services:
+  - Vespa Query API
+  - Vespa Document API
+  - Vespa Deploy API
+  - Vespa Tenant API
+  - Vespa Config API
+  - Vespa Cluster Controller API
+  - Vespa State API
+  - Vespa Metrics API
+tools:
+  - Vespa CLI (Go)
+  - pyvespa (Python)
+  - vespa-feed-client (Java)
+  - Vespa Docker Image
+  - Vespa Prometheus Exporter
+standards:
+  - Apache 2.0 License
+  - OpenAPI 3.0
+  - Prometheus exposition format
+  - JSON Lines
+  - ONNX
+  - mTLS

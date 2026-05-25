@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vespa-ai/main/json-schema/vespa-ai-query-schema.json",
+  "title": "VespaQuery",
+  "description": "Body of a Vespa POST /search/ query request.",
+  "type": "object",
+  "properties": {
+    "yql": {
+      "type": "string",
+      "description": "YQL query expression."
+    },
+    "query": {
+      "type": "string",
+      "description": "Simple user-string query passed to the query parser."
+    },
+    "hits": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 10
+    },
+    "offset": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 0
+    },
+    "ranking": {
+      "type": "object",
+      "description": "Ranking configuration (profile, feature inputs, sorting).",
+      "additionalProperties": true
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "select": {
+      "type": "string",
+      "description": "Grouping / aggregation specification."
+    },
+    "timeout": {
+      "type": "string"
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

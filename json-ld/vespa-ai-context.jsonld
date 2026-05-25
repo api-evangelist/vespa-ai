@@ -1,0 +1,57 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "vespa": "https://vespa.ai/ns/",
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "license": "schema:license",
+    "provider": {
+      "@id": "schema:provider",
+      "@type": "schema:Organization"
+    },
+    "Application": "vespa:Application",
+    "Schema": "vespa:Schema",
+    "Document": {
+      "@id": "vespa:Document",
+      "@context": {
+        "namespace": "vespa:namespace",
+        "documentType": "vespa:documentType",
+        "documentId": "vespa:documentId",
+        "fields": "vespa:fields"
+      }
+    },
+    "Tensor": "vespa:Tensor",
+    "RankProfile": "vespa:RankProfile",
+    "ContentCluster": "vespa:ContentCluster",
+    "ContainerCluster": "vespa:ContainerCluster",
+    "Zone": "vespa:Zone",
+    "Tenant": {
+      "@id": "vespa:Tenant",
+      "@type": "schema:Organization"
+    },
+    "Endpoint": {
+      "@id": "vespa:Endpoint",
+      "@type": "schema:WebAPI"
+    },
+    "Query": {
+      "@id": "vespa:Query",
+      "@context": {
+        "yql": "vespa:yql",
+        "query": "vespa:queryString",
+        "hits": "vespa:hits",
+        "offset": "vespa:offset",
+        "ranking": "vespa:ranking"
+      }
+    },
+    "Hit": {
+      "@id": "vespa:Hit",
+      "@context": {
+        "relevance": "vespa:relevance",
+        "source": "vespa:source",
+        "fields": "vespa:fields"
+      }
+    }
+  }
+}

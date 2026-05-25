@@ -1,0 +1,196 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vespa Document API
+  description: Vespa /document/v1 capability covering Put, Get, Update, Remove, and Visit operations
+    against a Vespa content cluster. Self-contained Naftiko capability for the Vespa documents
+    business surface.
+  tags:
+    - Vespa
+    - Documents
+    - CRUD
+    - Visit
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      VESPA_ENDPOINT: VESPA_ENDPOINT
+      VESPA_DATA_PLANE_TOKEN: VESPA_DATA_PLANE_TOKEN
+capability:
+  consumes:
+    - type: http
+      namespace: vespa-documents
+      baseUri: '{{env.VESPA_ENDPOINT}}'
+      description: Vespa Document API business capability. Self-contained.
+      resources:
+        - name: visit-all
+          path: /document/v1/
+          operations:
+            - name: vespaVisitAll
+              method: GET
+              description: Visit Documents Across A Cluster
+              inputParameters:
+                - name: cluster
+                  in: query
+                  type: string
+                - name: selection
+                  in: query
+                  type: string
+                - name: continuation
+                  in: query
+                  type: string
+                - name: wantedDocumentCount
+                  in: query
+                  type: integer
+                - name: stream
+                  in: query
+                  type: boolean
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: document
+          path: /document/v1/{namespace}/{documentType}/docid/{documentId}
+          operations:
+            - name: vespaGetDocument
+              method: GET
+              description: Get Document By Id
+              inputParameters:
+                - name: namespace
+                  in: path
+                  type: string
+                - name: documentType
+                  in: path
+                  type: string
+                - name: documentId
+                  in: path
+                  type: string
+                - name: fieldSet
+                  in: query
+                  type: string
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+            - name: vespaPutDocument
+              method: POST
+              description: Put Document
+              inputParameters:
+                - name: namespace
+                  in: path
+                  type: string
+                - name: documentType
+                  in: path
+                  type: string
+                - name: documentId
+                  in: path
+                  type: string
+                - name: condition
+                  in: query
+                  type: string
+              inputRawFormat: json
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+            - name: vespaUpdateDocument
+              method: PUT
+              description: Update Document With Partial Update Operators
+              inputParameters:
+                - name: namespace
+                  in: path
+                  type: string
+                - name: documentType
+                  in: path
+                  type: string
+                - name: documentId
+                  in: path
+                  type: string
+                - name: create
+                  in: query
+                  type: boolean
+                - name: condition
+                  in: query
+                  type: string
+              inputRawFormat: json
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+            - name: vespaRemoveDocument
+              method: DELETE
+              description: Remove Document
+              inputParameters:
+                - name: namespace
+                  in: path
+                  type: string
+                - name: documentType
+                  in: path
+                  type: string
+                - name: documentId
+                  in: path
+                  type: string
+                - name: condition
+                  in: query
+                  type: string
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: visit-by-type
+          path: /document/v1/{namespace}/{documentType}/docid
+          operations:
+            - name: vespaVisitByType
+              method: GET
+              description: Visit Documents Of A Type
+              inputParameters:
+                - name: namespace
+                  in: path
+                  type: string
+                - name: documentType
+                  in: path
+                  type: string
+                - name: selection
+                  in: query
+                  type: string
+                - name: continuation
+                  in: query
+                  type: string
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+            - name: vespaDeleteWhere
+              method: DELETE
+              description: Delete Documents Matching A Selection Expression
+              inputParameters:
+                - name: namespace
+                  in: path
+                  type: string
+                - name: documentType
+                  in: path
+                  type: string
+                - name: cluster
+                  in: query
+                  type: string
+                - name: selection
+                  in: query
+                  type: string
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+      authentication:
+        type: bearer
+        token: '{{env.VESPA_DATA_PLANE_TOKEN}}'
+  exposes:
+    - type: rest
+      namespace: vespa-documents-rest
+      port: 8080

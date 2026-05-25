@@ -1,0 +1,50 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://example.vespa-cloud.com/search/",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "yql": "select * from sources * where userQuery() and nearestNeighbor(embedding, q_embedding)",
+      "query": "vector databases",
+      "hits": 5,
+      "ranking": {
+        "profile": "hybrid",
+        "features": {
+          "query(q_embedding)": "[0.13, 0.55, -0.21, 0.04, ...]"
+        }
+      },
+      "timeout": "500ms"
+    }
+  },
+  "response": {
+    "root": {
+      "id": "toplevel",
+      "relevance": 1.0,
+      "fields": {
+        "totalCount": 3
+      },
+      "coverage": {
+        "coverage": 100,
+        "documents": 1024,
+        "full": true,
+        "nodes": 2,
+        "results": 1,
+        "resultsFull": 1
+      },
+      "children": [
+        {
+          "id": "id:articles:article::42",
+          "relevance": 0.7821,
+          "source": "articles",
+          "fields": {
+            "title": "An Introduction to Vector Databases",
+            "summary": "Vector databases store embeddings and support nearest-neighbor search...",
+            "url": "https://example.com/intro-to-vector-databases"
+          }
+        }
+      ]
+    }
+  }
+}

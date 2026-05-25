@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vespa-ai/main/json-schema/vespa-ai-document-schema.json",
+  "title": "VespaDocument",
+  "description": "A Vespa document as returned by the /document/v1 API or referenced in put/update payloads.",
+  "type": "object",
+  "properties": {
+    "pathId": {
+      "type": "string",
+      "description": "Document path id, e.g. /document/v1/{namespace}/{documentType}/docid/{documentId}."
+    },
+    "id": {
+      "type": "string",
+      "description": "Fully-qualified Vespa document id, e.g. id:music:song::1."
+    },
+    "fields": {
+      "type": "object",
+      "description": "Field values keyed by schema field name.",
+      "additionalProperties": true
+    }
+  },
+  "required": ["fields"]
+}

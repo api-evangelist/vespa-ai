@@ -1,0 +1,56 @@
+extends:
+  - spectral:oas
+rules:
+  vespa-info-contact-required:
+    description: Vespa OpenAPI specs should include a contact pointing to vespa.ai.
+    given: $.info
+    severity: warn
+    then:
+      field: contact
+      function: truthy
+  vespa-info-license-apache-2:
+    description: Vespa is Apache 2.0 — specs should reflect that license.
+    given: $.info.license
+    severity: warn
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: '^Apache'
+  vespa-paths-document-v1-prefix:
+    description: Document API paths must be rooted at /document/v1/.
+    given: $.paths[?(@property =~ /^\\/document/)]~
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: '^/document/v1/'
+  vespa-operation-summary-title-case:
+    description: Operation summaries should use Title Case.
+    given: $.paths[*][*].summary
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][A-Za-z0-9 ]+$'
+  vespa-operation-id-camel-case:
+    description: Operation IDs should be camelCase.
+    given: $.paths[*][*].operationId
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9]*$'
+  vespa-tag-defined:
+    description: Every operation should declare at least one tag.
+    given: $.paths[*][*]
+    severity: warn
+    then:
+      field: tags
+      function: truthy
+  vespa-server-defined:
+    description: At least one server entry must be declared.
+    given: $.servers
+    severity: warn
+    then:
+      function: truthy

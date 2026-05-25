@@ -1,0 +1,23 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://example.vespa-cloud.com/document/v1/articles/article/docid/42",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "fields": {
+        "title": "An Introduction to Vector Databases",
+        "summary": "Vector databases store embeddings and support nearest-neighbor search.",
+        "url": "https://example.com/intro-to-vector-databases",
+        "embedding": {
+          "values": [0.13, 0.55, -0.21, 0.04]
+        }
+      }
+    }
+  },
+  "response": {
+    "pathId": "/document/v1/articles/article/docid/42",
+    "id": "id:articles:article::42"
+  }
+}
