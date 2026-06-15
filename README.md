@@ -1,14 +1,27 @@
 # Vespa (vespa-ai)
 
-Vespa is an open-source AI search engine, big-data serving engine, and vector database originally developed inside Yahoo and spun out as Vespa.ai AS. Vespa combines vector search, text search (BM25), structured filtering, and machine-learned ranking — including native tensor inference — into a single distributed serving engine that scales to billions of documents with sub-100ms latency. Vespa Cloud is the fully managed commercial offering operated by the Vespa.ai team across AWS and GCP.
+Vespa is an open-source AI search engine, big-data serving engine, and vector database originally developed inside Yahoo and spun out as Vespa.ai AS. Vespa combines vector search, text search (BM25), structured filtering, and machine-learned ranking — including native tensor inference — into a single distributed serving engine that scales to billions of documents with sub-100ms latency. Vespa Cloud is the fully managed commercial offering operated by the Vespa.ai team across AWS and GCP, with Startup, Basic, Commercial, and Enterprise plans plus a Self-Managed option for customers running the open-source engine on their own infrastructure. Vespa is widely used at Spotify, Perplexity, Yahoo, Farfetch, and Elicit for search, recommendation, personalization, and Retrieval-Augmented Generation (RAG).
 
-**URL:** [https://vespa.ai](https://vespa.ai)
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/vespa-ai/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/vespa-ai/refs/heads/main/apis.yml)
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=opensource-api-evangelist&utm_content=repo)
+## Scope
+
+- **Type:** Index
+- **Position:** Provider
+- **Access:** 3rd-Party
 
 ## Tags
 
-AI, Search, Vector Database, Big Data, Machine Learning, Semantic Search, Retrieval Augmented Generation, Open Source, Tensor, Recommendations
+- AI
+- Search
+- Vector Database
+- Big Data
+- Machine Learning
+- Semantic Search
+- Retrieval Augmented Generation
+- Open Source
+- Tensor
+- Recommendations
 
 ## Timestamps
 
@@ -18,49 +31,166 @@ AI, Search, Vector Database, Big Data, Machine Learning, Semantic Search, Retrie
 ## APIs
 
 ### Vespa Query API
-Execute YQL queries with text, vector (HNSW nearest-neighbor), hybrid, and machine-learned ranking against a Vespa application.
 
-- Documentation: [https://docs.vespa.ai/en/query-api.html](https://docs.vespa.ai/en/query-api.html)
-- OpenAPI: [openapi/vespa-query-api-openapi.yml](openapi/vespa-query-api-openapi.yml)
-- Naftiko Capability: [capabilities/vespa-query.yaml](capabilities/vespa-query.yaml)
+The Vespa Query (Search) API executes structured and vector queries against a Vespa application using YQL (Vespa Query Language). It supports text search with BM25, approximate-nearest-neighbor vector search over HNSW indexes, hybrid search, machine-learned ranking with multi-phase rank profiles, grouping/aggregation, pagination, result presentation, and tracing. Queries can be issued as GET requests with query-string parameters or POST requests with a JSON body for complex expressions.
+
+- **Human URL:** [https://docs.vespa.ai/en/query-api.html](https://docs.vespa.ai/en/query-api.html)
+
+#### Tags
+
+- AI
+- Search
+- Query
+- YQL
+- Vector Search
+- Ranking
+- Hybrid Search
+
+#### Properties
+
+- [OpenAPI](openapi/vespa-query-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/vespa-query-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/vespa-query-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Documentation](https://docs.vespa.ai/en/query-api.html)
+- [Documentation](https://docs.vespa.ai/en/reference/api/query.html)
+- [Getting Started](https://docs.vespa.ai/en/getting-started.html)
 
 ### Vespa Document API
-Synchronous Put / Get / Update / Remove / Visit operations against a Vespa content cluster.
 
-- Documentation: [https://docs.vespa.ai/en/reference/document-v1-api-reference.html](https://docs.vespa.ai/en/reference/document-v1-api-reference.html)
-- OpenAPI: [openapi/vespa-document-api-openapi.yml](openapi/vespa-document-api-openapi.yml)
-- Naftiko Capability: [capabilities/vespa-documents.yaml](capabilities/vespa-documents.yaml)
+The Vespa Document API (/document/v1) provides synchronous REST access to document operations against a Vespa content cluster. It supports Put, Get, Update (partial update with assign/add/remove operators), Remove, and Visit (streaming visit, copy, delete-where, update-where) over JSON or JSON Lines, with conditional writes, multi-tenant namespaces, field-set projection, time-window selection, and pagination via continuation tokens.
+
+- **Human URL:** [https://docs.vespa.ai/en/reference/document-v1-api-reference.html](https://docs.vespa.ai/en/reference/document-v1-api-reference.html)
+
+#### Tags
+
+- Documents
+- CRUD
+- Indexing
+- Data
+- Streaming
+
+#### Properties
+
+- [OpenAPI](openapi/vespa-document-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Documentation](https://docs.vespa.ai/en/reference/document-v1-api-reference.html)
+- [Documentation](https://docs.vespa.ai/en/writing/document-v1-api-guide.html)
+- [Documentation](https://docs.vespa.ai/en/reads-and-writes.html)
 
 ### Vespa Deploy API
-Application-package deployment, prepare/activate sessions, schema validation, zero-downtime updates.
 
-- Documentation: [https://docs.vespa.ai/en/reference/deploy-rest-api-v2.html](https://docs.vespa.ai/en/reference/deploy-rest-api-v2.html)
+The Vespa Deploy API (/application/v2) manages application packages on a Vespa configuration server. It supports preparing, activating, and tearing down application packages, session-based deployments, schema validation, and zero-downtime updates of services, schemas, and rank profiles.
+
+- **Human URL:** [https://docs.vespa.ai/en/reference/deploy-rest-api-v2.html](https://docs.vespa.ai/en/reference/deploy-rest-api-v2.html)
+
+#### Tags
+
+- Deployment
+- Configuration
+- Application
+- DevOps
+
+#### Properties
+
+- [Documentation](https://docs.vespa.ai/en/reference/deploy-rest-api-v2.html)
+- [Documentation](https://docs.vespa.ai/en/application-packages.html)
+- [Postman Collection](collections/vespa-query-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/vespa-query-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Vespa Tenant and Application API
-Tenant and application management on a Vespa configuration server or Vespa Cloud control plane.
 
-- Documentation: [https://docs.vespa.ai/en/reference/application-v2-tenant.html](https://docs.vespa.ai/en/reference/application-v2-tenant.html)
+The Vespa Tenant API (/application/v2/tenant) manages tenants and applications hosted on a Vespa configuration server or Vespa Cloud control plane. It exposes operations for creating tenants, listing applications, and binding application sessions to a tenant.
+
+- **Human URL:** [https://docs.vespa.ai/en/reference/application-v2-tenant.html](https://docs.vespa.ai/en/reference/application-v2-tenant.html)
+
+#### Tags
+
+- Tenants
+- Applications
+- Multi-Tenancy
+- Administration
+
+#### Properties
+
+- [Documentation](https://docs.vespa.ai/en/reference/application-v2-tenant.html)
+- [Postman Collection](collections/vespa-query-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/vespa-query-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Vespa Config API
-Internal configuration distribution from the config-server to Vespa services.
 
-- Documentation: [https://docs.vespa.ai/en/reference/config-rest-api-v2.html](https://docs.vespa.ai/en/reference/config-rest-api-v2.html)
+The Vespa Config API (/config/v2) lets services in a Vespa application retrieve their configuration from a Vespa configuration server using the config-server / config-proxy protocol. It is primarily used by Vespa services and tooling rather than end users, but is documented as a stable HTTP API.
+
+- **Human URL:** [https://docs.vespa.ai/en/reference/config-rest-api-v2.html](https://docs.vespa.ai/en/reference/config-rest-api-v2.html)
+
+#### Tags
+
+- Configuration
+- Internal
+
+#### Properties
+
+- [Documentation](https://docs.vespa.ai/en/reference/config-rest-api-v2.html)
+- [Postman Collection](collections/vespa-query-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/vespa-query-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Vespa Cluster Controller API
-Content-cluster runtime state and maintenance-mode orchestration.
 
-- Documentation: [https://docs.vespa.ai/en/reference/cluster-v2.html](https://docs.vespa.ai/en/reference/cluster-v2.html)
+The Vespa Cluster Controller API (/cluster/v2) exposes runtime state and management endpoints for a Vespa content cluster — including node state queries, maintenance-mode transitions, and storage cluster orchestration.
+
+- **Human URL:** [https://docs.vespa.ai/en/reference/cluster-v2.html](https://docs.vespa.ai/en/reference/cluster-v2.html)
+
+#### Tags
+
+- Cluster
+- Operations
+- Content
+- State
+
+#### Properties
+
+- [Documentation](https://docs.vespa.ai/en/reference/cluster-v2.html)
+- [Postman Collection](collections/vespa-query-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/vespa-query-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Vespa State API
-Per-service health, version, and metrics for any Vespa node.
 
-- Documentation: [https://docs.vespa.ai/en/reference/state-v1.html](https://docs.vespa.ai/en/reference/state-v1.html)
-- Naftiko Capability: [capabilities/vespa-state.yaml](capabilities/vespa-state.yaml)
+The Vespa State API (/state/v1) exposes per-service health, version, and metrics endpoints for any Vespa node — used by orchestration tooling, monitoring agents, and load balancers to check liveness, readiness, and runtime metrics.
+
+- **Human URL:** [https://docs.vespa.ai/en/reference/state-v1.html](https://docs.vespa.ai/en/reference/state-v1.html)
+
+#### Tags
+
+- Health
+- Monitoring
+- Metrics
+- Observability
+
+#### Properties
+
+- [Documentation](https://docs.vespa.ai/en/reference/state-v1.html)
+- [Postman Collection](collections/vespa-query-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/vespa-query-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Vespa Metrics API
-JSON / Prometheus exposition endpoints (`/metrics/v1`, `/metrics/v2`, `/prometheus/v1`).
 
-- Documentation: [https://docs.vespa.ai/en/operations/metrics.html](https://docs.vespa.ai/en/operations/metrics.html)
+Vespa exposes a family of metrics endpoints (/metrics/v1, /metrics/v2, /prometheus/v1) that publish Vespa engine and application metrics in JSON or Prometheus exposition format for scraping by Prometheus, Grafana, or other observability stacks.
+
+- **Human URL:** [https://docs.vespa.ai/en/operations/metrics.html](https://docs.vespa.ai/en/operations/metrics.html)
+
+#### Tags
+
+- Metrics
+- Prometheus
+- Observability
+- Monitoring
+
+#### Properties
+
+- [Documentation](https://docs.vespa.ai/en/operations/metrics.html)
+- [Documentation](https://docs.vespa.ai/en/reference/metrics-v1.html)
+- [Documentation](https://docs.vespa.ai/en/reference/metrics-v2.html)
+- [Documentation](https://docs.vespa.ai/en/reference/prometheus-v1.html)
+- [Postman Collection](collections/vespa-query-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/vespa-query-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ## Common Properties
 
@@ -70,94 +200,34 @@ JSON / Prometheus exposition endpoints (`/metrics/v1`, `/metrics/v2`, `/promethe
 - [Tutorials](https://docs.vespa.ai/en/learn/tutorials/)
 - [GitHub Organization](https://github.com/vespa-engine)
 - [GitHub Repository](https://github.com/vespa-engine/vespa)
-- [License (Apache 2.0)](https://github.com/vespa-engine/vespa/blob/master/LICENSE)
+- [License](https://github.com/vespa-engine/vespa/blob/master/LICENSE)
 - [Blog](https://blog.vespa.ai/)
-- [Blog RSS](https://blog.vespa.ai/feed.xml)
+- [Blog R S S](https://blog.vespa.ai/feed.xml)
 - [Pricing](https://cloud.vespa.ai/pricing)
-- [Vespa Cloud Console](https://console.vespa-cloud.com/)
+- [Console](https://console.vespa-cloud.com/)
 - [Slack](https://slack.vespa.ai/)
-- [Support / Issues](https://github.com/vespa-engine/vespa/issues)
-- [Releases / Change Log](https://github.com/vespa-engine/vespa/releases)
+- [Support](https://github.com/vespa-engine/vespa/issues)
+- [Changelog](https://github.com/vespa-engine/vespa/releases)
+- [SDK](https://github.com/vespa-engine/vespa/tree/master/client/go)
+- [SDK](https://github.com/vespa-engine/pyvespa)
+- [SDK](https://vespa-engine.github.io/pyvespa/)
+- [SDK](https://github.com/vespa-engine/vespa/tree/master/vespa-feed-client)
+- [SDK](https://github.com/vespa-engine/vespa-search)
 - [Sample Apps](https://github.com/vespa-engine/sample-apps)
-- [Docker Image](https://github.com/vespa-engine/docker-image)
 - [Prometheus Exporter](https://github.com/vespa-engine/vespa_exporter)
-- [setup-vespa-cli GitHub Action](https://github.com/vespa-engine/setup-vespa-cli-action)
-
-## SDKs and Clients
-
-- [Vespa CLI (Go)](https://github.com/vespa-engine/vespa/tree/master/client/go)
-- [pyvespa (Python)](https://github.com/vespa-engine/pyvespa) — [docs](https://vespa-engine.github.io/pyvespa/)
-- [vespa-feed-client (Java)](https://github.com/vespa-engine/vespa/tree/master/vespa-feed-client)
-- [vespa-search (JavaScript)](https://github.com/vespa-engine/vespa-search)
-
-## Use Cases
-
-| Name | Description |
-|------|-------------|
-| Hybrid Search | Combine BM25, vector similarity, and structured filters in a single multi-phase ranked query. |
-| Retrieval Augmented Generation | Serve grounded context to LLMs with sub-100ms hybrid retrieval over chunks and embeddings. |
-| Recommendation and Personalization | ML-ranked recommendations with real-time feature updates and tensor inference. |
-| Ad Targeting / RTB | Match candidate ads against user context within tight latency budgets. |
-| E-Commerce Search and Browse | Faceted navigation + structured filters + learned ranking for large product catalogs. |
-| Streaming Search | Scan a user's personal corpus on demand — ideal for mail, messaging, and document search. |
-
-## Plans (Vespa Cloud)
-
-| Plan | vCPU/hr | GiB Memory/hr | GiB Disk/hr | GPU GiB/hr | Notes |
-|------|---------|---------------|-------------|------------|-------|
-| Startup | $0.05 | $0.005 | $0.0002 | $0.03 | Shared, dev zones only, community support |
-| Basic | $0.10 | $0.01 | $0.0004 | $0.07 | NBD support |
-| Commercial | $0.145 | $0.0145 | $0.0005 | $0.10 | 24/7 1-hour SLA, backup + DR |
-| Enterprise | $0.18 | $0.018 | $0.0007 | $0.125 | $20k/mo min, 15-min SLA, SSO, named rep |
-| Self-Managed | per-contract | per-contract | per-contract | per-contract | Run open-source Vespa with commercial support |
-| Open Source | free | free | free | free | Apache 2.0, community support |
-
-Up to 50% volume discount; 15% committed-spend discount.
-
-See [plans/vespa-ai-plans-pricing.yml](plans/vespa-ai-plans-pricing.yml).
-
-## Artifacts
-
-### OpenAPI
-- [Vespa Query API OpenAPI](openapi/vespa-query-api-openapi.yml)
-- [Vespa Document API OpenAPI](openapi/vespa-document-api-openapi.yml)
-
-### JSON Schema
-- [Vespa Document Schema](json-schema/vespa-ai-document-schema.json)
-- [Vespa Query Schema](json-schema/vespa-ai-query-schema.json)
-
-### JSON Structure
-- [Vespa Document Structure](json-structure/vespa-ai-document-structure.json)
-
-### JSON-LD
-- [Vespa JSON-LD Context](json-ld/vespa-ai-context.jsonld)
-
-### Examples
-- [Vespa Query Example](examples/vespa-ai-query-example.json)
-- [Vespa Document Put Example](examples/vespa-ai-document-put-example.json)
-
-## Capabilities
-
-Naftiko capabilities mapping Vespa business surfaces.
-
-- [Vespa Query](capabilities/vespa-query.yaml) — YQL / hybrid / vector queries
-- [Vespa Documents](capabilities/vespa-documents.yaml) — Put / Get / Update / Remove / Visit
-- [Vespa State](capabilities/vespa-state.yaml) — Health, version, and per-service metrics
-
-## Vocabulary
-
-- [Vespa Vocabulary](vocabulary/vespa-ai-vocabulary.yml) — Domain taxonomy (concepts, services, tools, standards)
-
-## Rules
-
-- [Vespa Spectral Rules](rules/vespa-ai-rules.yml) — Spectral ruleset enforcing Vespa OpenAPI conventions
-
-## Plans / Rate Limits / FinOps
-
-- [Plans](plans/vespa-ai-plans-pricing.yml) — API Commons Plans 0.1
-- [Rate Limits](rate-limits/vespa-ai-rate-limits.yml) — API Commons Rate Limits 0.1
-- [FinOps](finops/vespa-ai-finops.yml) — FOCUS 1.3 aligned
+- [Docker Image](https://github.com/vespa-engine/docker-image)
+- [Git Hub Action](https://github.com/vespa-engine/setup-vespa-cli-action)
+- [Spectral Rules](rules/vespa-ai-rules.yml)
+- [Vocabulary](vocabulary/vespa-ai-vocabulary.yml)
+- [J S O N L D Context](json-ld/vespa-ai-context.jsonld)
+- [Plans](plans/vespa-ai-plans-pricing.yml)
+- [Rate Limits](rate-limits/vespa-ai-rate-limits.yml)
+- [Fin Ops](finops/vespa-ai-finops.yml)
+- [Features](undefined)
+- [Use Cases](undefined)
+- [Integrations](undefined)
 
 ## Maintainers
 
-- Kin Lane — kin@apievangelist.com
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com

@@ -1,7 +1,8 @@
 aid: vespa-ai
 name: Vespa
-description: Vespa is an open-source AI search engine, big-data serving engine, and vector database originally developed
-  inside Yahoo and spun out as Vespa.ai AS. Vespa combines vector search, text search (BM25), structured filtering, and
+description: >-
+  Vespa is an open-source AI search engine, big-data serving engine, and vector database originally developed inside
+  Yahoo and spun out as Vespa.ai AS. Vespa combines vector search, text search (BM25), structured filtering, and
   machine-learned ranking — including native tensor inference — into a single distributed serving engine that scales to
   billions of documents with sub-100ms latency. Vespa Cloud is the fully managed commercial offering operated by the
   Vespa.ai team across AWS and GCP, with Startup, Basic, Commercial, and Enterprise plans plus a Self-Managed option for
@@ -29,11 +30,12 @@ specificationVersion: '0.19'
 apis:
   - aid: vespa-ai:vespa-query-api
     name: Vespa Query API
-    description: The Vespa Query (Search) API executes structured and vector queries against a Vespa application using
-      YQL (Vespa Query Language). It supports text search with BM25, approximate-nearest-neighbor vector search over HNSW
-      indexes, hybrid search, machine-learned ranking with multi-phase rank profiles, grouping/aggregation, pagination,
-      result presentation, and tracing. Queries can be issued as GET requests with query-string parameters or POST
-      requests with a JSON body for complex expressions.
+    description: >-
+      The Vespa Query (Search) API executes structured and vector queries against a Vespa application using YQL (Vespa
+      Query Language). It supports text search with BM25, approximate-nearest-neighbor vector search over HNSW indexes,
+      hybrid search, machine-learned ranking with multi-phase rank profiles, grouping/aggregation, pagination, result
+      presentation, and tracing. Queries can be issued as GET requests with query-string parameters or POST requests
+      with a JSON body for complex expressions.
     humanURL: https://docs.vespa.ai/en/query-api.html
     tags:
       - AI
@@ -52,14 +54,13 @@ apis:
         type: Documentation
       - url: https://docs.vespa.ai/en/getting-started.html
         type: GettingStarted
-      - type: NaftikoCapability
-        url: capabilities/vespa-query.yaml
   - aid: vespa-ai:vespa-document-api
     name: Vespa Document API
-    description: The Vespa Document API (/document/v1) provides synchronous REST access to document operations against a
-      Vespa content cluster. It supports Put, Get, Update (partial update with assign/add/remove operators), Remove, and
-      Visit (streaming visit, copy, delete-where, update-where) over JSON or JSON Lines, with conditional writes,
-      multi-tenant namespaces, field-set projection, time-window selection, and pagination via continuation tokens.
+    description: >-
+      The Vespa Document API (/document/v1) provides synchronous REST access to document operations against a Vespa
+      content cluster. It supports Put, Get, Update (partial update with assign/add/remove operators), Remove, and Visit
+      (streaming visit, copy, delete-where, update-where) over JSON or JSON Lines, with conditional writes, multi-tenant
+      namespaces, field-set projection, time-window selection, and pagination via continuation tokens.
     humanURL: https://docs.vespa.ai/en/reference/document-v1-api-reference.html
     tags:
       - Documents
@@ -76,13 +77,12 @@ apis:
         type: Documentation
       - url: https://docs.vespa.ai/en/reads-and-writes.html
         type: Documentation
-      - type: NaftikoCapability
-        url: capabilities/vespa-documents.yaml
   - aid: vespa-ai:vespa-deploy-api
     name: Vespa Deploy API
-    description: The Vespa Deploy API (/application/v2) manages application packages on a Vespa configuration server.
-      It supports preparing, activating, and tearing down application packages, session-based deployments, schema
-      validation, and zero-downtime updates of services, schemas, and rank profiles.
+    description: >-
+      The Vespa Deploy API (/application/v2) manages application packages on a Vespa configuration server. It supports
+      preparing, activating, and tearing down application packages, session-based deployments, schema validation, and
+      zero-downtime updates of services, schemas, and rank profiles.
     humanURL: https://docs.vespa.ai/en/reference/deploy-rest-api-v2.html
     tags:
       - Deployment
@@ -96,9 +96,10 @@ apis:
         type: Documentation
   - aid: vespa-ai:vespa-tenant-api
     name: Vespa Tenant and Application API
-    description: The Vespa Tenant API (/application/v2/tenant) manages tenants and applications hosted on a Vespa
-      configuration server or Vespa Cloud control plane. It exposes operations for creating tenants, listing
-      applications, and binding application sessions to a tenant.
+    description: >-
+      The Vespa Tenant API (/application/v2/tenant) manages tenants and applications hosted on a Vespa configuration
+      server or Vespa Cloud control plane. It exposes operations for creating tenants, listing applications, and binding
+      application sessions to a tenant.
     humanURL: https://docs.vespa.ai/en/reference/application-v2-tenant.html
     tags:
       - Tenants
@@ -110,9 +111,10 @@ apis:
         type: Documentation
   - aid: vespa-ai:vespa-config-api
     name: Vespa Config API
-    description: The Vespa Config API (/config/v2) lets services in a Vespa application retrieve their configuration
-      from a Vespa configuration server using the config-server / config-proxy protocol. It is primarily used by Vespa
-      services and tooling rather than end users, but is documented as a stable HTTP API.
+    description: >-
+      The Vespa Config API (/config/v2) lets services in a Vespa application retrieve their configuration from a Vespa
+      configuration server using the config-server / config-proxy protocol. It is primarily used by Vespa services and
+      tooling rather than end users, but is documented as a stable HTTP API.
     humanURL: https://docs.vespa.ai/en/reference/config-rest-api-v2.html
     tags:
       - Configuration
@@ -122,8 +124,9 @@ apis:
         type: Documentation
   - aid: vespa-ai:vespa-cluster-api
     name: Vespa Cluster Controller API
-    description: The Vespa Cluster Controller API (/cluster/v2) exposes runtime state and management endpoints for a
-      Vespa content cluster — including node state queries, maintenance-mode transitions, and storage cluster orchestration.
+    description: >-
+      The Vespa Cluster Controller API (/cluster/v2) exposes runtime state and management endpoints for a Vespa content
+      cluster — including node state queries, maintenance-mode transitions, and storage cluster orchestration.
     humanURL: https://docs.vespa.ai/en/reference/cluster-v2.html
     tags:
       - Cluster
@@ -135,9 +138,10 @@ apis:
         type: Documentation
   - aid: vespa-ai:vespa-state-api
     name: Vespa State API
-    description: The Vespa State API (/state/v1) exposes per-service health, version, and metrics endpoints for any
-      Vespa node — used by orchestration tooling, monitoring agents, and load balancers to check liveness, readiness,
-      and runtime metrics.
+    description: >-
+      The Vespa State API (/state/v1) exposes per-service health, version, and metrics endpoints for any Vespa node —
+      used by orchestration tooling, monitoring agents, and load balancers to check liveness, readiness, and runtime
+      metrics.
     humanURL: https://docs.vespa.ai/en/reference/state-v1.html
     tags:
       - Health
@@ -147,13 +151,12 @@ apis:
     properties:
       - url: https://docs.vespa.ai/en/reference/state-v1.html
         type: Documentation
-      - type: NaftikoCapability
-        url: capabilities/vespa-state.yaml
   - aid: vespa-ai:vespa-metrics-api
     name: Vespa Metrics API
-    description: Vespa exposes a family of metrics endpoints (/metrics/v1, /metrics/v2, /prometheus/v1) that publish
-      Vespa engine and application metrics in JSON or Prometheus exposition format for scraping by Prometheus,
-      Grafana, or other observability stacks.
+    description: >-
+      Vespa exposes a family of metrics endpoints (/metrics/v1, /metrics/v2, /prometheus/v1) that publish Vespa engine
+      and application metrics in JSON or Prometheus exposition format for scraping by Prometheus, Grafana, or other
+      observability stacks.
     humanURL: https://docs.vespa.ai/en/operations/metrics.html
     tags:
       - Metrics
@@ -262,23 +265,29 @@ common:
   - type: UseCases
     data:
       - name: Hybrid Search
-        description: Combine BM25 text relevance with vector similarity and structured filters in a single query
-          executed by Vespa's multi-phase ranking pipeline.
+        description: >-
+          Combine BM25 text relevance with vector similarity and structured filters in a single query executed by
+          Vespa's multi-phase ranking pipeline.
       - name: Retrieval Augmented Generation
-        description: Serve grounded context to large language models by indexing documents, chunks, and embeddings in
-          Vespa and retrieving them with hybrid search at sub-100ms latency.
+        description: >-
+          Serve grounded context to large language models by indexing documents, chunks, and embeddings in Vespa and
+          retrieving them with hybrid search at sub-100ms latency.
       - name: Recommendation and Personalization
-        description: Power recommendation systems with machine-learned ranking, real-time feature updates, and tensor
-          inference over user and item embeddings.
+        description: >-
+          Power recommendation systems with machine-learned ranking, real-time feature updates, and tensor inference
+          over user and item embeddings.
       - name: Ad Targeting and Real-Time Bidding
-        description: Match candidate ads against user context and serve ranked impressions within tight latency
-          budgets using Vespa's distributed serving engine.
+        description: >-
+          Match candidate ads against user context and serve ranked impressions within tight latency budgets using
+          Vespa's distributed serving engine.
       - name: E-Commerce Search and Browse
-        description: Combine faceted navigation, structured filters, text relevance, and learned ranking for
-          large product catalogs with frequent updates.
+        description: >-
+          Combine faceted navigation, structured filters, text relevance, and learned ranking for large product catalogs
+          with frequent updates.
       - name: Streaming Search for Personal Data
-        description: Run "streaming search" mode that scans a user's personal corpus on demand — ideal for mail,
-          messaging, and document search where each user has their own private index.
+        description: >-
+          Run "streaming search" mode that scans a user's personal corpus on demand — ideal for mail, messaging, and
+          document search where each user has their own private index.
   - type: Integrations
     data:
       - name: AWS
