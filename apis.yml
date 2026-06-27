@@ -201,19 +201,19 @@ common:
     url: https://github.com/vespa-engine/vespa/issues
   - type: ChangeLog
     url: https://github.com/vespa-engine/vespa/releases
-  - type: SDK
+  - type: SDKs
     name: Vespa CLI (Go)
     url: https://github.com/vespa-engine/vespa/tree/master/client/go
-  - type: SDK
+  - type: SDKs
     name: pyvespa (Python)
     url: https://github.com/vespa-engine/pyvespa
-  - type: SDK
+  - type: SDKs
     name: pyvespa Documentation
     url: https://vespa-engine.github.io/pyvespa/
-  - type: SDK
+  - type: SDKs
     name: vespa-feed-client (Java)
     url: https://github.com/vespa-engine/vespa/tree/master/vespa-feed-client
-  - type: SDK
+  - type: SDKs
     name: vespa-search (JavaScript)
     url: https://github.com/vespa-engine/vespa-search
   - type: SampleApps
