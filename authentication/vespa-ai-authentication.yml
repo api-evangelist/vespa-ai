@@ -1,0 +1,13 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/vespa-query-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: mtls
+  type: http
+  scheme: bearer
+  description: Vespa Cloud endpoints typically use mTLS with a client data-plane certificate.
+  sources:
+  - openapi/vespa-query-api-openapi.yml

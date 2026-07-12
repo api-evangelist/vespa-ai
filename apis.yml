@@ -173,6 +173,12 @@ apis:
       - url: https://docs.vespa.ai/en/reference/prometheus-v1.html
         type: Documentation
 common:
+  - type: VulnerabilityDisclosure
+    url: security/vespa-ai-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/vespa-ai-domain-security.yml
+  - type: Authentication
+    url: authentication/vespa-ai-authentication.yml
   - type: Website
     url: https://vespa.ai
   - type: Documentation
