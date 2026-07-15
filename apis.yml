@@ -173,6 +173,8 @@ apis:
       - url: https://docs.vespa.ai/en/reference/prometheus-v1.html
         type: Documentation
 common:
+  - type: AgenticAccess
+    url: agentic-access/vespa-ai-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/vespa-ai-vulnerability-disclosure.yml
   - type: DomainSecurity
