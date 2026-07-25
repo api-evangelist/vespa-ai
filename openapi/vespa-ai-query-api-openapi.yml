@@ -1,14 +1,20 @@
 openapi: 3.0.3
 info:
   title: Vespa Query API
-  description: |
-    The Vespa Query (Search) API executes structured and vector queries against a Vespa application
+  description: 'The Vespa Query (Search) API executes structured and vector queries against a Vespa application
+
     using YQL (Vespa Query Language). It supports text search with BM25, approximate-nearest-neighbor
+
     vector search over HNSW indexes, hybrid search, machine-learned ranking with multi-phase rank
+
     profiles, grouping/aggregation, pagination, result presentation, and tracing.
 
+
     The Query API can be called as a GET with query-string parameters or as a POST with a JSON body
+
     for complex query expressions. Responses are returned as JSON (default), CBOR, or XML.
+
+    '
   version: '1.0'
   contact:
     name: Vespa
@@ -17,14 +23,16 @@ info:
     name: Apache 2.0
     url: https://github.com/vespa-engine/vespa/blob/master/LICENSE
 servers:
-  - url: http://localhost:8080
-    description: Default local Vespa container endpoint
-  - url: https://{endpoint}.vespa-cloud.com
-    description: Vespa Cloud application endpoint
-    variables:
-      endpoint:
-        default: example
-        description: Vespa Cloud application endpoint hostname prefix
+- url: http://localhost:8080
+  description: Default local Vespa container endpoint
+- url: https://{endpoint}.vespa-cloud.com
+  description: Vespa Cloud application endpoint
+  variables:
+    endpoint:
+      default: example
+      description: Vespa Cloud application endpoint hostname prefix
+tags:
+- name: Query
 paths:
   /search/:
     get:
@@ -32,60 +40,63 @@ paths:
       summary: Execute Query Via GET
       description: Execute a Vespa query using URL-encoded query-string parameters.
       tags:
-        - Query
+      - Query
       parameters:
-        - name: yql
-          in: query
-          description: YQL query expression, e.g. `select * from sources * where userQuery()`.
-          required: false
-          schema:
-            type: string
-        - name: query
-          in: query
-          description: Simple user query string passed to the query parser.
-          required: false
-          schema:
-            type: string
-        - name: hits
-          in: query
-          description: Maximum number of hits to return.
-          required: false
-          schema:
-            type: integer
-            default: 10
-        - name: offset
-          in: query
-          description: Number of hits to skip for pagination.
-          required: false
-          schema:
-            type: integer
-            default: 0
-        - name: ranking.profile
-          in: query
-          description: Name of the rank profile to use for scoring.
-          required: false
-          schema:
-            type: string
-        - name: timeout
-          in: query
-          description: Query timeout, e.g. `500ms` or `5s`.
-          required: false
-          schema:
-            type: string
-        - name: trace.level
-          in: query
-          description: Trace verbosity level for debugging.
-          required: false
-          schema:
-            type: integer
-        - name: presentation.format
-          in: query
-          description: Response format. One of `json`, `cbor`, or `xml`.
-          required: false
-          schema:
-            type: string
-            enum: [json, cbor, xml]
-            default: json
+      - name: yql
+        in: query
+        description: YQL query expression, e.g. `select * from sources * where userQuery()`.
+        required: false
+        schema:
+          type: string
+      - name: query
+        in: query
+        description: Simple user query string passed to the query parser.
+        required: false
+        schema:
+          type: string
+      - name: hits
+        in: query
+        description: Maximum number of hits to return.
+        required: false
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        description: Number of hits to skip for pagination.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: ranking.profile
+        in: query
+        description: Name of the rank profile to use for scoring.
+        required: false
+        schema:
+          type: string
+      - name: timeout
+        in: query
+        description: Query timeout, e.g. `500ms` or `5s`.
+        required: false
+        schema:
+          type: string
+      - name: trace.level
+        in: query
+        description: Trace verbosity level for debugging.
+        required: false
+        schema:
+          type: integer
+      - name: presentation.format
+        in: query
+        description: Response format. One of `json`, `cbor`, or `xml`.
+        required: false
+        schema:
+          type: string
+          enum:
+          - json
+          - cbor
+          - xml
+          default: json
       responses:
         '200':
           description: Successful query result.
@@ -106,10 +117,9 @@ paths:
     post:
       operationId: queryPost
       summary: Execute Query Via POST
-      description: Execute a Vespa query whose parameters are provided as a JSON body. Equivalent to
-        GET but allows longer YQL expressions and complex grouping/ranking inputs.
+      description: Execute a Vespa query whose parameters are provided as a JSON body. Equivalent to GET but allows longer YQL expressions and complex grouping/ranking inputs.
       tags:
-        - Query
+      - Query
       requestBody:
         required: true
         content:
@@ -131,6 +141,39 @@ paths:
           description: Server error.
 components:
   schemas:
+    QueryResult:
+      type: object
+      properties:
+        root:
+          $ref: '#/components/schemas/QueryRoot'
+    QueryRoot:
+      type: object
+      properties:
+        id:
+          type: string
+        relevance:
+          type: number
+        fields:
+          type: object
+          additionalProperties: true
+        coverage:
+          $ref: '#/components/schemas/Coverage'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hit'
+    Hit:
+      type: object
+      properties:
+        id:
+          type: string
+        relevance:
+          type: number
+        source:
+          type: string
+        fields:
+          type: object
+          additionalProperties: true
     QueryRequest:
       type: object
       properties:
@@ -164,39 +207,6 @@ components:
         timeout:
           type: string
         trace:
-          type: object
-          additionalProperties: true
-    QueryResult:
-      type: object
-      properties:
-        root:
-          $ref: '#/components/schemas/QueryRoot'
-    QueryRoot:
-      type: object
-      properties:
-        id:
-          type: string
-        relevance:
-          type: number
-        fields:
-          type: object
-          additionalProperties: true
-        coverage:
-          $ref: '#/components/schemas/Coverage'
-        children:
-          type: array
-          items:
-            $ref: '#/components/schemas/Hit'
-    Hit:
-      type: object
-      properties:
-        id:
-          type: string
-        relevance:
-          type: number
-        source:
-          type: string
-        fields:
           type: object
           additionalProperties: true
     Coverage:
