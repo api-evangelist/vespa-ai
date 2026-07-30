@@ -9,9 +9,22 @@ description: >-
   customers running the open-source engine on their own infrastructure. Vespa is widely used at Spotify, Perplexity,
   Yahoo, Farfetch, and Elicit for search, recommendation, personalization, and Retrieval-Augmented Generation (RAG).
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Provider
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/vespa-ai.png
 tags:
   - AI
   - Search
@@ -28,151 +41,144 @@ created: '2026-05-25'
 modified: '2026-05-25'
 specificationVersion: '0.19'
 apis:
-  - aid: vespa-ai:vespa-query-api
-    name: Vespa Query API
-    description: >-
-      The Vespa Query (Search) API executes structured and vector queries against a Vespa application using YQL (Vespa
-      Query Language). It supports text search with BM25, approximate-nearest-neighbor vector search over HNSW indexes,
-      hybrid search, machine-learned ranking with multi-phase rank profiles, grouping/aggregation, pagination, result
-      presentation, and tracing. Queries can be issued as GET requests with query-string parameters or POST requests
-      with a JSON body for complex expressions.
-    humanURL: https://docs.vespa.ai/en/query-api.html
-    tags:
-      - AI
-      - Search
-      - Query
-      - YQL
-      - Vector Search
-      - Ranking
-      - Hybrid Search
-    properties:
-      - url: openapi/vespa-query-api-openapi.yml
-        type: OpenAPI
-      - url: https://docs.vespa.ai/en/query-api.html
-        type: Documentation
-      - url: https://docs.vespa.ai/en/reference/api/query.html
-        type: Documentation
-      - url: https://docs.vespa.ai/en/getting-started.html
-        type: GettingStarted
-  - aid: vespa-ai:vespa-document-api
-    name: Vespa Document API
-    description: >-
-      The Vespa Document API (/document/v1) provides synchronous REST access to document operations against a Vespa
-      content cluster. It supports Put, Get, Update (partial update with assign/add/remove operators), Remove, and Visit
-      (streaming visit, copy, delete-where, update-where) over JSON or JSON Lines, with conditional writes, multi-tenant
-      namespaces, field-set projection, time-window selection, and pagination via continuation tokens.
-    humanURL: https://docs.vespa.ai/en/reference/document-v1-api-reference.html
-    tags:
-      - Documents
-      - CRUD
-      - Indexing
-      - Data
-      - Streaming
-    properties:
-      - url: openapi/vespa-document-api-openapi.yml
-        type: OpenAPI
-      - url: https://docs.vespa.ai/en/reference/document-v1-api-reference.html
-        type: Documentation
-      - url: https://docs.vespa.ai/en/writing/document-v1-api-guide.html
-        type: Documentation
-      - url: https://docs.vespa.ai/en/reads-and-writes.html
-        type: Documentation
-  - aid: vespa-ai:vespa-deploy-api
-    name: Vespa Deploy API
-    description: >-
-      The Vespa Deploy API (/application/v2) manages application packages on a Vespa configuration server. It supports
-      preparing, activating, and tearing down application packages, session-based deployments, schema validation, and
-      zero-downtime updates of services, schemas, and rank profiles.
-    humanURL: https://docs.vespa.ai/en/reference/deploy-rest-api-v2.html
-    tags:
-      - Deployment
-      - Configuration
-      - Application
-      - DevOps
-    properties:
-      - url: https://docs.vespa.ai/en/reference/deploy-rest-api-v2.html
-        type: Documentation
-      - url: https://docs.vespa.ai/en/application-packages.html
-        type: Documentation
-  - aid: vespa-ai:vespa-tenant-api
-    name: Vespa Tenant and Application API
-    description: >-
-      The Vespa Tenant API (/application/v2/tenant) manages tenants and applications hosted on a Vespa configuration
-      server or Vespa Cloud control plane. It exposes operations for creating tenants, listing applications, and binding
-      application sessions to a tenant.
-    humanURL: https://docs.vespa.ai/en/reference/application-v2-tenant.html
-    tags:
-      - Tenants
-      - Applications
-      - Multi-Tenancy
-      - Administration
-    properties:
-      - url: https://docs.vespa.ai/en/reference/application-v2-tenant.html
-        type: Documentation
-  - aid: vespa-ai:vespa-config-api
-    name: Vespa Config API
-    description: >-
-      The Vespa Config API (/config/v2) lets services in a Vespa application retrieve their configuration from a Vespa
-      configuration server using the config-server / config-proxy protocol. It is primarily used by Vespa services and
-      tooling rather than end users, but is documented as a stable HTTP API.
-    humanURL: https://docs.vespa.ai/en/reference/config-rest-api-v2.html
-    tags:
-      - Configuration
-      - Internal
-    properties:
-      - url: https://docs.vespa.ai/en/reference/config-rest-api-v2.html
-        type: Documentation
-  - aid: vespa-ai:vespa-cluster-api
-    name: Vespa Cluster Controller API
-    description: >-
-      The Vespa Cluster Controller API (/cluster/v2) exposes runtime state and management endpoints for a Vespa content
-      cluster — including node state queries, maintenance-mode transitions, and storage cluster orchestration.
-    humanURL: https://docs.vespa.ai/en/reference/cluster-v2.html
-    tags:
-      - Cluster
-      - Operations
-      - Content
-      - State
-    properties:
-      - url: https://docs.vespa.ai/en/reference/cluster-v2.html
-        type: Documentation
-  - aid: vespa-ai:vespa-state-api
-    name: Vespa State API
-    description: >-
-      The Vespa State API (/state/v1) exposes per-service health, version, and metrics endpoints for any Vespa node —
-      used by orchestration tooling, monitoring agents, and load balancers to check liveness, readiness, and runtime
-      metrics.
-    humanURL: https://docs.vespa.ai/en/reference/state-v1.html
-    tags:
-      - Health
-      - Monitoring
-      - Metrics
-      - Observability
-    properties:
-      - url: https://docs.vespa.ai/en/reference/state-v1.html
-        type: Documentation
-  - aid: vespa-ai:vespa-metrics-api
-    name: Vespa Metrics API
-    description: >-
-      Vespa exposes a family of metrics endpoints (/metrics/v1, /metrics/v2, /prometheus/v1) that publish Vespa engine
-      and application metrics in JSON or Prometheus exposition format for scraping by Prometheus, Grafana, or other
-      observability stacks.
-    humanURL: https://docs.vespa.ai/en/operations/metrics.html
-    tags:
-      - Metrics
-      - Prometheus
-      - Observability
-      - Monitoring
-    properties:
-      - url: https://docs.vespa.ai/en/operations/metrics.html
-        type: Documentation
-      - url: https://docs.vespa.ai/en/reference/metrics-v1.html
-        type: Documentation
-      - url: https://docs.vespa.ai/en/reference/metrics-v2.html
-        type: Documentation
-      - url: https://docs.vespa.ai/en/reference/prometheus-v1.html
-        type: Documentation
+- aid: vespa-ai:vespa-document-api
+  name: Vespa Document API
+  description: >-
+    The Vespa Document API (/document/v1) provides synchronous REST access to document operations against
+    a Vespa content cluster. It supports Put, Get, Update (partial update with assign/add/remove operators),
+    Remove, and Visit (streaming visit, copy, delete-where, update-where) over JSON or JSON Lines, with
+    conditional writes, multi-tenant namespaces, field-set projection, time-window selection, and pagination
+    via continuation tokens.
+  humanURL: https://docs.vespa.ai/en/reference/document-v1-api-reference.html
+  tags:
+  - Documents
+  - CRUD
+  - Indexing
+  - Data
+  - Streaming
+  properties:
+  - url: openapi/vespa-document-api-openapi.yml
+    type: OpenAPI
+  - url: https://docs.vespa.ai/en/reference/document-v1-api-reference.html
+    type: Documentation
+  - url: https://docs.vespa.ai/en/writing/document-v1-api-guide.html
+    type: Documentation
+  - url: https://docs.vespa.ai/en/reads-and-writes.html
+    type: Documentation
+- aid: vespa-ai:vespa-deploy-api
+  name: Vespa Deploy API
+  description: >-
+    The Vespa Deploy API (/application/v2) manages application packages on a Vespa configuration server.
+    It supports preparing, activating, and tearing down application packages, session-based deployments,
+    schema validation, and zero-downtime updates of services, schemas, and rank profiles.
+  humanURL: https://docs.vespa.ai/en/reference/deploy-rest-api-v2.html
+  tags:
+  - Deployment
+  - Configuration
+  - Application
+  - DevOps
+  properties:
+  - url: https://docs.vespa.ai/en/reference/deploy-rest-api-v2.html
+    type: Documentation
+  - url: https://docs.vespa.ai/en/application-packages.html
+    type: Documentation
+- aid: vespa-ai:vespa-tenant-api
+  name: Vespa Tenant and Application API
+  description: >-
+    The Vespa Tenant API (/application/v2/tenant) manages tenants and applications hosted on a Vespa configuration
+    server or Vespa Cloud control plane. It exposes operations for creating tenants, listing applications,
+    and binding application sessions to a tenant.
+  humanURL: https://docs.vespa.ai/en/reference/application-v2-tenant.html
+  tags:
+  - Tenants
+  - Applications
+  - Multi-Tenancy
+  - Administration
+  properties:
+  - url: https://docs.vespa.ai/en/reference/application-v2-tenant.html
+    type: Documentation
+- aid: vespa-ai:vespa-config-api
+  name: Vespa Config API
+  description: >-
+    The Vespa Config API (/config/v2) lets services in a Vespa application retrieve their configuration
+    from a Vespa configuration server using the config-server / config-proxy protocol. It is primarily
+    used by Vespa services and tooling rather than end users, but is documented as a stable HTTP API.
+  humanURL: https://docs.vespa.ai/en/reference/config-rest-api-v2.html
+  tags:
+  - Configuration
+  - Internal
+  properties:
+  - url: https://docs.vespa.ai/en/reference/config-rest-api-v2.html
+    type: Documentation
+- aid: vespa-ai:vespa-cluster-api
+  name: Vespa Cluster Controller API
+  description: >-
+    The Vespa Cluster Controller API (/cluster/v2) exposes runtime state and management endpoints for
+    a Vespa content cluster — including node state queries, maintenance-mode transitions, and storage
+    cluster orchestration.
+  humanURL: https://docs.vespa.ai/en/reference/cluster-v2.html
+  tags:
+  - Cluster
+  - Operations
+  - Content
+  - State
+  properties:
+  - url: https://docs.vespa.ai/en/reference/cluster-v2.html
+    type: Documentation
+- aid: vespa-ai:vespa-state-api
+  name: Vespa State API
+  description: >-
+    The Vespa State API (/state/v1) exposes per-service health, version, and metrics endpoints for any
+    Vespa node — used by orchestration tooling, monitoring agents, and load balancers to check liveness,
+    readiness, and runtime metrics.
+  humanURL: https://docs.vespa.ai/en/reference/state-v1.html
+  tags:
+  - Health
+  - Monitoring
+  - Metrics
+  - Observability
+  properties:
+  - url: https://docs.vespa.ai/en/reference/state-v1.html
+    type: Documentation
+- aid: vespa-ai:vespa-metrics-api
+  name: Vespa Metrics API
+  description: >-
+    Vespa exposes a family of metrics endpoints (/metrics/v1, /metrics/v2, /prometheus/v1) that publish
+    Vespa engine and application metrics in JSON or Prometheus exposition format for scraping by Prometheus,
+    Grafana, or other observability stacks.
+  humanURL: https://docs.vespa.ai/en/operations/metrics.html
+  tags:
+  - Metrics
+  - Prometheus
+  - Observability
+  - Monitoring
+  properties:
+  - url: https://docs.vespa.ai/en/operations/metrics.html
+    type: Documentation
+  - url: https://docs.vespa.ai/en/reference/metrics-v1.html
+    type: Documentation
+  - url: https://docs.vespa.ai/en/reference/metrics-v2.html
+    type: Documentation
+  - url: https://docs.vespa.ai/en/reference/prometheus-v1.html
+    type: Documentation
+- aid: vespa-ai:vespa-ai-query-api
+  name: Vespa Query API
+  description: The Query API from Vespa — 1 operation(s) for query.
+  humanURL: https://docs.vespa.ai/en/query-api.html
+  tags:
+  - Query
+  properties:
+  - type: OpenAPI
+    url: openapi/vespa-ai-query-api-openapi.yml
+  - type: Documentation
+    url: https://docs.vespa.ai/en/query-api.html
+  - type: Documentation
+    url: https://docs.vespa.ai/en/reference/api/query.html
+  - type: GettingStarted
+    url: https://docs.vespa.ai/en/getting-started.html
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/vespa/overview
   - type: AgenticAccess
     url: agentic-access/vespa-ai-agentic-access.yml
   - type: VulnerabilityDisclosure
