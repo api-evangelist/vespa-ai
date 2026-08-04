@@ -43,7 +43,7 @@ paths:
         - $ref: '#/components/parameters/Timeout'
       responses:
         '200':
-          description: Visit result. JSON by default, JSON Lines when `Accept: application/jsonl`.
+          description: "Visit result. JSON by default, JSON Lines when `Accept: application/jsonl`."
           content:
             application/json:
               schema:

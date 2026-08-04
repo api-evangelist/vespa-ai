@@ -1,0 +1,760 @@
+{
+  "info": {
+    "_postman_id": "c7f9dabe-2b98-4511-b84e-162082323b83",
+    "name": "Vespa Query API",
+    "description": "The Vespa Query (Search) API executes structured and vector queries against a Vespa application\nusing YQL (Vespa Query Language). It supports text search with BM25, approximate-nearest-neighbor\nvector search over HNSW indexes, hybrid search, machine-learned ranking with multi-phase rank\nprofiles, grouping/aggregation, pagination, result presentation, and tracing.\n\nThe Query API can be called as a GET with query-string parameters or as a POST with a JSON body\nfor complex query expressions. Responses are returned as JSON (default), CBOR, or XML.\n\n\nContact Support:\n Name: Vespa",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T11:05:33.000Z",
+    "updatedAt": "2026-07-28T11:05:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c7f9dabe-2b98-4511-b84e-162082323b83"
+  },
+  "item": [
+    {
+      "name": "search",
+      "item": [
+        {
+          "name": "Execute Query Via GET",
+          "id": "ac031541-17be-4adf-b465-457d6000d2ac",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/search/?yql=<string>&query=<string>&hits=10&offset=0&ranking.profile=<string>&timeout=<string>&trace.level=<integer>&presentation.format=json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "search",
+                ""
+              ],
+              "query": [
+                {
+                  "description": "YQL query expression, e.g. `select * from sources * where userQuery()`.",
+                  "key": "yql",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Simple user query string passed to the query parser.",
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of hits to return.",
+                  "key": "hits",
+                  "value": "10"
+                },
+                {
+                  "description": "Number of hits to skip for pagination.",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Name of the rank profile to use for scoring.",
+                  "key": "ranking.profile",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Query timeout, e.g. `500ms` or `5s`.",
+                  "key": "timeout",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Trace verbosity level for debugging.",
+                  "key": "trace.level",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Response format. One of `json`, `cbor`, or `xml`.",
+                  "key": "presentation.format",
+                  "value": "json"
+                }
+              ]
+            },
+            "description": "Execute a Vespa query using URL-encoded query-string parameters."
+          },
+          "response": [
+            {
+              "id": "6ad00188-f867-44a7-a3c9-30bf9ce2f170",
+              "name": "Successful query result.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/search/?yql=<string>&query=<string>&hits=10&offset=0&ranking.profile=<string>&timeout=<string>&trace.level=<integer>&presentation.format=json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "search",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "YQL query expression, e.g. `select * from sources * where userQuery()`.",
+                      "key": "yql",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Simple user query string passed to the query parser.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of hits to return.",
+                      "key": "hits",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Number of hits to skip for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Name of the rank profile to use for scoring.",
+                      "key": "ranking.profile",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Query timeout, e.g. `500ms` or `5s`.",
+                      "key": "timeout",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Trace verbosity level for debugging.",
+                      "key": "trace.level",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Response format. One of `json`, `cbor`, or `xml`.",
+                      "key": "presentation.format",
+                      "value": "json"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"root\": {\n    \"id\": \"<string>\",\n    \"relevance\": \"<number>\",\n    \"fields\": {\n      \"iruref1\": \"Excepteur Ut cupidatat\"\n    },\n    \"coverage\": {\n      \"coverage\": \"<integer>\",\n      \"documents\": \"<integer>\",\n      \"full\": \"<boolean>\",\n      \"nodes\": \"<integer>\",\n      \"results\": \"<integer>\",\n      \"resultsFull\": \"<integer>\"\n    },\n    \"children\": [\n      {\n        \"id\": \"<string>\",\n        \"relevance\": \"<number>\",\n        \"source\": \"<string>\",\n        \"fields\": {\n          \"dolore_622\": true,\n          \"ut36\": -809591.8351669759,\n          \"incididunt_866\": -31520183\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"relevance\": \"<number>\",\n        \"source\": \"<string>\",\n        \"fields\": {\n          \"sint6\": -42428538,\n          \"magna_7\": 18811210.64822291,\n          \"culpa_7\": 89534522.77466732\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T11:05:34.000Z",
+              "updatedAt": "2026-07-28T11:05:34.000Z",
+              "uid": "35240-6ad00188-f867-44a7-a3c9-30bf9ce2f170"
+            },
+            {
+              "id": "30fd03ae-0bf6-4d94-936d-1deabf7fd836",
+              "name": "Bad request (invalid YQL or parameters).",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/search/?yql=<string>&query=<string>&hits=10&offset=0&ranking.profile=<string>&timeout=<string>&trace.level=<integer>&presentation.format=json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "search",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "YQL query expression, e.g. `select * from sources * where userQuery()`.",
+                      "key": "yql",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Simple user query string passed to the query parser.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of hits to return.",
+                      "key": "hits",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Number of hits to skip for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Name of the rank profile to use for scoring.",
+                      "key": "ranking.profile",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Query timeout, e.g. `500ms` or `5s`.",
+                      "key": "timeout",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Trace verbosity level for debugging.",
+                      "key": "trace.level",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Response format. One of `json`, `cbor`, or `xml`.",
+                      "key": "presentation.format",
+                      "value": "json"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T11:05:34.000Z",
+              "updatedAt": "2026-07-28T11:05:34.000Z",
+              "uid": "35240-30fd03ae-0bf6-4d94-936d-1deabf7fd836"
+            },
+            {
+              "id": "a073b30a-aa3c-44f7-b23c-28e5ef3e7ba7",
+              "name": "Query timed out.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/search/?yql=<string>&query=<string>&hits=10&offset=0&ranking.profile=<string>&timeout=<string>&trace.level=<integer>&presentation.format=json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "search",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "YQL query expression, e.g. `select * from sources * where userQuery()`.",
+                      "key": "yql",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Simple user query string passed to the query parser.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of hits to return.",
+                      "key": "hits",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Number of hits to skip for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Name of the rank profile to use for scoring.",
+                      "key": "ranking.profile",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Query timeout, e.g. `500ms` or `5s`.",
+                      "key": "timeout",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Trace verbosity level for debugging.",
+                      "key": "trace.level",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Response format. One of `json`, `cbor`, or `xml`.",
+                      "key": "presentation.format",
+                      "value": "json"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T11:05:34.000Z",
+              "updatedAt": "2026-07-28T11:05:34.000Z",
+              "uid": "35240-a073b30a-aa3c-44f7-b23c-28e5ef3e7ba7"
+            },
+            {
+              "id": "cdaf402c-63dd-4a38-b778-21db2ec68189",
+              "name": "Server error.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/search/?yql=<string>&query=<string>&hits=10&offset=0&ranking.profile=<string>&timeout=<string>&trace.level=<integer>&presentation.format=json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "search",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "YQL query expression, e.g. `select * from sources * where userQuery()`.",
+                      "key": "yql",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Simple user query string passed to the query parser.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of hits to return.",
+                      "key": "hits",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Number of hits to skip for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Name of the rank profile to use for scoring.",
+                      "key": "ranking.profile",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Query timeout, e.g. `500ms` or `5s`.",
+                      "key": "timeout",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Trace verbosity level for debugging.",
+                      "key": "trace.level",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Response format. One of `json`, `cbor`, or `xml`.",
+                      "key": "presentation.format",
+                      "value": "json"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T11:05:34.000Z",
+              "updatedAt": "2026-07-28T11:05:34.000Z",
+              "uid": "35240-cdaf402c-63dd-4a38-b778-21db2ec68189"
+            },
+            {
+              "id": "bdb721b3-f69b-48e5-b0eb-0ccd492bb0c1",
+              "name": "Service unavailable.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/search/?yql=<string>&query=<string>&hits=10&offset=0&ranking.profile=<string>&timeout=<string>&trace.level=<integer>&presentation.format=json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "search",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "YQL query expression, e.g. `select * from sources * where userQuery()`.",
+                      "key": "yql",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Simple user query string passed to the query parser.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of hits to return.",
+                      "key": "hits",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Number of hits to skip for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Name of the rank profile to use for scoring.",
+                      "key": "ranking.profile",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Query timeout, e.g. `500ms` or `5s`.",
+                      "key": "timeout",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Trace verbosity level for debugging.",
+                      "key": "trace.level",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Response format. One of `json`, `cbor`, or `xml`.",
+                      "key": "presentation.format",
+                      "value": "json"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T11:05:34.000Z",
+              "updatedAt": "2026-07-28T11:05:34.000Z",
+              "uid": "35240-bdb721b3-f69b-48e5-b0eb-0ccd492bb0c1"
+            },
+            {
+              "id": "c6fa57b1-5002-49f4-90e8-c88374feff74",
+              "name": "Gateway timeout.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/search/?yql=<string>&query=<string>&hits=10&offset=0&ranking.profile=<string>&timeout=<string>&trace.level=<integer>&presentation.format=json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "search",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "YQL query expression, e.g. `select * from sources * where userQuery()`.",
+                      "key": "yql",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Simple user query string passed to the query parser.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of hits to return.",
+                      "key": "hits",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Number of hits to skip for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Name of the rank profile to use for scoring.",
+                      "key": "ranking.profile",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Query timeout, e.g. `500ms` or `5s`.",
+                      "key": "timeout",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Trace verbosity level for debugging.",
+                      "key": "trace.level",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Response format. One of `json`, `cbor`, or `xml`.",
+                      "key": "presentation.format",
+                      "value": "json"
+                    }
+                  ]
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T11:05:34.000Z",
+              "updatedAt": "2026-07-28T11:05:34.000Z",
+              "uid": "35240-c6fa57b1-5002-49f4-90e8-c88374feff74"
+            }
+          ],
+          "createdAt": "2026-07-28T11:05:34.000Z",
+          "updatedAt": "2026-07-28T11:05:34.000Z",
+          "uid": "35240-ac031541-17be-4adf-b465-457d6000d2ac"
+        },
+        {
+          "name": "Execute Query Via POST",
+          "id": "8cf957a7-1b1a-4956-ab1f-0adbc782d758",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"yql\": \"<string>\",\n  \"query\": \"<string>\",\n  \"hits\": 10,\n  \"offset\": 0,\n  \"ranking\": {\n    \"eiusmod99c\": -6829832.6462935805,\n    \"dolore_9\": true\n  },\n  \"presentation\": {\n    \"velit_d0\": -62416243,\n    \"ad_12\": false\n  },\n  \"model\": {\n    \"aliquipcb\": true,\n    \"ad55b\": false\n  },\n  \"select\": \"<string>\",\n  \"timeout\": \"<string>\",\n  \"trace\": {\n    \"incididunt_3a\": -27471350\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/search/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "search",
+                ""
+              ]
+            },
+            "description": "Execute a Vespa query whose parameters are provided as a JSON body. Equivalent to GET but allows longer YQL expressions and complex grouping/ranking inputs."
+          },
+          "response": [
+            {
+              "id": "4d802698-c2e4-4a3d-8468-2480700dc21b",
+              "name": "Successful query result.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"yql\": \"<string>\",\n  \"query\": \"<string>\",\n  \"hits\": 10,\n  \"offset\": 0,\n  \"ranking\": {\n    \"eiusmod99c\": -6829832.6462935805,\n    \"dolore_9\": true\n  },\n  \"presentation\": {\n    \"velit_d0\": -62416243,\n    \"ad_12\": false\n  },\n  \"model\": {\n    \"aliquipcb\": true,\n    \"ad55b\": false\n  },\n  \"select\": \"<string>\",\n  \"timeout\": \"<string>\",\n  \"trace\": {\n    \"incididunt_3a\": -27471350\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/search/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "search",
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"root\": {\n    \"id\": \"<string>\",\n    \"relevance\": \"<number>\",\n    \"fields\": {\n      \"iruref1\": \"Excepteur Ut cupidatat\"\n    },\n    \"coverage\": {\n      \"coverage\": \"<integer>\",\n      \"documents\": \"<integer>\",\n      \"full\": \"<boolean>\",\n      \"nodes\": \"<integer>\",\n      \"results\": \"<integer>\",\n      \"resultsFull\": \"<integer>\"\n    },\n    \"children\": [\n      {\n        \"id\": \"<string>\",\n        \"relevance\": \"<number>\",\n        \"source\": \"<string>\",\n        \"fields\": {\n          \"dolore_622\": true,\n          \"ut36\": -809591.8351669759,\n          \"incididunt_866\": -31520183\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"relevance\": \"<number>\",\n        \"source\": \"<string>\",\n        \"fields\": {\n          \"sint6\": -42428538,\n          \"magna_7\": 18811210.64822291,\n          \"culpa_7\": 89534522.77466732\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T11:05:34.000Z",
+              "updatedAt": "2026-07-28T11:05:34.000Z",
+              "uid": "35240-4d802698-c2e4-4a3d-8468-2480700dc21b"
+            },
+            {
+              "id": "0c79f3cd-dd49-4071-9e06-ff5287322129",
+              "name": "Bad request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"yql\": \"<string>\",\n  \"query\": \"<string>\",\n  \"hits\": 10,\n  \"offset\": 0,\n  \"ranking\": {\n    \"eiusmod99c\": -6829832.6462935805,\n    \"dolore_9\": true\n  },\n  \"presentation\": {\n    \"velit_d0\": -62416243,\n    \"ad_12\": false\n  },\n  \"model\": {\n    \"aliquipcb\": true,\n    \"ad55b\": false\n  },\n  \"select\": \"<string>\",\n  \"timeout\": \"<string>\",\n  \"trace\": {\n    \"incididunt_3a\": -27471350\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/search/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "search",
+                    ""
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T11:05:34.000Z",
+              "updatedAt": "2026-07-28T11:05:34.000Z",
+              "uid": "35240-0c79f3cd-dd49-4071-9e06-ff5287322129"
+            },
+            {
+              "id": "5d809628-6ce2-4661-ba05-9c66a1ee861a",
+              "name": "Query timed out.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"yql\": \"<string>\",\n  \"query\": \"<string>\",\n  \"hits\": 10,\n  \"offset\": 0,\n  \"ranking\": {\n    \"eiusmod99c\": -6829832.6462935805,\n    \"dolore_9\": true\n  },\n  \"presentation\": {\n    \"velit_d0\": -62416243,\n    \"ad_12\": false\n  },\n  \"model\": {\n    \"aliquipcb\": true,\n    \"ad55b\": false\n  },\n  \"select\": \"<string>\",\n  \"timeout\": \"<string>\",\n  \"trace\": {\n    \"incididunt_3a\": -27471350\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/search/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "search",
+                    ""
+                  ]
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T11:05:34.000Z",
+              "updatedAt": "2026-07-28T11:05:34.000Z",
+              "uid": "35240-5d809628-6ce2-4661-ba05-9c66a1ee861a"
+            },
+            {
+              "id": "6a2e1144-e1d5-4915-b738-af69108cc1f1",
+              "name": "Server error.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"yql\": \"<string>\",\n  \"query\": \"<string>\",\n  \"hits\": 10,\n  \"offset\": 0,\n  \"ranking\": {\n    \"eiusmod99c\": -6829832.6462935805,\n    \"dolore_9\": true\n  },\n  \"presentation\": {\n    \"velit_d0\": -62416243,\n    \"ad_12\": false\n  },\n  \"model\": {\n    \"aliquipcb\": true,\n    \"ad55b\": false\n  },\n  \"select\": \"<string>\",\n  \"timeout\": \"<string>\",\n  \"trace\": {\n    \"incididunt_3a\": -27471350\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/search/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "search",
+                    ""
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T11:05:34.000Z",
+              "updatedAt": "2026-07-28T11:05:34.000Z",
+              "uid": "35240-6a2e1144-e1d5-4915-b738-af69108cc1f1"
+            }
+          ],
+          "createdAt": "2026-07-28T11:05:34.000Z",
+          "updatedAt": "2026-07-28T11:05:34.000Z",
+          "uid": "35240-8cf957a7-1b1a-4956-ab1f-0adbc782d758"
+        }
+      ],
+      "id": "bd6ba693-f771-4c39-b1c6-f20743b9beb8",
+      "createdAt": "2026-07-28T11:05:34.000Z",
+      "updatedAt": "2026-07-28T11:05:34.000Z",
+      "uid": "35240-bd6ba693-f771-4c39-b1c6-f20743b9beb8"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

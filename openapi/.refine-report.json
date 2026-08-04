@@ -1,0 +1,16 @@
+{
+  "provider": "vespa-ai",
+  "sources": [
+    "vespa-ai-query-api-openapi.yml"
+  ],
+  "outputs": [
+    "vespa-ai-query-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": [
+    "vespa-document-api-openapi.yml: parse error ScannerError: mapping values are not allowed here"
+  ]
+}
