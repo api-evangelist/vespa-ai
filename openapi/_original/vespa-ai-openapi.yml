@@ -1,0 +1,238 @@
+openapi: 3.1.0
+info:
+  title: Vespa Document API
+  version: '1'
+  description: |
+    The Vespa /document/v1 REST API supports GET, POST, PUT, and DELETE
+    operations against documents stored in a Vespa application, including
+    visiting (bulk read) across namespaces and document types. Vespa is an
+    open-source serving engine for big-data, vector search, and recommendations.
+    Endpoints are exposed on the Vespa container nodes. Authentication, when
+    enabled, uses mutual TLS (client certificate) or, for Vespa Cloud, signed
+    requests / API keys.
+  contact:
+    name: Vespa Documentation
+    url: https://docs.vespa.ai/en/document-v1-api-guide.html
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: http://{vespa_endpoint}/document/v1
+    description: Vespa container document API base URL
+    variables:
+      vespa_endpoint:
+        default: localhost:8080
+        description: Host:port of the Vespa container exposing /document/v1
+tags:
+  - name: Documents
+    description: Single-document GET, POST, PUT, DELETE operations
+  - name: Visit
+    description: Bulk visit (iteration) operations
+paths:
+  /{namespace}/{doctype}/docid/{docid}:
+    parameters:
+      - $ref: '#/components/parameters/namespace'
+      - $ref: '#/components/parameters/doctype'
+      - $ref: '#/components/parameters/docid'
+    get:
+      tags: [Documents]
+      summary: Get a single document
+      operationId: getDocument
+      parameters:
+        - $ref: '#/components/parameters/timeout'
+      responses:
+        '200':
+          description: Document found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '404':
+          description: Document not found
+    post:
+      tags: [Documents]
+      summary: Put (create or overwrite) a document
+      operationId: putDocument
+      parameters:
+        - $ref: '#/components/parameters/create'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentPut'
+      responses:
+        '200':
+          description: Document written
+    put:
+      tags: [Documents]
+      summary: Update (partial update) a document
+      operationId: updateDocument
+      parameters:
+        - $ref: '#/components/parameters/create'
+        - $ref: '#/components/parameters/timeout'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentUpdate'
+      responses:
+        '200':
+          description: Document updated
+    delete:
+      tags: [Documents]
+      summary: Delete a document
+      operationId: deleteDocument
+      parameters:
+        - $ref: '#/components/parameters/timeout'
+      responses:
+        '200':
+          description: Document deleted
+  /{namespace}/{doctype}/docid:
+    parameters:
+      - $ref: '#/components/parameters/namespace'
+      - $ref: '#/components/parameters/doctype'
+    get:
+      tags: [Visit]
+      summary: Visit all documents of a given namespace and document type
+      operationId: visitNamespaceDoctype
+      parameters:
+        - $ref: '#/components/parameters/selection'
+        - $ref: '#/components/parameters/continuation'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/concurrency'
+        - $ref: '#/components/parameters/slices'
+        - $ref: '#/components/parameters/stream'
+      responses:
+        '200':
+          description: Visit results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitResult'
+  /:
+    get:
+      tags: [Visit]
+      summary: Visit all documents across namespaces in a content cluster
+      operationId: visitCluster
+      parameters:
+        - name: cluster
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Content cluster name to visit
+        - $ref: '#/components/parameters/selection'
+        - $ref: '#/components/parameters/continuation'
+        - $ref: '#/components/parameters/timeout'
+        - $ref: '#/components/parameters/concurrency'
+        - $ref: '#/components/parameters/slices'
+        - $ref: '#/components/parameters/stream'
+      responses:
+        '200':
+          description: Visit results
+components:
+  parameters:
+    namespace:
+      name: namespace
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Document namespace identifier
+    doctype:
+      name: doctype
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Schema document type name
+    docid:
+      name: docid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique document identifier within the namespace
+    timeout:
+      name: timeout
+      in: query
+      schema:
+        type: string
+      description: Operation timeout, e.g. "5s"
+    selection:
+      name: selection
+      in: query
+      schema:
+        type: string
+      description: Document selection expression for filtering
+    continuation:
+      name: continuation
+      in: query
+      schema:
+        type: string
+      description: Opaque continuation token for paginated visits
+    concurrency:
+      name: concurrency
+      in: query
+      schema:
+        type: integer
+      description: Backend request concurrency
+    slices:
+      name: slices
+      in: query
+      schema:
+        type: integer
+      description: Number of parallel visit partitions
+    stream:
+      name: stream
+      in: query
+      schema:
+        type: boolean
+      description: Enable HTTP response streaming
+    create:
+      name: create
+      in: query
+      schema:
+        type: boolean
+      description: Allow upsert behavior (create document if absent)
+  schemas:
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+        fields:
+          type: object
+          additionalProperties: true
+    DocumentPut:
+      type: object
+      properties:
+        fields:
+          type: object
+          additionalProperties: true
+    DocumentUpdate:
+      type: object
+      properties:
+        fields:
+          type: object
+          additionalProperties: true
+    VisitResult:
+      type: object
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        continuation:
+          type: string
+        documentCount:
+          type: integer
+  securitySchemes:
+    mtls:
+      type: mutualTLS
+      description: Client certificate authentication (Vespa enforces mTLS when configured)
+security:
+  - mtls: []

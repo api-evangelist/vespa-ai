@@ -1,0 +1,159 @@
+openapi: 3.1.0
+info:
+  title: Vespa Document Documents Visit API
+  version: '1'
+  description: 'The Vespa /document/v1 REST API supports GET, POST, PUT, and DELETE
+
+    operations against documents stored in a Vespa application, including
+
+    visiting (bulk read) across namespaces and document types. Vespa is an
+
+    open-source serving engine for big-data, vector search, and recommendations.
+
+    Endpoints are exposed on the Vespa container nodes. Authentication, when
+
+    enabled, uses mutual TLS (client certificate) or, for Vespa Cloud, signed
+
+    requests / API keys.
+
+    '
+  contact:
+    name: Vespa Documentation
+    url: https://docs.vespa.ai/en/document-v1-api-guide.html
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://{vespa_endpoint}/document/v1
+  description: Vespa container document API base URL
+  variables:
+    vespa_endpoint:
+      default: localhost:8080
+      description: Host:port of the Vespa container exposing /document/v1
+security:
+- mtls: []
+tags:
+- name: Visit
+  description: Bulk visit (iteration) operations
+paths:
+  /{namespace}/{doctype}/docid:
+    parameters:
+    - $ref: '#/components/parameters/namespace'
+    - $ref: '#/components/parameters/doctype'
+    get:
+      tags:
+      - Visit
+      summary: Visit all documents of a given namespace and document type
+      operationId: visitNamespaceDoctype
+      parameters:
+      - $ref: '#/components/parameters/selection'
+      - $ref: '#/components/parameters/continuation'
+      - $ref: '#/components/parameters/timeout'
+      - $ref: '#/components/parameters/concurrency'
+      - $ref: '#/components/parameters/slices'
+      - $ref: '#/components/parameters/stream'
+      responses:
+        '200':
+          description: Visit results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitResult'
+  /:
+    get:
+      tags:
+      - Visit
+      summary: Visit all documents across namespaces in a content cluster
+      operationId: visitCluster
+      parameters:
+      - name: cluster
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Content cluster name to visit
+      - $ref: '#/components/parameters/selection'
+      - $ref: '#/components/parameters/continuation'
+      - $ref: '#/components/parameters/timeout'
+      - $ref: '#/components/parameters/concurrency'
+      - $ref: '#/components/parameters/slices'
+      - $ref: '#/components/parameters/stream'
+      responses:
+        '200':
+          description: Visit results
+components:
+  parameters:
+    doctype:
+      name: doctype
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Schema document type name
+    continuation:
+      name: continuation
+      in: query
+      schema:
+        type: string
+      description: Opaque continuation token for paginated visits
+    stream:
+      name: stream
+      in: query
+      schema:
+        type: boolean
+      description: Enable HTTP response streaming
+    slices:
+      name: slices
+      in: query
+      schema:
+        type: integer
+      description: Number of parallel visit partitions
+    timeout:
+      name: timeout
+      in: query
+      schema:
+        type: string
+      description: Operation timeout, e.g. "5s"
+    namespace:
+      name: namespace
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Document namespace identifier
+    concurrency:
+      name: concurrency
+      in: query
+      schema:
+        type: integer
+      description: Backend request concurrency
+    selection:
+      name: selection
+      in: query
+      schema:
+        type: string
+      description: Document selection expression for filtering
+  schemas:
+    VisitResult:
+      type: object
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        continuation:
+          type: string
+        documentCount:
+          type: integer
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+        fields:
+          type: object
+          additionalProperties: true
+  securitySchemes:
+    mtls:
+      type: mutualTLS
+      description: Client certificate authentication (Vespa enforces mTLS when configured)

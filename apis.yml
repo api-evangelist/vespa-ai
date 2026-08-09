@@ -1,13 +1,13 @@
 aid: vespa-ai
 name: Vespa
-description: >-
-  Vespa is an open-source AI search engine, big-data serving engine, and vector database originally developed inside
-  Yahoo and spun out as Vespa.ai AS. Vespa combines vector search, text search (BM25), structured filtering, and
-  machine-learned ranking — including native tensor inference — into a single distributed serving engine that scales to
-  billions of documents with sub-100ms latency. Vespa Cloud is the fully managed commercial offering operated by the
-  Vespa.ai team across AWS and GCP, with Startup, Basic, Commercial, and Enterprise plans plus a Self-Managed option for
-  customers running the open-source engine on their own infrastructure. Vespa is widely used at Spotify, Perplexity,
-  Yahoo, Farfetch, and Elicit for search, recommendation, personalization, and Retrieval-Augmented Generation (RAG).
+description: Vespa is an open-source AI search engine, big-data serving engine, and vector database originally
+  developed inside Yahoo and spun out as Vespa.ai AS. Vespa combines vector search, text search (BM25),
+  structured filtering, and machine-learned ranking — including native tensor inference — into a single
+  distributed serving engine that scales to billions of documents with sub-100ms latency. Vespa Cloud
+  is the fully managed commercial offering operated by the Vespa.ai team across AWS and GCP, with Startup,
+  Basic, Commercial, and Enterprise plans plus a Self-Managed option for customers running the open-source
+  engine on their own infrastructure. Vespa is widely used at Spotify, Perplexity, Yahoo, Farfetch, and
+  Elicit for search, recommendation, personalization, and Retrieval-Augmented Generation (RAG).
 type: Index
 accessModel:
   pricing: freemium
@@ -26,29 +26,28 @@ position: Provider
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/vespa-ai.png
 tags:
-  - AI
-  - Search
-  - Vector Database
-  - Big Data
-  - Machine Learning
-  - Semantic Search
-  - Retrieval Augmented Generation
-  - Open Source
-  - Tensor
-  - Recommendations
+- AI
+- Search
+- Vector Database
+- Big Data
+- Machine Learning
+- Semantic Search
+- Retrieval Augmented Generation
+- Open Source
+- Tensor
+- Recommendations
 url: https://raw.githubusercontent.com/api-evangelist/vespa-ai/refs/heads/main/apis.yml
 created: '2026-05-25'
-modified: '2026-05-25'
+modified: '2026-08-08'
 specificationVersion: '0.19'
 apis:
 - aid: vespa-ai:vespa-document-api
   name: Vespa Document API
-  description: >-
-    The Vespa Document API (/document/v1) provides synchronous REST access to document operations against
-    a Vespa content cluster. It supports Put, Get, Update (partial update with assign/add/remove operators),
-    Remove, and Visit (streaming visit, copy, delete-where, update-where) over JSON or JSON Lines, with
-    conditional writes, multi-tenant namespaces, field-set projection, time-window selection, and pagination
-    via continuation tokens.
+  description: The Vespa Document API (/document/v1) provides synchronous REST access to document operations
+    against a Vespa content cluster. It supports Put, Get, Update (partial update with assign/add/remove
+    operators), Remove, and Visit (streaming visit, copy, delete-where, update-where) over JSON or JSON
+    Lines, with conditional writes, multi-tenant namespaces, field-set projection, time-window selection,
+    and pagination via continuation tokens.
   humanURL: https://docs.vespa.ai/en/reference/document-v1-api-reference.html
   tags:
   - Documents
@@ -67,9 +66,8 @@ apis:
     type: Documentation
 - aid: vespa-ai:vespa-deploy-api
   name: Vespa Deploy API
-  description: >-
-    The Vespa Deploy API (/application/v2) manages application packages on a Vespa configuration server.
-    It supports preparing, activating, and tearing down application packages, session-based deployments,
+  description: The Vespa Deploy API (/application/v2) manages application packages on a Vespa configuration
+    server. It supports preparing, activating, and tearing down application packages, session-based deployments,
     schema validation, and zero-downtime updates of services, schemas, and rank profiles.
   humanURL: https://docs.vespa.ai/en/reference/deploy-rest-api-v2.html
   tags:
@@ -84,10 +82,9 @@ apis:
     type: Documentation
 - aid: vespa-ai:vespa-tenant-api
   name: Vespa Tenant and Application API
-  description: >-
-    The Vespa Tenant API (/application/v2/tenant) manages tenants and applications hosted on a Vespa configuration
-    server or Vespa Cloud control plane. It exposes operations for creating tenants, listing applications,
-    and binding application sessions to a tenant.
+  description: The Vespa Tenant API (/application/v2/tenant) manages tenants and applications hosted on
+    a Vespa configuration server or Vespa Cloud control plane. It exposes operations for creating tenants,
+    listing applications, and binding application sessions to a tenant.
   humanURL: https://docs.vespa.ai/en/reference/application-v2-tenant.html
   tags:
   - Tenants
@@ -99,8 +96,7 @@ apis:
     type: Documentation
 - aid: vespa-ai:vespa-config-api
   name: Vespa Config API
-  description: >-
-    The Vespa Config API (/config/v2) lets services in a Vespa application retrieve their configuration
+  description: The Vespa Config API (/config/v2) lets services in a Vespa application retrieve their configuration
     from a Vespa configuration server using the config-server / config-proxy protocol. It is primarily
     used by Vespa services and tooling rather than end users, but is documented as a stable HTTP API.
   humanURL: https://docs.vespa.ai/en/reference/config-rest-api-v2.html
@@ -112,9 +108,8 @@ apis:
     type: Documentation
 - aid: vespa-ai:vespa-cluster-api
   name: Vespa Cluster Controller API
-  description: >-
-    The Vespa Cluster Controller API (/cluster/v2) exposes runtime state and management endpoints for
-    a Vespa content cluster — including node state queries, maintenance-mode transitions, and storage
+  description: The Vespa Cluster Controller API (/cluster/v2) exposes runtime state and management endpoints
+    for a Vespa content cluster — including node state queries, maintenance-mode transitions, and storage
     cluster orchestration.
   humanURL: https://docs.vespa.ai/en/reference/cluster-v2.html
   tags:
@@ -127,10 +122,9 @@ apis:
     type: Documentation
 - aid: vespa-ai:vespa-state-api
   name: Vespa State API
-  description: >-
-    The Vespa State API (/state/v1) exposes per-service health, version, and metrics endpoints for any
-    Vespa node — used by orchestration tooling, monitoring agents, and load balancers to check liveness,
-    readiness, and runtime metrics.
+  description: The Vespa State API (/state/v1) exposes per-service health, version, and metrics endpoints
+    for any Vespa node — used by orchestration tooling, monitoring agents, and load balancers to check
+    liveness, readiness, and runtime metrics.
   humanURL: https://docs.vespa.ai/en/reference/state-v1.html
   tags:
   - Health
@@ -142,10 +136,9 @@ apis:
     type: Documentation
 - aid: vespa-ai:vespa-metrics-api
   name: Vespa Metrics API
-  description: >-
-    Vespa exposes a family of metrics endpoints (/metrics/v1, /metrics/v2, /prometheus/v1) that publish
-    Vespa engine and application metrics in JSON or Prometheus exposition format for scraping by Prometheus,
-    Grafana, or other observability stacks.
+  description: Vespa exposes a family of metrics endpoints (/metrics/v1, /metrics/v2, /prometheus/v1)
+    that publish Vespa engine and application metrics in JSON or Prometheus exposition format for scraping
+    by Prometheus, Grafana, or other observability stacks.
   humanURL: https://docs.vespa.ai/en/operations/metrics.html
   tags:
   - Metrics
@@ -177,152 +170,159 @@ apis:
   - type: GettingStarted
     url: https://docs.vespa.ai/en/getting-started.html
 common:
-  - type: PostmanWorkspace
-    url: https://www.postman.com/kinlaneapi/vespa/overview
-  - type: AgenticAccess
-    url: agentic-access/vespa-ai-agentic-access.yml
-  - type: VulnerabilityDisclosure
-    url: security/vespa-ai-vulnerability-disclosure.yml
-  - type: DomainSecurity
-    url: security/vespa-ai-domain-security.yml
-  - type: Authentication
-    url: authentication/vespa-ai-authentication.yml
-  - type: Website
-    url: https://vespa.ai
-  - type: Documentation
-    url: https://docs.vespa.ai/
-  - type: GettingStarted
-    url: https://docs.vespa.ai/en/getting-started.html
-  - type: Tutorials
-    url: https://docs.vespa.ai/en/learn/tutorials/
-  - type: GitHubOrganization
-    url: https://github.com/vespa-engine
-  - type: GitHubRepository
-    url: https://github.com/vespa-engine/vespa
-  - type: License
-    url: https://github.com/vespa-engine/vespa/blob/master/LICENSE
-  - type: Blog
-    url: https://blog.vespa.ai/
-  - type: BlogRSS
-    url: https://blog.vespa.ai/feed.xml
-  - type: Pricing
-    url: https://cloud.vespa.ai/pricing
-  - type: Console
-    url: https://console.vespa-cloud.com/
-  - type: Slack
-    url: https://slack.vespa.ai/
-  - type: Support
-    url: https://github.com/vespa-engine/vespa/issues
-  - type: ChangeLog
-    url: https://github.com/vespa-engine/vespa/releases
-  - type: SDKs
-    name: Vespa CLI (Go)
-    url: https://github.com/vespa-engine/vespa/tree/master/client/go
-  - type: SDKs
-    name: pyvespa (Python)
-    url: https://github.com/vespa-engine/pyvespa
-  - type: SDKs
-    name: pyvespa Documentation
-    url: https://vespa-engine.github.io/pyvespa/
-  - type: SDKs
-    name: vespa-feed-client (Java)
-    url: https://github.com/vespa-engine/vespa/tree/master/vespa-feed-client
-  - type: SDKs
-    name: vespa-search (JavaScript)
-    url: https://github.com/vespa-engine/vespa-search
-  - type: SampleApps
-    url: https://github.com/vespa-engine/sample-apps
-  - type: PrometheusExporter
-    url: https://github.com/vespa-engine/vespa_exporter
-  - type: DockerImage
-    url: https://github.com/vespa-engine/docker-image
-  - type: GitHubAction
-    url: https://github.com/vespa-engine/setup-vespa-cli-action
-  - type: SpectralRules
-    url: rules/vespa-ai-rules.yml
-  - type: Vocabulary
-    url: vocabulary/vespa-ai-vocabulary.yml
-  - type: JSONLDContext
-    url: json-ld/vespa-ai-context.jsonld
-  - type: Plans
-    url: plans/vespa-ai-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/vespa-ai-rate-limits.yml
-  - type: FinOps
-    url: finops/vespa-ai-finops.yml
-  - type: Features
-    data:
-      - Open-source under Apache 2.0
-      - Vector search with HNSW indexes
-      - BM25 text search and hybrid search
-      - Native tensor and ML model inference at serving time
-      - YQL (Vespa Query Language) for structured queries
-      - Multi-phase ranking (match-phase, first-phase, second-phase, global-phase)
-      - Document API with conditional writes, visits, and JSON Lines streaming
-      - Multi-tenant namespaces and document groups
-      - Real-time indexing with sub-100ms query latency
-      - Distributed content clusters with automatic sharding and replication
-      - Streaming search mode for personal/private corpora
-      - Built-in machine learning inference (TensorFlow, ONNX, XGBoost, LightGBM)
-      - Approximate nearest neighbor and exact nearest neighbor operators
-      - Application packages with schemas, services.xml, and rank profiles
-      - Container API for custom searchers, document processors, and handlers
-      - Self-managed (Apache 2.0) or fully managed Vespa Cloud (AWS, GCP)
-      - Vespa Cloud Startup plan from $0.05 / vCPU-hour, $0.005 / GiB-memory-hour
-      - Vespa Cloud Commercial plan with 24/7 1-hour SLA support
-      - Vespa Cloud Enterprise plan with $20k/month minimum and 15-minute SLA
-      - Up to 50% volume discounts and 15% committed-spend discount
-    sources:
-      - https://cloud.vespa.ai/price-calculator.html
-      - https://docs.vespa.ai/
-    updated: '2026-05-25'
-  - type: UseCases
-    data:
-      - name: Hybrid Search
-        description: >-
-          Combine BM25 text relevance with vector similarity and structured filters in a single query executed by
-          Vespa's multi-phase ranking pipeline.
-      - name: Retrieval Augmented Generation
-        description: >-
-          Serve grounded context to large language models by indexing documents, chunks, and embeddings in Vespa and
-          retrieving them with hybrid search at sub-100ms latency.
-      - name: Recommendation and Personalization
-        description: >-
-          Power recommendation systems with machine-learned ranking, real-time feature updates, and tensor inference
-          over user and item embeddings.
-      - name: Ad Targeting and Real-Time Bidding
-        description: >-
-          Match candidate ads against user context and serve ranked impressions within tight latency budgets using
-          Vespa's distributed serving engine.
-      - name: E-Commerce Search and Browse
-        description: >-
-          Combine faceted navigation, structured filters, text relevance, and learned ranking for large product catalogs
-          with frequent updates.
-      - name: Streaming Search for Personal Data
-        description: >-
-          Run "streaming search" mode that scans a user's personal corpus on demand — ideal for mail, messaging, and
-          document search where each user has their own private index.
-  - type: Integrations
-    data:
-      - name: AWS
-      - name: Google Cloud
-      - name: Prometheus
-      - name: Grafana
-      - name: TensorFlow
-      - name: ONNX Runtime
-      - name: XGBoost
-      - name: LightGBM
-      - name: Kubernetes
-      - name: LangChain
-      - name: LlamaIndex
-      - name: Haystack
-integrations:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/vespa/overview
+- type: AgenticAccess
+  url: agentic-access/vespa-ai-agentic-access.yml
+- type: VulnerabilityDisclosure
+  url: security/vespa-ai-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/vespa-ai-domain-security.yml
+- type: Authentication
+  url: authentication/vespa-ai-authentication.yml
+- type: Website
+  url: https://vespa.ai
+- type: Documentation
+  url: https://docs.vespa.ai/
+- type: GettingStarted
+  url: https://docs.vespa.ai/en/getting-started.html
+- type: Tutorials
+  url: https://docs.vespa.ai/en/learn/tutorials/
+- type: GitHubOrganization
+  url: https://github.com/vespa-engine
+- type: GitHubRepository
+  url: https://github.com/vespa-engine/vespa
+- type: License
+  url: https://github.com/vespa-engine/vespa/blob/master/LICENSE
+- type: Blog
+  url: https://blog.vespa.ai/
+- type: BlogRSS
+  url: https://blog.vespa.ai/feed.xml
+- type: Pricing
+  url: https://cloud.vespa.ai/pricing
+- type: Console
+  url: https://console.vespa-cloud.com/
+- type: Slack
+  url: https://slack.vespa.ai/
+- type: Support
+  url: https://github.com/vespa-engine/vespa/issues
+- type: ChangeLog
+  url: https://github.com/vespa-engine/vespa/releases
+- type: SDKs
+  name: Vespa CLI (Go)
+  url: https://github.com/vespa-engine/vespa/tree/master/client/go
+- type: SDKs
+  name: pyvespa (Python)
+  url: https://github.com/vespa-engine/pyvespa
+- type: SDKs
+  name: pyvespa Documentation
+  url: https://vespa-engine.github.io/pyvespa/
+- type: SDKs
+  name: vespa-feed-client (Java)
+  url: https://github.com/vespa-engine/vespa/tree/master/vespa-feed-client
+- type: SDKs
+  name: vespa-search (JavaScript)
+  url: https://github.com/vespa-engine/vespa-search
+- type: SampleApps
+  url: https://github.com/vespa-engine/sample-apps
+- type: PrometheusExporter
+  url: https://github.com/vespa-engine/vespa_exporter
+- type: DockerImage
+  url: https://github.com/vespa-engine/docker-image
+- type: GitHubAction
+  url: https://github.com/vespa-engine/setup-vespa-cli-action
+- type: SpectralRules
+  url: rules/vespa-ai-rules.yml
+- type: Vocabulary
+  url: vocabulary/vespa-ai-vocabulary.yml
+- type: JSONLDContext
+  url: json-ld/vespa-ai-context.jsonld
+- type: Plans
+  url: plans/vespa-ai-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/vespa-ai-rate-limits.yml
+- type: FinOps
+  url: finops/vespa-ai-finops.yml
+- type: Features
+  data:
+  - Open-source under Apache 2.0
+  - Vector search with HNSW indexes
+  - BM25 text search and hybrid search
+  - Native tensor and ML model inference at serving time
+  - YQL (Vespa Query Language) for structured queries
+  - Multi-phase ranking (match-phase, first-phase, second-phase, global-phase)
+  - Document API with conditional writes, visits, and JSON Lines streaming
+  - Multi-tenant namespaces and document groups
+  - Real-time indexing with sub-100ms query latency
+  - Distributed content clusters with automatic sharding and replication
+  - Streaming search mode for personal/private corpora
+  - Built-in machine learning inference (TensorFlow, ONNX, XGBoost, LightGBM)
+  - Approximate nearest neighbor and exact nearest neighbor operators
+  - Application packages with schemas, services.xml, and rank profiles
+  - Container API for custom searchers, document processors, and handlers
+  - Self-managed (Apache 2.0) or fully managed Vespa Cloud (AWS, GCP)
+  - Vespa Cloud Startup plan from $0.05 / vCPU-hour, $0.005 / GiB-memory-hour
+  - Vespa Cloud Commercial plan with 24/7 1-hour SLA support
+  - Vespa Cloud Enterprise plan with $20k/month minimum and 15-minute SLA
+  - Up to 50% volume discounts and 15% committed-spend discount
+  sources:
+  - https://cloud.vespa.ai/price-calculator.html
+  - https://docs.vespa.ai/
+  updated: '2026-05-25'
+- type: UseCases
+  data:
+  - name: Hybrid Search
+    description: Combine BM25 text relevance with vector similarity and structured filters in a single
+      query executed by Vespa's multi-phase ranking pipeline.
+  - name: Retrieval Augmented Generation
+    description: Serve grounded context to large language models by indexing documents, chunks, and embeddings
+      in Vespa and retrieving them with hybrid search at sub-100ms latency.
+  - name: Recommendation and Personalization
+    description: Power recommendation systems with machine-learned ranking, real-time feature updates,
+      and tensor inference over user and item embeddings.
+  - name: Ad Targeting and Real-Time Bidding
+    description: Match candidate ads against user context and serve ranked impressions within tight latency
+      budgets using Vespa's distributed serving engine.
+  - name: E-Commerce Search and Browse
+    description: Combine faceted navigation, structured filters, text relevance, and learned ranking for
+      large product catalogs with frequent updates.
+  - name: Streaming Search for Personal Data
+    description: Run "streaming search" mode that scans a user's personal corpus on demand — ideal for
+      mail, messaging, and document search where each user has their own private index.
+- type: Integrations
+  data:
   - name: AWS
   - name: Google Cloud
+  - name: Prometheus
+  - name: Grafana
+  - name: TensorFlow
+  - name: ONNX Runtime
+  - name: XGBoost
+  - name: LightGBM
+  - name: Kubernetes
   - name: LangChain
   - name: LlamaIndex
   - name: Haystack
-  - name: Prometheus
+- type: LinkedIn
+  url: https://www.linkedin.com/company/vespa-ai
+- type: Portal
+  url: https://docs.vespa.ai/
+- type: SourceCode
+  url: https://github.com/vespa-engine/vespa
+- type: CommercialOffering
+  title: Vespa Cloud
+  url: https://cloud.vespa.ai/
+- type: LlmsText
+  url: https://docs.vespa.ai/llms.txt
+integrations:
+- name: AWS
+- name: Google Cloud
+- name: LangChain
+- name: LlamaIndex
+- name: Haystack
+- name: Prometheus
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
+x-merged-from:
+- vespa

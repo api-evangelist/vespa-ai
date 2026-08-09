@@ -1,0 +1,310 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vespa Document API",
+    "version": "1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a single document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{vespa_endpoint}/document/v1/:namespace/:doctype/docid/:docid",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace identifier"
+              },
+              {
+                "name": "doctype",
+                "value": "",
+                "type": "path",
+                "description": "Schema document type name"
+              },
+              {
+                "name": "docid",
+                "value": "",
+                "type": "path",
+                "description": "Unique document identifier within the namespace"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Operation timeout, e.g. \"5s\""
+              }
+            ]
+          },
+          "docs": "Get a single document"
+        },
+        {
+          "info": {
+            "name": "Put (create or overwrite) a document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{vespa_endpoint}/document/v1/:namespace/:doctype/docid/:docid",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace identifier"
+              },
+              {
+                "name": "doctype",
+                "value": "",
+                "type": "path",
+                "description": "Schema document type name"
+              },
+              {
+                "name": "docid",
+                "value": "",
+                "type": "path",
+                "description": "Unique document identifier within the namespace"
+              },
+              {
+                "name": "create",
+                "value": "",
+                "type": "query",
+                "description": "Allow upsert behavior (create document if absent)"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Operation timeout, e.g. \"5s\""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Put (create or overwrite) a document"
+        },
+        {
+          "info": {
+            "name": "Update (partial update) a document",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://{vespa_endpoint}/document/v1/:namespace/:doctype/docid/:docid",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace identifier"
+              },
+              {
+                "name": "doctype",
+                "value": "",
+                "type": "path",
+                "description": "Schema document type name"
+              },
+              {
+                "name": "docid",
+                "value": "",
+                "type": "path",
+                "description": "Unique document identifier within the namespace"
+              },
+              {
+                "name": "create",
+                "value": "",
+                "type": "query",
+                "description": "Allow upsert behavior (create document if absent)"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Operation timeout, e.g. \"5s\""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update (partial update) a document"
+        },
+        {
+          "info": {
+            "name": "Delete a document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://{vespa_endpoint}/document/v1/:namespace/:doctype/docid/:docid",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace identifier"
+              },
+              {
+                "name": "doctype",
+                "value": "",
+                "type": "path",
+                "description": "Schema document type name"
+              },
+              {
+                "name": "docid",
+                "value": "",
+                "type": "path",
+                "description": "Unique document identifier within the namespace"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Operation timeout, e.g. \"5s\""
+              }
+            ]
+          },
+          "docs": "Delete a document"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Visit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Visit all documents of a given namespace and document type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{vespa_endpoint}/document/v1/:namespace/:doctype/docid",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace identifier"
+              },
+              {
+                "name": "doctype",
+                "value": "",
+                "type": "path",
+                "description": "Schema document type name"
+              },
+              {
+                "name": "selection",
+                "value": "",
+                "type": "query",
+                "description": "Document selection expression for filtering"
+              },
+              {
+                "name": "continuation",
+                "value": "",
+                "type": "query",
+                "description": "Opaque continuation token for paginated visits"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Operation timeout, e.g. \"5s\""
+              },
+              {
+                "name": "concurrency",
+                "value": "",
+                "type": "query",
+                "description": "Backend request concurrency"
+              },
+              {
+                "name": "slices",
+                "value": "",
+                "type": "query",
+                "description": "Number of parallel visit partitions"
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "query",
+                "description": "Enable HTTP response streaming"
+              }
+            ]
+          },
+          "docs": "Visit all documents of a given namespace and document type"
+        },
+        {
+          "info": {
+            "name": "Visit all documents across namespaces in a content cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{vespa_endpoint}/document/v1/",
+            "params": [
+              {
+                "name": "cluster",
+                "value": "",
+                "type": "query",
+                "description": "Content cluster name to visit"
+              },
+              {
+                "name": "selection",
+                "value": "",
+                "type": "query",
+                "description": "Document selection expression for filtering"
+              },
+              {
+                "name": "continuation",
+                "value": "",
+                "type": "query",
+                "description": "Opaque continuation token for paginated visits"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Operation timeout, e.g. \"5s\""
+              },
+              {
+                "name": "concurrency",
+                "value": "",
+                "type": "query",
+                "description": "Backend request concurrency"
+              },
+              {
+                "name": "slices",
+                "value": "",
+                "type": "query",
+                "description": "Number of parallel visit partitions"
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "query",
+                "description": "Enable HTTP response streaming"
+              }
+            ]
+          },
+          "docs": "Visit all documents across namespaces in a content cluster"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1027 @@
+{
+  "item": [
+    {
+      "id": "71908c73-316d-4c18-95bc-9a92e05cadfa",
+      "name": "Documents",
+      "description": {
+        "content": "Single-document GET, POST, PUT, DELETE operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "74b40bae-f9b2-4ffd-9994-c40386a47e5c",
+          "name": "Get a single document",
+          "request": {
+            "name": "Get a single document",
+            "description": {},
+            "url": {
+              "path": [
+                ":namespace",
+                ":doctype",
+                "docid",
+                ":docid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<string>",
+                  "description": "Operation timeout, e.g. \"5s\""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) Document namespace identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "doctype",
+                  "description": "(Required) Schema document type name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "docid",
+                  "description": "(Required) Unique document identifier within the namespace"
+                },
+                {
+                  "description": "Host:port of the Vespa container exposing /document/v1",
+                  "type": "any",
+                  "value": "{{vespa_endpoint}}",
+                  "key": "vespa_endpoint"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "36e35e9e-9e3f-4020-a256-df5860351706",
+              "name": "Document found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":namespace",
+                    ":doctype",
+                    "docid",
+                    ":docid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeout",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) Document namespace identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "doctype",
+                      "description": "(Required) Schema document type name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "docid",
+                      "description": "(Required) Unique document identifier within the namespace"
+                    },
+                    {
+                      "description": "Host:port of the Vespa container exposing /document/v1",
+                      "type": "any",
+                      "value": "{{vespa_endpoint}}",
+                      "key": "vespa_endpoint"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"fields\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c68d9705-47c6-46fd-b86e-ffddf488d3ae",
+              "name": "Document not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":namespace",
+                    ":doctype",
+                    "docid",
+                    ":docid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeout",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) Document namespace identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "doctype",
+                      "description": "(Required) Schema document type name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "docid",
+                      "description": "(Required) Unique document identifier within the namespace"
+                    },
+                    {
+                      "description": "Host:port of the Vespa container exposing /document/v1",
+                      "type": "any",
+                      "value": "{{vespa_endpoint}}",
+                      "key": "vespa_endpoint"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e6892b1e-373f-4332-b1c8-cb34bddc3112",
+          "name": "Put (create or overwrite) a document",
+          "request": {
+            "name": "Put (create or overwrite) a document",
+            "description": {},
+            "url": {
+              "path": [
+                ":namespace",
+                ":doctype",
+                "docid",
+                ":docid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "create",
+                  "value": "<boolean>",
+                  "description": "Allow upsert behavior (create document if absent)"
+                },
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<string>",
+                  "description": "Operation timeout, e.g. \"5s\""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) Document namespace identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "doctype",
+                  "description": "(Required) Schema document type name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "docid",
+                  "description": "(Required) Unique document identifier within the namespace"
+                },
+                {
+                  "description": "Host:port of the Vespa container exposing /document/v1",
+                  "type": "any",
+                  "value": "{{vespa_endpoint}}",
+                  "key": "vespa_endpoint"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fields\": {\n    \"key_0\": 1184.583626514588,\n    \"key_1\": 3754.429463471283\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "faa57950-6931-42de-b91d-55143e5a6cda",
+              "name": "Document written",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":namespace",
+                    ":doctype",
+                    "docid",
+                    ":docid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "create",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) Document namespace identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "doctype",
+                      "description": "(Required) Schema document type name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "docid",
+                      "description": "(Required) Unique document identifier within the namespace"
+                    },
+                    {
+                      "description": "Host:port of the Vespa container exposing /document/v1",
+                      "type": "any",
+                      "value": "{{vespa_endpoint}}",
+                      "key": "vespa_endpoint"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": {\n    \"key_0\": 1578.4203765524628\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50e0c326-36de-4772-9cc6-7a1664415754",
+          "name": "Update (partial update) a document",
+          "request": {
+            "name": "Update (partial update) a document",
+            "description": {},
+            "url": {
+              "path": [
+                ":namespace",
+                ":doctype",
+                "docid",
+                ":docid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "create",
+                  "value": "<boolean>",
+                  "description": "Allow upsert behavior (create document if absent)"
+                },
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<string>",
+                  "description": "Operation timeout, e.g. \"5s\""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) Document namespace identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "doctype",
+                  "description": "(Required) Schema document type name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "docid",
+                  "description": "(Required) Unique document identifier within the namespace"
+                },
+                {
+                  "description": "Host:port of the Vespa container exposing /document/v1",
+                  "type": "any",
+                  "value": "{{vespa_endpoint}}",
+                  "key": "vespa_endpoint"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fields\": {\n    \"key_0\": 1184.583626514588,\n    \"key_1\": 3754.429463471283\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8b96d1a6-1e85-4fc0-b5b9-546f4def2035",
+              "name": "Document updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":namespace",
+                    ":doctype",
+                    "docid",
+                    ":docid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "create",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) Document namespace identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "doctype",
+                      "description": "(Required) Schema document type name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "docid",
+                      "description": "(Required) Unique document identifier within the namespace"
+                    },
+                    {
+                      "description": "Host:port of the Vespa container exposing /document/v1",
+                      "type": "any",
+                      "value": "{{vespa_endpoint}}",
+                      "key": "vespa_endpoint"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": {\n    \"key_0\": 1578.4203765524628\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb3f98bd-9034-44e9-8814-8eaff62b7f36",
+          "name": "Delete a document",
+          "request": {
+            "name": "Delete a document",
+            "description": {},
+            "url": {
+              "path": [
+                ":namespace",
+                ":doctype",
+                "docid",
+                ":docid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<string>",
+                  "description": "Operation timeout, e.g. \"5s\""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) Document namespace identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "doctype",
+                  "description": "(Required) Schema document type name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "docid",
+                  "description": "(Required) Unique document identifier within the namespace"
+                },
+                {
+                  "description": "Host:port of the Vespa container exposing /document/v1",
+                  "type": "any",
+                  "value": "{{vespa_endpoint}}",
+                  "key": "vespa_endpoint"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4160359-a81a-4372-a2b7-ba4bded89cb9",
+              "name": "Document deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":namespace",
+                    ":doctype",
+                    "docid",
+                    ":docid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeout",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) Document namespace identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "doctype",
+                      "description": "(Required) Schema document type name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "docid",
+                      "description": "(Required) Unique document identifier within the namespace"
+                    },
+                    {
+                      "description": "Host:port of the Vespa container exposing /document/v1",
+                      "type": "any",
+                      "value": "{{vespa_endpoint}}",
+                      "key": "vespa_endpoint"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3a46227c-22c8-4a77-ae54-99e77711af68",
+      "name": "Visit",
+      "description": {
+        "content": "Bulk visit (iteration) operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7afb2f2a-db97-4de5-a12c-9d0811804bab",
+          "name": "Visit all documents of a given namespace and document type",
+          "request": {
+            "name": "Visit all documents of a given namespace and document type",
+            "description": {},
+            "url": {
+              "path": [
+                ":namespace",
+                ":doctype",
+                "docid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "selection",
+                  "value": "<string>",
+                  "description": "Document selection expression for filtering"
+                },
+                {
+                  "disabled": false,
+                  "key": "continuation",
+                  "value": "<string>",
+                  "description": "Opaque continuation token for paginated visits"
+                },
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<string>",
+                  "description": "Operation timeout, e.g. \"5s\""
+                },
+                {
+                  "disabled": false,
+                  "key": "concurrency",
+                  "value": "<integer>",
+                  "description": "Backend request concurrency"
+                },
+                {
+                  "disabled": false,
+                  "key": "slices",
+                  "value": "<integer>",
+                  "description": "Number of parallel visit partitions"
+                },
+                {
+                  "disabled": false,
+                  "key": "stream",
+                  "value": "<boolean>",
+                  "description": "Enable HTTP response streaming"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) Document namespace identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "doctype",
+                  "description": "(Required) Schema document type name"
+                },
+                {
+                  "description": "Host:port of the Vespa container exposing /document/v1",
+                  "type": "any",
+                  "value": "{{vespa_endpoint}}",
+                  "key": "vespa_endpoint"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3269982c-eec2-4cb1-a62c-a30ca19bd19b",
+              "name": "Visit results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":namespace",
+                    ":doctype",
+                    "docid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "selection",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "concurrency",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "slices",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "stream",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) Document namespace identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "doctype",
+                      "description": "(Required) Schema document type name"
+                    },
+                    {
+                      "description": "Host:port of the Vespa container exposing /document/v1",
+                      "type": "any",
+                      "value": "{{vespa_endpoint}}",
+                      "key": "vespa_endpoint"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documents\": [\n    {\n      \"id\": \"string\",\n      \"fields\": {\n        \"key_0\": 8986.407252721725\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"fields\": {\n        \"key_0\": true\n      }\n    }\n  ],\n  \"continuation\": \"string\",\n  \"documentCount\": 1425\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "934ccf2c-88b6-4eda-ae31-fd14f3d50c99",
+          "name": "Visit all documents across namespaces in a content cluster",
+          "request": {
+            "name": "Visit all documents across namespaces in a content cluster",
+            "description": {},
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cluster",
+                  "value": "<string>",
+                  "description": "(Required) Content cluster name to visit"
+                },
+                {
+                  "disabled": false,
+                  "key": "selection",
+                  "value": "<string>",
+                  "description": "Document selection expression for filtering"
+                },
+                {
+                  "disabled": false,
+                  "key": "continuation",
+                  "value": "<string>",
+                  "description": "Opaque continuation token for paginated visits"
+                },
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<string>",
+                  "description": "Operation timeout, e.g. \"5s\""
+                },
+                {
+                  "disabled": false,
+                  "key": "concurrency",
+                  "value": "<integer>",
+                  "description": "Backend request concurrency"
+                },
+                {
+                  "disabled": false,
+                  "key": "slices",
+                  "value": "<integer>",
+                  "description": "Number of parallel visit partitions"
+                },
+                {
+                  "disabled": false,
+                  "key": "stream",
+                  "value": "<boolean>",
+                  "description": "Enable HTTP response streaming"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Host:port of the Vespa container exposing /document/v1",
+                  "type": "any",
+                  "value": "{{vespa_endpoint}}",
+                  "key": "vespa_endpoint"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0bcbd35e-288d-4565-916b-8d1c55287734",
+              "name": "Visit results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "selection",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "concurrency",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "slices",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "stream",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Host:port of the Vespa container exposing /document/v1",
+                      "type": "any",
+                      "value": "{{vespa_endpoint}}",
+                      "key": "vespa_endpoint"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Host:port of the Vespa container exposing /document/v1",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost:8080",
+      "key": "vespa_endpoint"
+    },
+    {
+      "type": "string",
+      "value": "http://{{vespa_endpoint}}/document/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6d1c20bb-917d-4c0e-ab87-971c050307f3",
+    "name": "Vespa Document API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vespa /document/v1 REST API supports GET, POST, PUT, and DELETE\noperations against documents stored in a Vespa application, including\nvisiting (bulk read) across namespaces and document types. Vespa is an\nopen-source serving engine for big-data, vector search, and recommendations.\nEndpoints are exposed on the Vespa container nodes. Authentication, when\nenabled, uses mutual TLS (client certificate) or, for Vespa Cloud, signed\nrequests / API keys.\n\n\nContact Support:\n Name: Vespa Documentation",
+      "type": "text/plain"
+    }
+  }
+}
