@@ -1,0 +1,561 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vespa Ai Documents API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a single document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{vespa_endpoint}/document/v1/:namespace/:doctype/docid/:docid",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace identifier"
+              },
+              {
+                "name": "doctype",
+                "value": "",
+                "type": "path",
+                "description": "Schema document type name"
+              },
+              {
+                "name": "docid",
+                "value": "",
+                "type": "path",
+                "description": "Unique document identifier within the namespace"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Operation timeout, e.g. \"5s\""
+              }
+            ]
+          },
+          "docs": "Get a single document"
+        },
+        {
+          "info": {
+            "name": "Put (create or overwrite) a document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{vespa_endpoint}/document/v1/:namespace/:doctype/docid/:docid",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace identifier"
+              },
+              {
+                "name": "doctype",
+                "value": "",
+                "type": "path",
+                "description": "Schema document type name"
+              },
+              {
+                "name": "docid",
+                "value": "",
+                "type": "path",
+                "description": "Unique document identifier within the namespace"
+              },
+              {
+                "name": "create",
+                "value": "",
+                "type": "query",
+                "description": "Allow upsert behavior (create document if absent)"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Operation timeout, e.g. \"5s\""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Put (create or overwrite) a document"
+        },
+        {
+          "info": {
+            "name": "Update (partial update) a document",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://{vespa_endpoint}/document/v1/:namespace/:doctype/docid/:docid",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace identifier"
+              },
+              {
+                "name": "doctype",
+                "value": "",
+                "type": "path",
+                "description": "Schema document type name"
+              },
+              {
+                "name": "docid",
+                "value": "",
+                "type": "path",
+                "description": "Unique document identifier within the namespace"
+              },
+              {
+                "name": "create",
+                "value": "",
+                "type": "query",
+                "description": "Allow upsert behavior (create document if absent)"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Operation timeout, e.g. \"5s\""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update (partial update) a document"
+        },
+        {
+          "info": {
+            "name": "Delete a document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://{vespa_endpoint}/document/v1/:namespace/:doctype/docid/:docid",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace identifier"
+              },
+              {
+                "name": "doctype",
+                "value": "",
+                "type": "path",
+                "description": "Schema document type name"
+              },
+              {
+                "name": "docid",
+                "value": "",
+                "type": "path",
+                "description": "Unique document identifier within the namespace"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Operation timeout, e.g. \"5s\""
+              }
+            ]
+          },
+          "docs": "Delete a document"
+        },
+        {
+          "info": {
+            "name": "Visit Documents Across Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{vespa_endpoint}/document/v1/document/v1/",
+            "params": [
+              {
+                "name": "cluster",
+                "value": "",
+                "type": "query",
+                "description": "Content cluster name. Required for visit and bulk operations."
+              },
+              {
+                "name": "selection",
+                "value": "",
+                "type": "query",
+                "description": "Vespa document selection expression."
+              },
+              {
+                "name": "continuation",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token from a prior visit response."
+              },
+              {
+                "name": "wantedDocumentCount",
+                "value": "",
+                "type": "query",
+                "description": "Target number of documents to return per visit batch."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "query",
+                "description": "When true, stream responses as JSON Lines."
+              },
+              {
+                "name": "fieldSet",
+                "value": "",
+                "type": "query",
+                "description": "Field set name controlling which document fields are returned."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Request timeout, e.g. `5s`."
+              }
+            ]
+          },
+          "docs": "Visit (stream) documents from a content cluster. Requires the `cluster` query parameter."
+        },
+        {
+          "info": {
+            "name": "Get Document By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{vespa_endpoint}/document/v1/document/v1/:namespace/:documentType/docid/:documentId",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace (a multi-tenant grouping segment)."
+              },
+              {
+                "name": "documentType",
+                "value": "",
+                "type": "path",
+                "description": "Document type as declared in the Vespa application schema."
+              },
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document id within the namespace and type."
+              },
+              {
+                "name": "fieldSet",
+                "value": "",
+                "type": "query",
+                "description": "Field set name controlling which document fields are returned."
+              },
+              {
+                "name": "cluster",
+                "value": "",
+                "type": "query",
+                "description": "Content cluster name. Required for visit and bulk operations."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Request timeout, e.g. `5s`."
+              }
+            ]
+          },
+          "docs": "Retrieve a single document by its document id."
+        },
+        {
+          "info": {
+            "name": "Put Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{vespa_endpoint}/document/v1/document/v1/:namespace/:documentType/docid/:documentId",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace (a multi-tenant grouping segment)."
+              },
+              {
+                "name": "documentType",
+                "value": "",
+                "type": "path",
+                "description": "Document type as declared in the Vespa application schema."
+              },
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document id within the namespace and type."
+              },
+              {
+                "name": "condition",
+                "value": "",
+                "type": "query",
+                "description": "Test-and-set condition selection expression."
+              },
+              {
+                "name": "route",
+                "value": "",
+                "type": "query",
+                "description": "Document API route name for advanced routing."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Request timeout, e.g. `5s`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or overwrite a document with the given id."
+        },
+        {
+          "info": {
+            "name": "Update Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://{vespa_endpoint}/document/v1/document/v1/:namespace/:documentType/docid/:documentId",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace (a multi-tenant grouping segment)."
+              },
+              {
+                "name": "documentType",
+                "value": "",
+                "type": "path",
+                "description": "Document type as declared in the Vespa application schema."
+              },
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document id within the namespace and type."
+              },
+              {
+                "name": "condition",
+                "value": "",
+                "type": "query",
+                "description": "Test-and-set condition selection expression."
+              },
+              {
+                "name": "create",
+                "value": "",
+                "type": "query",
+                "description": "If true, create the document when missing on update (upsert)."
+              },
+              {
+                "name": "route",
+                "value": "",
+                "type": "query",
+                "description": "Document API route name for advanced routing."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Request timeout, e.g. `5s`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apply a partial update to a document using assign / add / remove operators."
+        },
+        {
+          "info": {
+            "name": "Remove Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://{vespa_endpoint}/document/v1/document/v1/:namespace/:documentType/docid/:documentId",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace (a multi-tenant grouping segment)."
+              },
+              {
+                "name": "documentType",
+                "value": "",
+                "type": "path",
+                "description": "Document type as declared in the Vespa application schema."
+              },
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document id within the namespace and type."
+              },
+              {
+                "name": "condition",
+                "value": "",
+                "type": "query",
+                "description": "Test-and-set condition selection expression."
+              },
+              {
+                "name": "route",
+                "value": "",
+                "type": "query",
+                "description": "Document API route name for advanced routing."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Request timeout, e.g. `5s`."
+              }
+            ]
+          },
+          "docs": "Remove a document with the given id."
+        },
+        {
+          "info": {
+            "name": "Visit Documents Of A Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{vespa_endpoint}/document/v1/document/v1/:namespace/:documentType/docid",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace (a multi-tenant grouping segment)."
+              },
+              {
+                "name": "documentType",
+                "value": "",
+                "type": "path",
+                "description": "Document type as declared in the Vespa application schema."
+              },
+              {
+                "name": "selection",
+                "value": "",
+                "type": "query",
+                "description": "Vespa document selection expression."
+              },
+              {
+                "name": "continuation",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token from a prior visit response."
+              },
+              {
+                "name": "wantedDocumentCount",
+                "value": "",
+                "type": "query",
+                "description": "Target number of documents to return per visit batch."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "query",
+                "description": "When true, stream responses as JSON Lines."
+              },
+              {
+                "name": "fieldSet",
+                "value": "",
+                "type": "query",
+                "description": "Field set name controlling which document fields are returned."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Request timeout, e.g. `5s`."
+              },
+              {
+                "name": "cluster",
+                "value": "",
+                "type": "query",
+                "description": "Content cluster name. Required for visit and bulk operations."
+              }
+            ]
+          },
+          "docs": "Visit (stream) documents of the given namespace and document type."
+        },
+        {
+          "info": {
+            "name": "Delete Documents Matching Selection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://{vespa_endpoint}/document/v1/document/v1/:namespace/:documentType/docid",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace (a multi-tenant grouping segment)."
+              },
+              {
+                "name": "documentType",
+                "value": "",
+                "type": "path",
+                "description": "Document type as declared in the Vespa application schema."
+              },
+              {
+                "name": "cluster",
+                "value": "",
+                "type": "query",
+                "description": "Content cluster name. Required for visit and bulk operations."
+              },
+              {
+                "name": "selection",
+                "value": "",
+                "type": "query",
+                "description": "Vespa document selection expression."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Request timeout, e.g. `5s`."
+              }
+            ]
+          },
+          "docs": "Bulk-delete documents matching a Vespa selection expression. Requires `cluster` and `selection`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

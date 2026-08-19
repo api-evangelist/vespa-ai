@@ -1,0 +1,1031 @@
+{
+  "item": [
+    {
+      "id": "1718f46f-3ac5-4357-a4e0-ec4f5ba1717f",
+      "name": "Visit",
+      "description": {
+        "content": "Bulk visit (iteration) operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "41f248b0-87b9-4d07-9a24-0360053fc089",
+          "name": "Visit all documents of a given namespace and document type",
+          "request": {
+            "name": "Visit all documents of a given namespace and document type",
+            "description": {},
+            "url": {
+              "path": [
+                ":namespace",
+                ":doctype",
+                "docid"
+              ],
+              "host": [
+                "{{namespace-doctype-docid-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "selection",
+                  "value": "<string>",
+                  "description": "Document selection expression for filtering"
+                },
+                {
+                  "disabled": false,
+                  "key": "continuation",
+                  "value": "<string>",
+                  "description": "Opaque continuation token for paginated visits"
+                },
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<string>",
+                  "description": "Operation timeout, e.g. \"5s\""
+                },
+                {
+                  "disabled": false,
+                  "key": "concurrency",
+                  "value": "<integer>",
+                  "description": "Backend request concurrency"
+                },
+                {
+                  "disabled": false,
+                  "key": "slices",
+                  "value": "<integer>",
+                  "description": "Number of parallel visit partitions"
+                },
+                {
+                  "disabled": false,
+                  "key": "stream",
+                  "value": "<boolean>",
+                  "description": "Enable HTTP response streaming"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) Document namespace identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "doctype",
+                  "description": "(Required) Schema document type name"
+                },
+                {
+                  "description": "Host:port of the Vespa container exposing /document/v1",
+                  "type": "any",
+                  "value": "{{vespa_endpoint}}",
+                  "key": "vespa_endpoint"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "b10569f4-df97-4214-b4b7-fbd0270544fa",
+              "name": "Visit results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":namespace",
+                    ":doctype",
+                    "docid"
+                  ],
+                  "host": [
+                    "{{namespace-doctype-docid-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "selection",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "concurrency",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "slices",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "stream",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) Document namespace identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "doctype",
+                      "description": "(Required) Schema document type name"
+                    },
+                    {
+                      "description": "Host:port of the Vespa container exposing /document/v1",
+                      "type": "any",
+                      "value": "{{vespa_endpoint}}",
+                      "key": "vespa_endpoint"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documents\": [\n    {\n      \"id\": \"string\",\n      \"fields\": {\n        \"key_0\": 3015,\n        \"key_1\": 6854,\n        \"key_2\": 4377.545886368986\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"fields\": {\n        \"key_0\": false,\n        \"key_1\": true,\n        \"key_2\": 7854,\n        \"key_3\": 3274\n      }\n    }\n  ],\n  \"continuation\": \"string\",\n  \"documentCount\": 7683\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7703e32a-577a-4de1-8ce6-171cddb3a95b",
+          "name": "Visit all documents across namespaces in a content cluster",
+          "request": {
+            "name": "Visit all documents across namespaces in a content cluster",
+            "description": {},
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cluster",
+                  "value": "<string>",
+                  "description": "(Required) Content cluster name to visit"
+                },
+                {
+                  "disabled": false,
+                  "key": "selection",
+                  "value": "<string>",
+                  "description": "Document selection expression for filtering"
+                },
+                {
+                  "disabled": false,
+                  "key": "continuation",
+                  "value": "<string>",
+                  "description": "Opaque continuation token for paginated visits"
+                },
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<string>",
+                  "description": "Operation timeout, e.g. \"5s\""
+                },
+                {
+                  "disabled": false,
+                  "key": "concurrency",
+                  "value": "<integer>",
+                  "description": "Backend request concurrency"
+                },
+                {
+                  "disabled": false,
+                  "key": "slices",
+                  "value": "<integer>",
+                  "description": "Number of parallel visit partitions"
+                },
+                {
+                  "disabled": false,
+                  "key": "stream",
+                  "value": "<boolean>",
+                  "description": "Enable HTTP response streaming"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Host:port of the Vespa container exposing /document/v1",
+                  "type": "any",
+                  "value": "{{vespa_endpoint}}",
+                  "key": "vespa_endpoint"
+                }
+              ]
+            },
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "c06b25bb-f203-45c5-8f18-04f9d8797ff5",
+              "name": "Visit results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "selection",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "concurrency",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "slices",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "stream",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Host:port of the Vespa container exposing /document/v1",
+                      "type": "any",
+                      "value": "{{vespa_endpoint}}",
+                      "key": "vespa_endpoint"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e9727a4-3732-4cae-b09f-b158e46c19a0",
+          "name": "Visit Documents Across Cluster",
+          "request": {
+            "name": "Visit Documents Across Cluster",
+            "description": {
+              "content": "Visit (stream) documents from a content cluster. Requires the `cluster` query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "document",
+                "v1",
+                ""
+              ],
+              "host": [
+                "{{document-v1--Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cluster",
+                  "value": "<string>",
+                  "description": "Content cluster name. Required for visit and bulk operations."
+                },
+                {
+                  "disabled": false,
+                  "key": "selection",
+                  "value": "<string>",
+                  "description": "Vespa document selection expression."
+                },
+                {
+                  "disabled": false,
+                  "key": "continuation",
+                  "value": "<string>",
+                  "description": "Continuation token from a prior visit response."
+                },
+                {
+                  "disabled": false,
+                  "key": "wantedDocumentCount",
+                  "value": "<integer>",
+                  "description": "Target number of documents to return per visit batch."
+                },
+                {
+                  "disabled": false,
+                  "key": "stream",
+                  "value": "<boolean>",
+                  "description": "When true, stream responses as JSON Lines."
+                },
+                {
+                  "disabled": false,
+                  "key": "fieldSet",
+                  "value": "<string>",
+                  "description": "Field set name controlling which document fields are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<string>",
+                  "description": "Request timeout, e.g. `5s`."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Host:port of the Vespa container exposing /document/v1",
+                  "type": "any",
+                  "value": "{{vespa_endpoint}}",
+                  "key": "vespa_endpoint"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dbb2aa05-a7da-44d3-adc6-6cc61a8a4e2f",
+              "name": "Visit result. JSON by default, JSON Lines when `Accept: application/jsonl`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "document",
+                    "v1",
+                    ""
+                  ],
+                  "host": [
+                    "{{document-v1--Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "selection",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wantedDocumentCount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "stream",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "fieldSet",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Host:port of the Vespa container exposing /document/v1",
+                      "type": "any",
+                      "value": "{{vespa_endpoint}}",
+                      "key": "vespa_endpoint"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pathId\": \"string\",\n  \"documents\": [\n    {\n      \"pathId\": \"string\",\n      \"id\": \"string\",\n      \"fields\": {\n        \"key_0\": 9804\n      }\n    },\n    {\n      \"pathId\": \"string\",\n      \"id\": \"string\",\n      \"fields\": {\n        \"key_0\": 8322,\n        \"key_1\": 9821.133814582901\n      }\n    }\n  ],\n  \"documentCount\": 5481,\n  \"continuation\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d35ceb53-5225-4a8a-a459-0f6d9d2ee250",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "document",
+                    "v1",
+                    ""
+                  ],
+                  "host": [
+                    "{{document-v1--Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "selection",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wantedDocumentCount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "stream",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "fieldSet",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Host:port of the Vespa container exposing /document/v1",
+                      "type": "any",
+                      "value": "{{vespa_endpoint}}",
+                      "key": "vespa_endpoint"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7ab34c2d-60b2-4da9-bd39-57dd05831dfd",
+              "name": "Too many inflight requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "document",
+                    "v1",
+                    ""
+                  ],
+                  "host": [
+                    "{{document-v1--Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "selection",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wantedDocumentCount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "stream",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "fieldSet",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Host:port of the Vespa container exposing /document/v1",
+                      "type": "any",
+                      "value": "{{vespa_endpoint}}",
+                      "key": "vespa_endpoint"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a95da1a8-6cba-488c-ab88-39ffd41e9e4b",
+          "name": "Visit Documents Of A Type",
+          "request": {
+            "name": "Visit Documents Of A Type",
+            "description": {
+              "content": "Visit (stream) documents of the given namespace and document type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "document",
+                "v1",
+                ":namespace",
+                ":documentType",
+                "docid"
+              ],
+              "host": [
+                "{{document-v1-namespace-documentType-docid-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "selection",
+                  "value": "<string>",
+                  "description": "Vespa document selection expression."
+                },
+                {
+                  "disabled": false,
+                  "key": "continuation",
+                  "value": "<string>",
+                  "description": "Continuation token from a prior visit response."
+                },
+                {
+                  "disabled": false,
+                  "key": "wantedDocumentCount",
+                  "value": "<integer>",
+                  "description": "Target number of documents to return per visit batch."
+                },
+                {
+                  "disabled": false,
+                  "key": "stream",
+                  "value": "<boolean>",
+                  "description": "When true, stream responses as JSON Lines."
+                },
+                {
+                  "disabled": false,
+                  "key": "fieldSet",
+                  "value": "<string>",
+                  "description": "Field set name controlling which document fields are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<string>",
+                  "description": "Request timeout, e.g. `5s`."
+                },
+                {
+                  "disabled": false,
+                  "key": "cluster",
+                  "value": "<string>",
+                  "description": "Content cluster name. Required for visit and bulk operations."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) Document namespace (a multi-tenant grouping segment)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentType",
+                  "description": "(Required) Document type as declared in the Vespa application schema."
+                },
+                {
+                  "description": "Host:port of the Vespa container exposing /document/v1",
+                  "type": "any",
+                  "value": "{{vespa_endpoint}}",
+                  "key": "vespa_endpoint"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "04a03556-3fe8-464d-a126-aa719801ff10",
+              "name": "Visit result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "document",
+                    "v1",
+                    ":namespace",
+                    ":documentType",
+                    "docid"
+                  ],
+                  "host": [
+                    "{{document-v1-namespace-documentType-docid-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "selection",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wantedDocumentCount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "stream",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "fieldSet",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cluster",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) Document namespace (a multi-tenant grouping segment)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentType",
+                      "description": "(Required) Document type as declared in the Vespa application schema."
+                    },
+                    {
+                      "description": "Host:port of the Vespa container exposing /document/v1",
+                      "type": "any",
+                      "value": "{{vespa_endpoint}}",
+                      "key": "vespa_endpoint"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pathId\": \"string\",\n  \"documents\": [\n    {\n      \"pathId\": \"string\",\n      \"id\": \"string\",\n      \"fields\": {\n        \"key_0\": true,\n        \"key_1\": 1997,\n        \"key_2\": 4678,\n        \"key_3\": \"string\"\n      }\n    },\n    {\n      \"pathId\": \"string\",\n      \"id\": \"string\",\n      \"fields\": {\n        \"key_0\": 7495,\n        \"key_1\": \"string\"\n      }\n    }\n  ],\n  \"documentCount\": 5713,\n  \"continuation\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "241002f6-09a2-444c-9d46-e43b34d5b9a8",
+          "name": "Delete Documents Matching Selection",
+          "request": {
+            "name": "Delete Documents Matching Selection",
+            "description": {
+              "content": "Bulk-delete documents matching a Vespa selection expression. Requires `cluster` and `selection`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "document",
+                "v1",
+                ":namespace",
+                ":documentType",
+                "docid"
+              ],
+              "host": [
+                "{{document-v1-namespace-documentType-docid-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cluster",
+                  "value": "<string>",
+                  "description": "Content cluster name. Required for visit and bulk operations."
+                },
+                {
+                  "disabled": false,
+                  "key": "selection",
+                  "value": "<string>",
+                  "description": "Vespa document selection expression."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<string>",
+                  "description": "Request timeout, e.g. `5s`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) Document namespace (a multi-tenant grouping segment)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentType",
+                  "description": "(Required) Document type as declared in the Vespa application schema."
+                },
+                {
+                  "description": "Host:port of the Vespa container exposing /document/v1",
+                  "type": "any",
+                  "value": "{{vespa_endpoint}}",
+                  "key": "vespa_endpoint"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fd5de228-1453-40fd-bc67-b1c15b13205c",
+              "name": "Bulk delete completed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "document",
+                    "v1",
+                    ":namespace",
+                    ":documentType",
+                    "docid"
+                  ],
+                  "host": [
+                    "{{document-v1-namespace-documentType-docid-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "selection",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) Document namespace (a multi-tenant grouping segment)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentType",
+                      "description": "(Required) Document type as declared in the Vespa application schema."
+                    },
+                    {
+                      "description": "Host:port of the Vespa container exposing /document/v1",
+                      "type": "any",
+                      "value": "{{vespa_endpoint}}",
+                      "key": "vespa_endpoint"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pathId\": \"string\",\n  \"documents\": [\n    {\n      \"pathId\": \"string\",\n      \"id\": \"string\",\n      \"fields\": {\n        \"key_0\": true,\n        \"key_1\": 1997,\n        \"key_2\": 4678,\n        \"key_3\": \"string\"\n      }\n    },\n    {\n      \"pathId\": \"string\",\n      \"id\": \"string\",\n      \"fields\": {\n        \"key_0\": 7495,\n        \"key_1\": \"string\"\n      }\n    }\n  ],\n  \"documentCount\": 5713,\n  \"continuation\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Host:port of the Vespa container exposing /document/v1",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost:8080",
+      "key": "vespa_endpoint"
+    },
+    {
+      "type": "string",
+      "value": "http://{{vespa_endpoint}}/document/v1",
+      "key": "baseUrl"
+    },
+    {
+      "description": {
+        "content": "Host:port of the Vespa container exposing /document/v1",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost:8080",
+      "key": "vespa_endpoint"
+    },
+    {
+      "type": "string",
+      "value": "http://{{vespa_endpoint}}/document/v1",
+      "key": "namespace-doctype-docid-Url"
+    },
+    {
+      "description": {
+        "content": "Host:port of the Vespa container exposing /document/v1",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost:8080",
+      "key": "vespa_endpoint"
+    },
+    {
+      "type": "string",
+      "value": "http://{{vespa_endpoint}}/document/v1",
+      "key": "-Url"
+    },
+    {
+      "type": "string",
+      "value": "http://localhost:8080",
+      "key": "document-v1--Url"
+    },
+    {
+      "type": "string",
+      "value": "http://localhost:8080",
+      "key": "document-v1-namespace-documentType-docid-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "af4f067f-b1d3-4482-b861-7e209d413757",
+    "name": "Vespa Ai Visit API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Visit across 2 of this provider's published API definitions: vespa-ai-visit-api-openapi.yml, vespa-document-api-openapi.yml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

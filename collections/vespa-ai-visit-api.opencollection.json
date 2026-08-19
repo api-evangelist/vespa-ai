@@ -1,0 +1,299 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vespa Ai Visit API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Visit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Visit all documents of a given namespace and document type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{vespa_endpoint}/document/v1/:namespace/:doctype/docid",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace identifier"
+              },
+              {
+                "name": "doctype",
+                "value": "",
+                "type": "path",
+                "description": "Schema document type name"
+              },
+              {
+                "name": "selection",
+                "value": "",
+                "type": "query",
+                "description": "Document selection expression for filtering"
+              },
+              {
+                "name": "continuation",
+                "value": "",
+                "type": "query",
+                "description": "Opaque continuation token for paginated visits"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Operation timeout, e.g. \"5s\""
+              },
+              {
+                "name": "concurrency",
+                "value": "",
+                "type": "query",
+                "description": "Backend request concurrency"
+              },
+              {
+                "name": "slices",
+                "value": "",
+                "type": "query",
+                "description": "Number of parallel visit partitions"
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "query",
+                "description": "Enable HTTP response streaming"
+              }
+            ]
+          },
+          "docs": "Visit all documents of a given namespace and document type"
+        },
+        {
+          "info": {
+            "name": "Visit all documents across namespaces in a content cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{vespa_endpoint}/document/v1/",
+            "params": [
+              {
+                "name": "cluster",
+                "value": "",
+                "type": "query",
+                "description": "Content cluster name to visit"
+              },
+              {
+                "name": "selection",
+                "value": "",
+                "type": "query",
+                "description": "Document selection expression for filtering"
+              },
+              {
+                "name": "continuation",
+                "value": "",
+                "type": "query",
+                "description": "Opaque continuation token for paginated visits"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Operation timeout, e.g. \"5s\""
+              },
+              {
+                "name": "concurrency",
+                "value": "",
+                "type": "query",
+                "description": "Backend request concurrency"
+              },
+              {
+                "name": "slices",
+                "value": "",
+                "type": "query",
+                "description": "Number of parallel visit partitions"
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "query",
+                "description": "Enable HTTP response streaming"
+              }
+            ]
+          },
+          "docs": "Visit all documents across namespaces in a content cluster"
+        },
+        {
+          "info": {
+            "name": "Visit Documents Across Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{vespa_endpoint}/document/v1/document/v1/",
+            "params": [
+              {
+                "name": "cluster",
+                "value": "",
+                "type": "query",
+                "description": "Content cluster name. Required for visit and bulk operations."
+              },
+              {
+                "name": "selection",
+                "value": "",
+                "type": "query",
+                "description": "Vespa document selection expression."
+              },
+              {
+                "name": "continuation",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token from a prior visit response."
+              },
+              {
+                "name": "wantedDocumentCount",
+                "value": "",
+                "type": "query",
+                "description": "Target number of documents to return per visit batch."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "query",
+                "description": "When true, stream responses as JSON Lines."
+              },
+              {
+                "name": "fieldSet",
+                "value": "",
+                "type": "query",
+                "description": "Field set name controlling which document fields are returned."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Request timeout, e.g. `5s`."
+              }
+            ]
+          },
+          "docs": "Visit (stream) documents from a content cluster. Requires the `cluster` query parameter."
+        },
+        {
+          "info": {
+            "name": "Visit Documents Of A Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{vespa_endpoint}/document/v1/document/v1/:namespace/:documentType/docid",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace (a multi-tenant grouping segment)."
+              },
+              {
+                "name": "documentType",
+                "value": "",
+                "type": "path",
+                "description": "Document type as declared in the Vespa application schema."
+              },
+              {
+                "name": "selection",
+                "value": "",
+                "type": "query",
+                "description": "Vespa document selection expression."
+              },
+              {
+                "name": "continuation",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token from a prior visit response."
+              },
+              {
+                "name": "wantedDocumentCount",
+                "value": "",
+                "type": "query",
+                "description": "Target number of documents to return per visit batch."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "query",
+                "description": "When true, stream responses as JSON Lines."
+              },
+              {
+                "name": "fieldSet",
+                "value": "",
+                "type": "query",
+                "description": "Field set name controlling which document fields are returned."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Request timeout, e.g. `5s`."
+              },
+              {
+                "name": "cluster",
+                "value": "",
+                "type": "query",
+                "description": "Content cluster name. Required for visit and bulk operations."
+              }
+            ]
+          },
+          "docs": "Visit (stream) documents of the given namespace and document type."
+        },
+        {
+          "info": {
+            "name": "Delete Documents Matching Selection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://{vespa_endpoint}/document/v1/document/v1/:namespace/:documentType/docid",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "Document namespace (a multi-tenant grouping segment)."
+              },
+              {
+                "name": "documentType",
+                "value": "",
+                "type": "path",
+                "description": "Document type as declared in the Vespa application schema."
+              },
+              {
+                "name": "cluster",
+                "value": "",
+                "type": "query",
+                "description": "Content cluster name. Required for visit and bulk operations."
+              },
+              {
+                "name": "selection",
+                "value": "",
+                "type": "query",
+                "description": "Vespa document selection expression."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Request timeout, e.g. `5s`."
+              }
+            ]
+          },
+          "docs": "Bulk-delete documents matching a Vespa selection expression. Requires `cluster` and `selection`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

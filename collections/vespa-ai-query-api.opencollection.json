@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vespa Query API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Query",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute Query Via GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/search/",
+            "params": [
+              {
+                "name": "yql",
+                "value": "",
+                "type": "query",
+                "description": "YQL query expression, e.g. `select * from sources * where userQuery()`."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Simple user query string passed to the query parser."
+              },
+              {
+                "name": "hits",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of hits to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of hits to skip for pagination."
+              },
+              {
+                "name": "ranking.profile",
+                "value": "",
+                "type": "query",
+                "description": "Name of the rank profile to use for scoring."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Query timeout, e.g. `500ms` or `5s`."
+              },
+              {
+                "name": "trace.level",
+                "value": "",
+                "type": "query",
+                "description": "Trace verbosity level for debugging."
+              },
+              {
+                "name": "presentation.format",
+                "value": "",
+                "type": "query",
+                "description": "Response format. One of `json`, `cbor`, or `xml`."
+              }
+            ]
+          },
+          "docs": "Execute a Vespa query using URL-encoded query-string parameters."
+        },
+        {
+          "info": {
+            "name": "Execute Query Via POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8080/search/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a Vespa query whose parameters are provided as a JSON body. Equivalent to GET but allows longer YQL expressions and complex grouping/ranking inputs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,28 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Vespa Document Documents Visit API
-  version: '1'
-  description: 'The Vespa /document/v1 REST API supports GET, POST, PUT, and DELETE
-
-    operations against documents stored in a Vespa application, including
-
-    visiting (bulk read) across namespaces and document types. Vespa is an
-
-    open-source serving engine for big-data, vector search, and recommendations.
-
-    Endpoints are exposed on the Vespa container nodes. Authentication, when
-
-    enabled, uses mutual TLS (client certificate) or, for Vespa Cloud, signed
-
-    requests / API keys.
-
-    '
-  contact:
-    name: Vespa Documentation
-    url: https://docs.vespa.ai/en/document-v1-api-guide.html
-  license:
-    name: Apache-2.0
-    url: https://www.apache.org/licenses/LICENSE-2.0
+  title: Vespa Ai Visit API
+  version: '1.0'
+  description: 'Operations tagged Visit across 2 of this provider''s published API definitions: vespa-ai-visit-api-openapi.yml, vespa-document-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: http://{vespa_endpoint}/document/v1
   description: Vespa container document API base URL
@@ -30,8 +10,14 @@ servers:
     vespa_endpoint:
       default: localhost:8080
       description: Host:port of the Vespa container exposing /document/v1
-security:
-- mtls: []
+- url: http://localhost:8080
+  description: Default local Vespa container endpoint
+- url: https://{endpoint}.vespa-cloud.com
+  description: Vespa Cloud application endpoint
+  variables:
+    endpoint:
+      default: example
+      description: Vespa Cloud application endpoint hostname prefix
 tags:
 - name: Visit
   description: Bulk visit (iteration) operations
@@ -40,6 +26,13 @@ paths:
     parameters:
     - $ref: '#/components/parameters/namespace'
     - $ref: '#/components/parameters/doctype'
+    servers:
+    - url: http://{vespa_endpoint}/document/v1
+      description: Vespa container document API base URL
+      variables:
+        vespa_endpoint:
+          default: localhost:8080
+          description: Host:port of the Vespa container exposing /document/v1
     get:
       tags:
       - Visit
@@ -59,7 +52,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/VisitResult'
+      security:
+      - mtls: []
   /:
+    servers:
+    - url: http://{vespa_endpoint}/document/v1
+      description: Vespa container document API base URL
+      variables:
+        vespa_endpoint:
+          default: localhost:8080
+          description: Host:port of the Vespa container exposing /document/v1
     get:
       tags:
       - Visit
@@ -81,39 +83,100 @@ paths:
       responses:
         '200':
           description: Visit results
+      security:
+      - mtls: []
+  /document/v1/:
+    servers:
+    - url: http://localhost:8080
+      description: Default local Vespa container endpoint
+    - url: https://{endpoint}.vespa-cloud.com
+      description: Vespa Cloud application endpoint
+      variables:
+        endpoint:
+          default: example
+          description: Vespa Cloud application endpoint hostname prefix
+    get:
+      operationId: visitAllDocuments
+      summary: Visit Documents Across Cluster
+      description: Visit (stream) documents from a content cluster. Requires the `cluster` query parameter.
+      tags:
+      - Visit
+      parameters:
+      - $ref: '#/components/parameters/Cluster'
+      - $ref: '#/components/parameters/Selection'
+      - $ref: '#/components/parameters/Continuation'
+      - $ref: '#/components/parameters/WantedDocumentCount'
+      - $ref: '#/components/parameters/Stream'
+      - $ref: '#/components/parameters/FieldSet'
+      - $ref: '#/components/parameters/Timeout'
+      responses:
+        '200':
+          description: 'Visit result. JSON by default, JSON Lines when `Accept: application/jsonl`.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitResponse'
+            application/jsonl:
+              schema:
+                type: string
+                description: Newline-separated JSON objects (put, remove, continuation, sessionStats).
+        '400':
+          description: Bad request.
+        '429':
+          description: Too many inflight requests.
+  /document/v1/{namespace}/{documentType}/docid:
+    parameters:
+    - $ref: '#/components/parameters/Namespace'
+    - $ref: '#/components/parameters/DocumentType'
+    servers:
+    - url: http://localhost:8080
+      description: Default local Vespa container endpoint
+    - url: https://{endpoint}.vespa-cloud.com
+      description: Vespa Cloud application endpoint
+      variables:
+        endpoint:
+          default: example
+          description: Vespa Cloud application endpoint hostname prefix
+    get:
+      operationId: visitDocumentsByType
+      summary: Visit Documents Of A Type
+      description: Visit (stream) documents of the given namespace and document type.
+      tags:
+      - Visit
+      parameters:
+      - $ref: '#/components/parameters/Selection'
+      - $ref: '#/components/parameters/Continuation'
+      - $ref: '#/components/parameters/WantedDocumentCount'
+      - $ref: '#/components/parameters/Stream'
+      - $ref: '#/components/parameters/FieldSet'
+      - $ref: '#/components/parameters/Timeout'
+      - $ref: '#/components/parameters/Cluster'
+      responses:
+        '200':
+          description: Visit result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitResponse'
+    delete:
+      operationId: deleteWhere
+      summary: Delete Documents Matching Selection
+      description: Bulk-delete documents matching a Vespa selection expression. Requires `cluster` and `selection`.
+      tags:
+      - Visit
+      parameters:
+      - $ref: '#/components/parameters/Cluster'
+      - $ref: '#/components/parameters/Selection'
+      - $ref: '#/components/parameters/Timeout'
+      responses:
+        '200':
+          description: Bulk delete completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitResponse'
 components:
   parameters:
-    doctype:
-      name: doctype
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Schema document type name
-    continuation:
-      name: continuation
-      in: query
-      schema:
-        type: string
-      description: Opaque continuation token for paginated visits
-    stream:
-      name: stream
-      in: query
-      schema:
-        type: boolean
-      description: Enable HTTP response streaming
-    slices:
-      name: slices
-      in: query
-      schema:
-        type: integer
-      description: Number of parallel visit partitions
-    timeout:
-      name: timeout
-      in: query
-      schema:
-        type: string
-      description: Operation timeout, e.g. "5s"
     namespace:
       name: namespace
       in: path
@@ -121,6 +184,32 @@ components:
       schema:
         type: string
       description: Document namespace identifier
+    doctype:
+      name: doctype
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Schema document type name
+    Cluster:
+      name: cluster
+      in: query
+      schema:
+        type: string
+      description: Content cluster name. Required for visit and bulk operations.
+    Namespace:
+      name: namespace
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Document namespace (a multi-tenant grouping segment).
+    timeout:
+      name: timeout
+      in: query
+      schema:
+        type: string
+      description: Operation timeout, e.g. "5s"
     concurrency:
       name: concurrency
       in: query
@@ -133,6 +222,67 @@ components:
       schema:
         type: string
       description: Document selection expression for filtering
+    Stream:
+      name: stream
+      in: query
+      schema:
+        type: boolean
+      description: When true, stream responses as JSON Lines.
+    FieldSet:
+      name: fieldSet
+      in: query
+      schema:
+        type: string
+      description: Field set name controlling which document fields are returned.
+    Continuation:
+      name: continuation
+      in: query
+      schema:
+        type: string
+      description: Continuation token from a prior visit response.
+    Timeout:
+      name: timeout
+      in: query
+      schema:
+        type: string
+      description: Request timeout, e.g. `5s`.
+    Selection:
+      name: selection
+      in: query
+      schema:
+        type: string
+      description: Vespa document selection expression.
+    WantedDocumentCount:
+      name: wantedDocumentCount
+      in: query
+      schema:
+        type: integer
+      description: Target number of documents to return per visit batch.
+    slices:
+      name: slices
+      in: query
+      schema:
+        type: integer
+      description: Number of parallel visit partitions
+    DocumentType:
+      name: documentType
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Document type as declared in the Vespa application schema.
+    continuation:
+      name: continuation
+      in: query
+      schema:
+        type: string
+      description: Opaque continuation token for paginated visits
+    stream:
+      name: stream
+      in: query
+      schema:
+        type: boolean
+      description: Enable HTTP response streaming
   schemas:
     VisitResult:
       type: object
@@ -145,6 +295,31 @@ components:
           type: string
         documentCount:
           type: integer
+    VisitResponse:
+      type: object
+      properties:
+        pathId:
+          type: string
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document_2'
+        documentCount:
+          type: integer
+        continuation:
+          type: string
+        message:
+          type: string
+    Document_2:
+      type: object
+      properties:
+        pathId:
+          type: string
+        id:
+          type: string
+        fields:
+          type: object
+          additionalProperties: true
     Document:
       type: object
       properties:
@@ -157,3 +332,6 @@ components:
     mtls:
       type: mutualTLS
       description: Client certificate authentication (Vespa enforces mTLS when configured)
+x-refined-from:
+- vespa-ai-visit-api-openapi.yml
+- vespa-document-api-openapi.yml
