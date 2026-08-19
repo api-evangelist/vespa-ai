@@ -39,7 +39,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/vespa-ai/refs/heads/main/apis.yml
 created: '2026-05-25'
 modified: '2026-08-08'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: vespa-ai:vespa-deploy-api
   name: Vespa Deploy API
