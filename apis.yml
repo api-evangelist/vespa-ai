@@ -26,6 +26,17 @@ position: Provider
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/vespa-ai.png
 tags:
+- Artificial Intelligence
+- Search
+- Vector Database
+- Big Data
+- Machine-Learning
+- Semantic Search
+- Retrieval Augmented Generation
+- Open-Source
+- Tensor
+- Recommendations
+tags_raw:
 - AI
 - Search
 - Vector Database
@@ -67,6 +78,11 @@ apis:
   humanURL: https://docs.vespa.ai/en/reference/application-v2-tenant.html
   tags:
   - Tenants
+  - Application
+  - Multi-Tenancy
+  - Administration
+  tags_raw:
+  - Tenants
   - Applications
   - Multi-Tenancy
   - Administration
@@ -94,6 +110,10 @@ apis:
     cluster orchestration.
   humanURL: https://docs.vespa.ai/en/reference/cluster-v2.html
   tags:
+  - Cluster
+  - Content
+  - States
+  tags_raw:
   - Cluster
   - Operations
   - Content
