@@ -9,6 +9,19 @@ description: Vespa is an open-source AI search engine, big-data serving engine, 
   engine on their own infrastructure. Vespa is widely used at Spotify, Perplexity, Yahoo, Farfetch, and
   Elicit for search, recommendation, personalization, and Retrieval-Augmented Generation (RAG).
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -203,6 +216,10 @@ apis:
   - type: Documentation
     url: https://docs.vespa.ai/en/reads-and-writes.html
 common:
+- type: SecurityPolicy
+  url: https://github.com/vespa-engine/vespa/blob/master/SECURITY.md
+- type: ContributionGuide
+  url: https://github.com/vespa-engine/vespa/blob/master/CONTRIBUTING.md
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/vespa/overview
 - type: AgenticAccess
