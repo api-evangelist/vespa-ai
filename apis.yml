@@ -63,7 +63,7 @@ tags_raw:
 - Recommendations
 url: https://raw.githubusercontent.com/api-evangelist/vespa-ai/refs/heads/main/apis.yml
 created: '2026-05-25'
-modified: '2026-08-08'
+modified: '2026-09-13'
 specificationVersion: '0.23'
 apis:
 - aid: vespa-ai:vespa-deploy-api
@@ -365,6 +365,9 @@ common:
   url: https://cloud.vespa.ai/
 - type: LlmsText
   url: https://docs.vespa.ai/llms.txt
+- name: MCP Documentation
+  url: https://blog.vespa.ai/public-mcp-interns/
+  type: MCPDocumentation
 integrations:
 - name: AWS
 - name: Google Cloud
