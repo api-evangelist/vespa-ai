@@ -1,0 +1,35 @@
+# Front Door AI Index — vespa-ai — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: vespa-ai
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: vespa.ai
+  final_host: vespa.ai
+  ownership: own
+  owner: vespa-ai
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 59
+  host_score: 59
+  density: 48.92
+  words: 1206
+  tiers:
+    agentic: 26
+    core: 33
+    model: 0
+  ambiguous: 13
+  top_terms:
+    AI: 25
+    RAG: 9
+    AI agent: 7
+    agent: 7
+    intelligence: 6
+    vector database: 6
+    gen ai: 3
+    machine learning: 3
+    MCP: 2
+    generative ai: 2
+    inference: 2

@@ -3,18 +3,7 @@ info:
   title: Vespa Query API
   description: 'The Vespa Query (Search) API executes structured and vector queries against a Vespa application
 
-    using YQL (Vespa Query Language). It supports text search with BM25, approximate-nearest-neighbor
-
-    vector search over HNSW indexes, hybrid search, machine-learned ranking with multi-phase rank
-
-    profiles, grouping/aggregation, pagination, result presentation, and tracing.
-
-
-    The Query API can be called as a GET with query-string parameters or as a POST with a JSON body
-
-    for complex query expressions. Responses are returned as JSON (default), CBOR, or XML.
-
-    '
+    using YQL (Vespa Query Language).'
   version: '1.0'
   contact:
     name: Vespa
@@ -141,33 +130,11 @@ paths:
           description: Server error.
 components:
   schemas:
-    Coverage:
+    QueryResult:
       type: object
       properties:
-        coverage:
-          type: integer
-        documents:
-          type: integer
-        full:
-          type: boolean
-        nodes:
-          type: integer
-        results:
-          type: integer
-        resultsFull:
-          type: integer
-    Hit:
-      type: object
-      properties:
-        id:
-          type: string
-        relevance:
-          type: number
-        source:
-          type: string
-        fields:
-          type: object
-          additionalProperties: true
+        root:
+          $ref: '#/components/schemas/QueryRoot'
     QueryRoot:
       type: object
       properties:
@@ -184,11 +151,33 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Hit'
-    QueryResult:
+    Hit:
       type: object
       properties:
-        root:
-          $ref: '#/components/schemas/QueryRoot'
+        id:
+          type: string
+        relevance:
+          type: number
+        source:
+          type: string
+        fields:
+          type: object
+          additionalProperties: true
+    Coverage:
+      type: object
+      properties:
+        coverage:
+          type: integer
+        documents:
+          type: integer
+        full:
+          type: boolean
+        nodes:
+          type: integer
+        results:
+          type: integer
+        resultsFull:
+          type: integer
     QueryRequest:
       type: object
       properties:

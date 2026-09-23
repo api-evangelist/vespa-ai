@@ -1,23 +1,33 @@
 {
   "provider": "vespa-ai",
   "sources": [
-    "vespa-ai-documents-api-openapi.yml",
-    "vespa-ai-query-api-openapi.yml",
-    "vespa-ai-visit-api-openapi.yml"
+    "_original/vespa-ai-openapi.yml",
+    "_original/vespa-document-api-openapi.yml",
+    "_original/vespa-query-api-openapi.yml"
   ],
   "outputs": [
     "vespa-ai-documents-api-openapi.yml",
-    "vespa-ai-query-api-openapi.yml",
-    "vespa-ai-visit-api-openapi.yml"
+    "vespa-ai-visit-api-openapi.yml",
+    "vespa-ai-query-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
-    "vespa-ai-documents-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "vespa-ai-query-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "vespa-ai-visit-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "vespa-ai-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "vespa-document-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "vespa-document-api-openapi.yml: declared missing tag: Documents",
+    "vespa-document-api-openapi.yml: declared missing tag: Visit",
+    "vespa-query-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "vespa-query-api-openapi.yml: declared missing tag: Query",
+    "tag 'Documents' spans 2 source specs (vespa-ai-openapi.yml, vespa-document-api-openapi.yml): per-path servers applied",
+    "tag 'Visit' spans 2 source specs (vespa-ai-openapi.yml, vespa-document-api-openapi.yml): per-path servers applied",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "vespa-ai-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vespa-ai-query-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vespa-ai-visit-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
