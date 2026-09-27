@@ -10,17 +10,22 @@ description: Vespa is an open-source AI search engine, big-data serving engine, 
   Elicit for search, recommendation, personalization, and Retrieval-Augmented Generation (RAG).
 type: Index
 deliveryModel:
-  model: unknown
-  open_source: unknown
+  model: open-core
+  license: Apache-2.0
+  license_evidence:
+    repo: vespa-engine/vespa
+    spdx: Apache-2.0
+    stars: 7110
+  open_source: true
   commercial: true
   callable_host: true
-  label: Delivery model not determined — needs a product licence on record
-  confidence: low
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: medium
   source:
   - openapi
   - pricing
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-license
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium
@@ -44,10 +49,10 @@ tags:
 - Search
 - Vector Database
 - Big Data
-- Machine-Learning
+- Machine Learning
 - Semantic Search
 - RAG
-- Open-Source
+- Open Source
 - Tensor
 - Recommendations
 tags_raw:
@@ -61,6 +66,8 @@ tags_raw:
 - Open Source
 - Tensor
 - Recommendations
+- Machine-Learning
+- Open-Source
 url: https://raw.githubusercontent.com/api-evangelist/vespa-ai/refs/heads/main/apis.yml
 created: '2026-05-25'
 modified: '2026-09-13'

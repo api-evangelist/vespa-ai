@@ -130,39 +130,6 @@ paths:
           description: Server error.
 components:
   schemas:
-    QueryResult:
-      type: object
-      properties:
-        root:
-          $ref: '#/components/schemas/QueryRoot'
-    QueryRoot:
-      type: object
-      properties:
-        id:
-          type: string
-        relevance:
-          type: number
-        fields:
-          type: object
-          additionalProperties: true
-        coverage:
-          $ref: '#/components/schemas/Coverage'
-        children:
-          type: array
-          items:
-            $ref: '#/components/schemas/Hit'
-    Hit:
-      type: object
-      properties:
-        id:
-          type: string
-        relevance:
-          type: number
-        source:
-          type: string
-        fields:
-          type: object
-          additionalProperties: true
     Coverage:
       type: object
       properties:
@@ -213,6 +180,39 @@ components:
         trace:
           type: object
           additionalProperties: true
+    QueryRoot:
+      type: object
+      properties:
+        id:
+          type: string
+        relevance:
+          type: number
+        fields:
+          type: object
+          additionalProperties: true
+        coverage:
+          $ref: '#/components/schemas/Coverage'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hit'
+    Hit:
+      type: object
+      properties:
+        id:
+          type: string
+        relevance:
+          type: number
+        source:
+          type: string
+        fields:
+          type: object
+          additionalProperties: true
+    QueryResult:
+      type: object
+      properties:
+        root:
+          $ref: '#/components/schemas/QueryRoot'
   securitySchemes:
     mtls:
       type: http
