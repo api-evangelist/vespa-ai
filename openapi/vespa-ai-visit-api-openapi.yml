@@ -177,37 +177,37 @@ paths:
           description: Vespa Cloud application endpoint hostname prefix
 components:
   parameters:
-    timeout:
-      name: timeout
-      in: query
-      schema:
-        type: string
-      description: Operation timeout, e.g. "5s"
-    concurrency:
-      name: concurrency
-      in: query
-      schema:
-        type: integer
-      description: Backend request concurrency
-    doctype:
-      name: doctype
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Schema document type name
-    continuation:
-      name: continuation
-      in: query
-      schema:
-        type: string
-      description: Opaque continuation token for paginated visits
     stream:
       name: stream
       in: query
       schema:
         type: boolean
       description: Enable HTTP response streaming
+    timeout:
+      name: timeout
+      in: query
+      schema:
+        type: string
+      description: Operation timeout, e.g. "5s"
+    continuation:
+      name: continuation
+      in: query
+      schema:
+        type: string
+      description: Opaque continuation token for paginated visits
+    namespace:
+      name: namespace
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Document namespace identifier
+    concurrency:
+      name: concurrency
+      in: query
+      schema:
+        type: integer
+      description: Backend request concurrency
     selection:
       name: selection
       in: query
@@ -220,62 +220,43 @@ components:
       schema:
         type: integer
       description: Number of parallel visit partitions
-    namespace:
-      name: namespace
+    doctype:
+      name: doctype
       in: path
       required: true
       schema:
         type: string
-      description: Document namespace identifier
-    Selection:
-      name: selection
-      in: query
-      schema:
-        type: string
-      description: Vespa document selection expression.
-    FieldSet:
-      name: fieldSet
-      in: query
-      schema:
-        type: string
-      description: Field set name controlling which document fields are returned.
-    WantedDocumentCount:
-      name: wantedDocumentCount
-      in: query
-      schema:
-        type: integer
-      description: Target number of documents to return per visit batch.
-    Stream:
-      name: stream
-      in: query
-      schema:
-        type: boolean
-      description: When true, stream responses as JSON Lines.
-    DocumentType:
-      name: documentType
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Document type as declared in the Vespa application schema.
-    Continuation:
-      name: continuation
-      in: query
-      schema:
-        type: string
-      description: Continuation token from a prior visit response.
-    Cluster:
-      name: cluster
-      in: query
-      schema:
-        type: string
-      description: Content cluster name. Required for visit and bulk operations.
+      description: Schema document type name
     Timeout:
       name: timeout
       in: query
       schema:
         type: string
       description: Request timeout, e.g. `5s`.
+    FieldSet:
+      name: fieldSet
+      in: query
+      schema:
+        type: string
+      description: Field set name controlling which document fields are returned.
+    Selection:
+      name: selection
+      in: query
+      schema:
+        type: string
+      description: Vespa document selection expression.
+    Cluster:
+      name: cluster
+      in: query
+      schema:
+        type: string
+      description: Content cluster name. Required for visit and bulk operations.
+    Stream:
+      name: stream
+      in: query
+      schema:
+        type: boolean
+      description: When true, stream responses as JSON Lines.
     Namespace:
       name: namespace
       in: path
@@ -283,7 +264,34 @@ components:
       schema:
         type: string
       description: Document namespace (a multi-tenant grouping segment).
+    WantedDocumentCount:
+      name: wantedDocumentCount
+      in: query
+      schema:
+        type: integer
+      description: Target number of documents to return per visit batch.
+    Continuation:
+      name: continuation
+      in: query
+      schema:
+        type: string
+      description: Continuation token from a prior visit response.
+    DocumentType:
+      name: documentType
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Document type as declared in the Vespa application schema.
   schemas:
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+        fields:
+          type: object
+          additionalProperties: true
     VisitResult:
       type: object
       properties:
@@ -295,14 +303,6 @@ components:
           type: string
         documentCount:
           type: integer
-    Document:
-      type: object
-      properties:
-        id:
-          type: string
-        fields:
-          type: object
-          additionalProperties: true
     VisitResponse:
       type: object
       properties:
