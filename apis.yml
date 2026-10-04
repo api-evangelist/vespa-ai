@@ -55,6 +55,7 @@ tags:
 - Open Source
 - Tensor
 - Recommendations
+- Vector Search
 tags_raw:
 - AI
 - Search
@@ -68,6 +69,7 @@ tags_raw:
 - Recommendations
 - Machine-Learning
 - Open-Source
+- Vector Search
 url: https://raw.githubusercontent.com/api-evangelist/vespa-ai/refs/heads/main/apis.yml
 created: '2026-05-25'
 modified: '2026-09-13'
