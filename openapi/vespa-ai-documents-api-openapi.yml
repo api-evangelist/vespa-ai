@@ -305,19 +305,6 @@ paths:
           description: Vespa Cloud application endpoint hostname prefix
 components:
   parameters:
-    timeout:
-      name: timeout
-      in: query
-      schema:
-        type: string
-      description: Operation timeout, e.g. "5s"
-    docid:
-      name: docid
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Unique document identifier within the namespace
     namespace:
       name: namespace
       in: path
@@ -325,12 +312,13 @@ components:
       schema:
         type: string
       description: Document namespace identifier
-    create:
-      name: create
-      in: query
+    docid:
+      name: docid
+      in: path
+      required: true
       schema:
-        type: boolean
-      description: Allow upsert behavior (create document if absent)
+        type: string
+      description: Unique document identifier within the namespace
     doctype:
       name: doctype
       in: path
@@ -338,48 +326,24 @@ components:
       schema:
         type: string
       description: Schema document type name
-    Timeout:
+    timeout:
       name: timeout
       in: query
       schema:
         type: string
-      description: Request timeout, e.g. `5s`.
-    FieldSet:
-      name: fieldSet
+      description: Operation timeout, e.g. "5s"
+    create:
+      name: create
       in: query
       schema:
-        type: string
-      description: Field set name controlling which document fields are returned.
+        type: boolean
+      description: Allow upsert behavior (create document if absent)
     Create:
       name: create
       in: query
       schema:
         type: boolean
       description: If true, create the document when missing on update (upsert).
-    Selection:
-      name: selection
-      in: query
-      schema:
-        type: string
-      description: Vespa document selection expression.
-    Route:
-      name: route
-      in: query
-      schema:
-        type: string
-      description: Document API route name for advanced routing.
-    Cluster:
-      name: cluster
-      in: query
-      schema:
-        type: string
-      description: Content cluster name. Required for visit and bulk operations.
-    Stream:
-      name: stream
-      in: query
-      schema:
-        type: boolean
-      description: When true, stream responses as JSON Lines.
     Namespace:
       name: namespace
       in: path
@@ -387,25 +351,6 @@ components:
       schema:
         type: string
       description: Document namespace (a multi-tenant grouping segment).
-    DocumentId:
-      name: documentId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Document id within the namespace and type.
-    Condition:
-      name: condition
-      in: query
-      schema:
-        type: string
-      description: Test-and-set condition selection expression.
-    WantedDocumentCount:
-      name: wantedDocumentCount
-      in: query
-      schema:
-        type: integer
-      description: Target number of documents to return per visit batch.
     Continuation:
       name: continuation
       in: query
@@ -419,13 +364,62 @@ components:
       schema:
         type: string
       description: Document type as declared in the Vespa application schema.
+    Stream:
+      name: stream
+      in: query
+      schema:
+        type: boolean
+      description: When true, stream responses as JSON Lines.
+    FieldSet:
+      name: fieldSet
+      in: query
+      schema:
+        type: string
+      description: Field set name controlling which document fields are returned.
+    Route:
+      name: route
+      in: query
+      schema:
+        type: string
+      description: Document API route name for advanced routing.
+    DocumentId:
+      name: documentId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Document id within the namespace and type.
+    Timeout:
+      name: timeout
+      in: query
+      schema:
+        type: string
+      description: Request timeout, e.g. `5s`.
+    WantedDocumentCount:
+      name: wantedDocumentCount
+      in: query
+      schema:
+        type: integer
+      description: Target number of documents to return per visit batch.
+    Cluster:
+      name: cluster
+      in: query
+      schema:
+        type: string
+      description: Content cluster name. Required for visit and bulk operations.
+    Selection:
+      name: selection
+      in: query
+      schema:
+        type: string
+      description: Vespa document selection expression.
+    Condition:
+      name: condition
+      in: query
+      schema:
+        type: string
+      description: Test-and-set condition selection expression.
   schemas:
-    DocumentPut:
-      type: object
-      properties:
-        fields:
-          type: object
-          additionalProperties: true
     Document:
       type: object
       properties:
@@ -440,6 +434,21 @@ components:
         fields:
           type: object
           additionalProperties: true
+    DocumentPut:
+      type: object
+      properties:
+        fields:
+          type: object
+          additionalProperties: true
+    DocumentWriteResponse:
+      type: object
+      properties:
+        pathId:
+          type: string
+        id:
+          type: string
+        message:
+          type: string
     DocumentUpdateBody:
       type: object
       required:
@@ -449,15 +458,16 @@ components:
           type: object
           additionalProperties: true
           description: Update operators (assign, add, remove, increment, decrement, multiply, divide) keyed by field name.
-    DocumentBody:
+    Document_2:
       type: object
-      required:
-      - fields
       properties:
+        pathId:
+          type: string
+        id:
+          type: string
         fields:
           type: object
           additionalProperties: true
-          description: Document field values keyed by schema field name.
     VisitResponse:
       type: object
       properties:
@@ -473,25 +483,15 @@ components:
           type: string
         message:
           type: string
-    DocumentWriteResponse:
+    DocumentBody:
       type: object
+      required:
+      - fields
       properties:
-        pathId:
-          type: string
-        id:
-          type: string
-        message:
-          type: string
-    Document_2:
-      type: object
-      properties:
-        pathId:
-          type: string
-        id:
-          type: string
         fields:
           type: object
           additionalProperties: true
+          description: Document field values keyed by schema field name.
   securitySchemes:
     mtls:
       type: mutualTLS
