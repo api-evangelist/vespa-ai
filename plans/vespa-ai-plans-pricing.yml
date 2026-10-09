@@ -1,278 +1,112 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Vespa
-providerId: vespa-ai
-created: '2026-05-25'
-modified: '2026-05-25'
-reconciled: true
-tags:
-  - AI Search
-  - Vector Database
-description: Vespa Cloud pricing tiers — Startup, Basic, Commercial, Enterprise, Self-Managed.
-  Pricing is resource-based (vCPU-hour, GiB-memory-hour, GiB-disk-hour, GiB-GPU-memory-hour) with
-  volume discounts up to 50% and a 15% committed-spend discount.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://cloud.vespa.ai/price-calculator.html
 sources:
-  - https://cloud.vespa.ai/price-calculator.html
-  - https://cloud.vespa.ai/pricing
+- https://cloud.vespa.ai/price-calculator.html
+- https://cloud.vespa.ai/pricing
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: usage-other
+delivery:
+  delivery: managed+licensed
+  method: page
+  read: '2026-10-07'
+  evidence: Self Managed Vespa deployment including support.
+  managed_tier: Basic
+published: true
+note: Hourly resource-based pricing by support tier, plus a price calculator. Volume discounts up to 50%
+  (83% on enclave); enclave requires $10k/month minimum; committed spend gives 15% discount (8% on enclave).
+  Self-managed option is sold via contact sales.
+plan_count: 5
+currency: USD
 plans:
-  - id: vespa-startup
-    name: Startup
-    type: paid
-    description: Lowest-cost plan for testing and early-stage businesses. Shared resources, dev
-      zones only, community support, no SLA.
-    entries:
-      - label: vCPU per hour
-        name: vcpu
-        type: metered
-        metric: vCPU-hour
-        limit: -1
-        timeFrame: hour
-        geo: global
-        unit: 1
-        price: '0.05'
-        userMultiplied: false
-      - label: Memory per GiB-hour
-        name: memory
-        type: metered
-        metric: GiB-hour
-        limit: -1
-        timeFrame: hour
-        geo: global
-        unit: 1
-        price: '0.005'
-        userMultiplied: false
-      - label: Disk per GiB-hour
-        name: disk
-        type: metered
-        metric: GiB-hour
-        limit: -1
-        timeFrame: hour
-        geo: global
-        unit: 1
-        price: '0.0002'
-        userMultiplied: false
-      - label: GPU memory per GiB-hour
-        name: gpu_memory
-        type: metered
-        metric: GiB-hour
-        limit: -1
-        timeFrame: hour
-        geo: global
-        unit: 1
-        price: '0.03'
-        userMultiplied: false
-    elements:
-      - name: Shared resources
-      - name: Dev zones only
-      - name: No redundancy by default
-      - name: Community / Slack support
-      - name: No SLA
-  - id: vespa-basic
-    name: Basic
-    type: paid
-    description: For applications without 24/7 support needs. Next-business-day support for
-      production / deployment issues.
-    entries:
-      - label: vCPU per hour
-        name: vcpu
-        type: metered
-        metric: vCPU-hour
-        limit: -1
-        timeFrame: hour
-        geo: global
-        unit: 1
-        price: '0.10'
-        userMultiplied: false
-      - label: Memory per GiB-hour
-        name: memory
-        type: metered
-        metric: GiB-hour
-        limit: -1
-        timeFrame: hour
-        geo: global
-        unit: 1
-        price: '0.01'
-        userMultiplied: false
-      - label: Disk per GiB-hour
-        name: disk
-        type: metered
-        metric: GiB-hour
-        limit: -1
-        timeFrame: hour
-        geo: global
-        unit: 1
-        price: '0.0004'
-        userMultiplied: false
-      - label: GPU memory per GiB-hour
-        name: gpu_memory
-        type: metered
-        metric: GiB-hour
-        limit: -1
-        timeFrame: hour
-        geo: global
-        unit: 1
-        price: '0.07'
-        userMultiplied: false
-    elements:
-      - name: Dedicated resources
-      - name: NBD support response
-      - name: 2 business-day response for non-production
-  - id: vespa-commercial
-    name: Commercial
-    type: paid
-    description: Production-ready with 24/7 operational support, 1-hour response for production
-      issues, backup and disaster recovery.
-    entries:
-      - label: vCPU per hour
-        name: vcpu
-        type: metered
-        metric: vCPU-hour
-        limit: -1
-        timeFrame: hour
-        geo: global
-        unit: 1
-        price: '0.145'
-        userMultiplied: false
-      - label: Memory per GiB-hour
-        name: memory
-        type: metered
-        metric: GiB-hour
-        limit: -1
-        timeFrame: hour
-        geo: global
-        unit: 1
-        price: '0.0145'
-        userMultiplied: false
-      - label: Disk per GiB-hour
-        name: disk
-        type: metered
-        metric: GiB-hour
-        limit: -1
-        timeFrame: hour
-        geo: global
-        unit: 1
-        price: '0.0005'
-        userMultiplied: false
-      - label: GPU memory per GiB-hour
-        name: gpu_memory
-        type: metered
-        metric: GiB-hour
-        limit: -1
-        timeFrame: hour
-        geo: global
-        unit: 1
-        price: '0.10'
-        userMultiplied: false
-    elements:
-      - name: 24/7 operational support
-      - name: 1-hour response for production issues
-      - name: Backup and disaster recovery included
-  - id: vespa-enterprise
-    name: Enterprise
-    type: paid
-    description: Premium tier with a $20,000 monthly minimum, 15-minute response SLA, SSO, named
-      support representative, dedicated Slack channel, and on-site visits.
-    entries:
-      - label: Monthly minimum
-        name: monthly_min
-        type: subscription
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '20000.00'
-        userMultiplied: false
-      - label: vCPU per hour
-        name: vcpu
-        type: metered
-        metric: vCPU-hour
-        limit: -1
-        timeFrame: hour
-        geo: global
-        unit: 1
-        price: '0.18'
-        userMultiplied: false
-      - label: Memory per GiB-hour
-        name: memory
-        type: metered
-        metric: GiB-hour
-        limit: -1
-        timeFrame: hour
-        geo: global
-        unit: 1
-        price: '0.018'
-        userMultiplied: false
-      - label: Disk per GiB-hour
-        name: disk
-        type: metered
-        metric: GiB-hour
-        limit: -1
-        timeFrame: hour
-        geo: global
-        unit: 1
-        price: '0.0007'
-        userMultiplied: false
-      - label: GPU memory per GiB-hour
-        name: gpu_memory
-        type: metered
-        metric: GiB-hour
-        limit: -1
-        timeFrame: hour
-        geo: global
-        unit: 1
-        price: '0.125'
-        userMultiplied: false
-    elements:
-      - name: 15-minute SLA for production
-      - name: SSO
-      - name: Named support representative
-      - name: Dedicated Slack channel
-      - name: On-site visits available
-  - id: vespa-self-managed
-    name: Self Managed
-    type: custom
-    description: Run open-source Vespa on your own infrastructure with a commercial support contract
-      and dedicated representative. Pricing per contract.
-    entries:
-      - label: Contract pricing
-        name: contract
-        type: custom
-        metric: contract
-        limit: -1
-        timeFrame: year
-        geo: global
-        unit: 1
-        price: 'contact-sales'
-        userMultiplied: false
-    elements:
-      - name: Run on your own infrastructure
-      - name: Apache 2.0 open-source license
-      - name: Dedicated support representative
-      - name: Custom contract terms
-  - id: vespa-open-source
-    name: Open Source
-    type: free
-    description: Apache 2.0 open-source Vespa engine, self-hosted. Free of license cost; community
-      support only.
-    entries:
-      - label: Free
-        name: free
-        type: subscription
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Apache 2.0 license
-      - name: Full Vespa engine
-      - name: Community support via Slack and GitHub
-discounts:
-  - name: Volume discount
-    description: Resource unit prices decrease by up to 50% as usage scales.
-  - name: Committed-spend discount
-    description: 15% discount on committed annual spend.
+- name: Startup
+  price_text: $ 0.05 / hour
+  price: 0.05
+  currency: USD
+  period: per-use
+  unit: vCPU hour
+  included_quota: Memory GB $ 0.005 / hour; Disk GB $ 0.0002 / hour; GPU Memory GB $ 0.03 / hour; community
+    support only, dev zones only
+- name: Basic
+  price_text: $ 0.1 / hour
+  price: 0.1
+  currency: USD
+  period: per-use
+  unit: vCPU hour
+  included_quota: Memory GB $ 0.01 / hour; Disk GB $ 0.0004 / hour; GPU Memory GB $ 0.07 / hour
+  overage: Prices go down with volume
+- name: Commercial
+  price_text: $ 0.145 / hour
+  price: 0.145
+  currency: USD
+  period: per-use
+  unit: vCPU hour
+  included_quota: Memory GB $ 0.0145 / hour; Disk GB $ 0.0005 / hour; GPU Memory GB $ 0.1 / hour; 24/7
+    operational support
+  overage: Prices go down with volume
+- name: Enterprise
+  price_text: $ 0.18 / hour
+  price: 0.18
+  currency: USD
+  period: per-use
+  unit: vCPU hour
+  included_quota: Memory GB $ 0.018 / hour; Disk GB $ 0.0007 / hour; GPU Memory GB $ 0.125 / hour
+  overage: Minimum monthly spend of $20,000
+- name: Self Managed
+  price_text: Contact Sales
+  period: none
+  included_quota: Self Managed Vespa deployment including support
+rate_limit_statements:
+- All plans have a quota.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  units:
+  - compute
+  plans:
+  - name: Startup
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Basic
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Commercial
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Enterprise
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Self Managed
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
