@@ -2,6 +2,7 @@ generated: '2026-10-14'
 method: searched
 checked:
 - datadog/integrations/datadog-integration-edges.yml
+- https://github.com/run-llama/llama_index/tree/main/llama-index-integrations
 source:
 - datadog/integrations/datadog-integration-edges.yml
 edges:
@@ -22,3 +23,22 @@ edges:
   detected: '2026-10-14'
   detected_by: mirror-platform-listings.py
   category: Data Stores
+- partner_name: LlamaIndex
+  partner: llamaindex
+  partner_match: framework
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/vector_stores/llama-index-vector-stores-vespa
+  coverage_role:
+  - vector-store
+  framework_signals:
+    packages:
+    - llama-index-vector-stores-vespa
+    roles:
+    - vector-store
+    vendor_domain: vespa.ai
+  matched_by: verified-domain-table
+  detected_by: sweep-rag-vector.py
+  first_seen: '2026-10-15'
