@@ -165,21 +165,6 @@ components:
         trace:
           type: object
           additionalProperties: true
-    Coverage:
-      type: object
-      properties:
-        coverage:
-          type: integer
-        documents:
-          type: integer
-        full:
-          type: boolean
-        nodes:
-          type: integer
-        results:
-          type: integer
-        resultsFull:
-          type: integer
     QueryRoot:
       type: object
       properties:
@@ -213,6 +198,21 @@ components:
         fields:
           type: object
           additionalProperties: true
+    Coverage:
+      type: object
+      properties:
+        coverage:
+          type: integer
+        documents:
+          type: integer
+        full:
+          type: boolean
+        nodes:
+          type: integer
+        results:
+          type: integer
+        resultsFull:
+          type: integer
   securitySchemes:
     mtls:
       type: http

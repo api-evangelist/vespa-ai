@@ -319,6 +319,12 @@ components:
       schema:
         type: string
       description: Unique document identifier within the namespace
+    create:
+      name: create
+      in: query
+      schema:
+        type: boolean
+      description: Allow upsert behavior (create document if absent)
     doctype:
       name: doctype
       in: path
@@ -332,18 +338,6 @@ components:
       schema:
         type: string
       description: Operation timeout, e.g. "5s"
-    create:
-      name: create
-      in: query
-      schema:
-        type: boolean
-      description: Allow upsert behavior (create document if absent)
-    Create:
-      name: create
-      in: query
-      schema:
-        type: boolean
-      description: If true, create the document when missing on update (upsert).
     Namespace:
       name: namespace
       in: path
@@ -351,12 +345,48 @@ components:
       schema:
         type: string
       description: Document namespace (a multi-tenant grouping segment).
-    Continuation:
-      name: continuation
+    FieldSet:
+      name: fieldSet
       in: query
       schema:
         type: string
-      description: Continuation token from a prior visit response.
+      description: Field set name controlling which document fields are returned.
+    Stream:
+      name: stream
+      in: query
+      schema:
+        type: boolean
+      description: When true, stream responses as JSON Lines.
+    WantedDocumentCount:
+      name: wantedDocumentCount
+      in: query
+      schema:
+        type: integer
+      description: Target number of documents to return per visit batch.
+    Create:
+      name: create
+      in: query
+      schema:
+        type: boolean
+      description: If true, create the document when missing on update (upsert).
+    Route:
+      name: route
+      in: query
+      schema:
+        type: string
+      description: Document API route name for advanced routing.
+    Timeout:
+      name: timeout
+      in: query
+      schema:
+        type: string
+      description: Request timeout, e.g. `5s`.
+    Selection:
+      name: selection
+      in: query
+      schema:
+        type: string
+      description: Vespa document selection expression.
     DocumentType:
       name: documentType
       in: path
@@ -364,24 +394,6 @@ components:
       schema:
         type: string
       description: Document type as declared in the Vespa application schema.
-    Stream:
-      name: stream
-      in: query
-      schema:
-        type: boolean
-      description: When true, stream responses as JSON Lines.
-    FieldSet:
-      name: fieldSet
-      in: query
-      schema:
-        type: string
-      description: Field set name controlling which document fields are returned.
-    Route:
-      name: route
-      in: query
-      schema:
-        type: string
-      description: Document API route name for advanced routing.
     DocumentId:
       name: documentId
       in: path
@@ -389,30 +401,18 @@ components:
       schema:
         type: string
       description: Document id within the namespace and type.
-    Timeout:
-      name: timeout
-      in: query
-      schema:
-        type: string
-      description: Request timeout, e.g. `5s`.
-    WantedDocumentCount:
-      name: wantedDocumentCount
-      in: query
-      schema:
-        type: integer
-      description: Target number of documents to return per visit batch.
     Cluster:
       name: cluster
       in: query
       schema:
         type: string
       description: Content cluster name. Required for visit and bulk operations.
-    Selection:
-      name: selection
+    Continuation:
+      name: continuation
       in: query
       schema:
         type: string
-      description: Vespa document selection expression.
+      description: Continuation token from a prior visit response.
     Condition:
       name: condition
       in: query
@@ -420,6 +420,12 @@ components:
         type: string
       description: Test-and-set condition selection expression.
   schemas:
+    DocumentPut:
+      type: object
+      properties:
+        fields:
+          type: object
+          additionalProperties: true
     Document:
       type: object
       properties:
@@ -434,21 +440,6 @@ components:
         fields:
           type: object
           additionalProperties: true
-    DocumentPut:
-      type: object
-      properties:
-        fields:
-          type: object
-          additionalProperties: true
-    DocumentWriteResponse:
-      type: object
-      properties:
-        pathId:
-          type: string
-        id:
-          type: string
-        message:
-          type: string
     DocumentUpdateBody:
       type: object
       required:
@@ -458,6 +449,24 @@ components:
           type: object
           additionalProperties: true
           description: Update operators (assign, add, remove, increment, decrement, multiply, divide) keyed by field name.
+    DocumentBody:
+      type: object
+      required:
+      - fields
+      properties:
+        fields:
+          type: object
+          additionalProperties: true
+          description: Document field values keyed by schema field name.
+    DocumentWriteResponse:
+      type: object
+      properties:
+        pathId:
+          type: string
+        id:
+          type: string
+        message:
+          type: string
     Document_2:
       type: object
       properties:
@@ -483,15 +492,6 @@ components:
           type: string
         message:
           type: string
-    DocumentBody:
-      type: object
-      required:
-      - fields
-      properties:
-        fields:
-          type: object
-          additionalProperties: true
-          description: Document field values keyed by schema field name.
   securitySchemes:
     mtls:
       type: mutualTLS
